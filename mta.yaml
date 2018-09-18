@@ -1,0 +1,73 @@
+_schema-version: 2.0.0
+ID: cloud-sample-spaceflight-node
+version: 1.0.0
+modules:
+  - name: db
+    type: hdb
+    path: db
+    parameters:
+      memory: 256M
+      disk-quota: 256M
+    requires:
+      - name: cloud-sample-spaceflight-node-hdi-container
+  - name: srv
+    type: nodejs
+    path: srv
+    parameters:
+      memory: 512M
+      disk-quota: 256M
+    provides:
+      - name: srv_api
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: cloud-sample-spaceflight-node-uaa
+      - name: cloud-sample-spaceflight-node-hdi-container
+  - name: ui
+    type: html5
+    path: ui
+    parameters:
+      disk-quota: 256M
+      memory: 256M
+    build-parameters:
+      builder: grunt
+    requires:
+      - name: uaa_cloud-sample-spaceflight-node
+      - name: dest_cloud-sample-spaceflight-node
+      - name: srv_api
+        group: destinations
+        properties:
+          name: backend
+          url: '~{url}'
+          forwardAuthToken: true
+
+resources:
+  - name: cloud-sample-spaceflight-node-hdi-container
+    properties:
+      hdi-container-name: '${service-name}'
+    type: com.sap.xs.hdi-container
+  - name: cloud-sample-spaceflight-node-uaa
+    type: com.sap.xs.uaa
+    parameters:
+      service-plan: application
+      config:
+        xsappname: 'cloud-sample-spaceflight-node-${org}-${space}'
+        tenant-mode: dedicated
+        scopes:
+          - name: $XSAPPNAME.Show
+            description: display
+          - name: $XSAPPNAME.Add
+            description: create
+          - name: $XSAPPNAME.Remove
+            description: delete
+  - name: uaa_cloud-sample-spaceflight-node
+    parameters:
+      path: ./xs-security.json
+      service-plan: application
+      service: xsuaa
+    type: org.cloudfoundry.managed-service
+  - name: dest_cloud-sample-spaceflight-node
+    parameters:
+      service-plan: lite
+      service: destination
+    type: org.cloudfoundry.managed-service

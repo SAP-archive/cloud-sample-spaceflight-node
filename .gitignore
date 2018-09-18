@@ -1,0 +1,14 @@
+node_modules/
+package-lock.json
+gen
+
+.project
+.classpath
+.settings/
+.cds_gen.log
+
+.mta/
+*.mtar
+
+.DS_Store
+cloud-sample-spaceflight-node.db

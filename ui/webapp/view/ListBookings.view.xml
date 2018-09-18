@@ -1,0 +1,61 @@
+<mvc:View
+	controllerName="space.itineraries.company.ui.controller.ListBookings"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true">
+  <Panel
+	  headerText="{i18n>bookingsPageTitle}"
+	  class="sapUiResponsiveMargin"
+		width="auto">
+    <content>
+      <Table
+        id="bookingsList"
+        items="{
+          path: '/Bookings'
+        }">
+        <headerToolbar>
+          <OverflowToolbar>
+            <content>
+              <ToolbarSpacer/>
+              <Button
+                id="refreshBookingsButton"
+                icon="sap-icon://refresh"
+                tooltip="{i18n>refreshButtonText}"
+                press="onRefresh"/>
+            </content>
+          </OverflowToolbar>
+        </headerToolbar>
+        <columns>
+          <Column id="customerNameColumn">
+            <Text text="{i18n>nameLabelText}"/>
+          </Column>
+          <Column id="emailColumn">
+            <Text text="{i18n>emailLabelText}"/>
+          </Column>
+          <Column id="dateOfTravelColumn">
+            <Text text="{i18n>dateOfTravelLabelText}"/>
+          </Column>
+          <Column id="costColumn">
+            <Text text="{i18n>costLabelText}"/>
+          </Column>
+        </columns>
+        <items>
+          <ColumnListItem>
+            <cells>
+              <Label text="{CustomerName}"/>
+            </cells>
+            <cells>
+              <Label text="{EmailAddress}"/>
+            </cells>
+            <cells>
+              <Label text="{DateOfTravel}"/>
+            </cells>
+            <cells>
+              <Label text="{Cost}"/>
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table>
+    </content>
+  </Panel>
+</mvc:View>

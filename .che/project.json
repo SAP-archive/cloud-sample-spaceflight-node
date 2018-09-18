@@ -1,0 +1,1 @@
+{"type":"mta","builders":{"default":"mtabuilder","configs":{}},"runners":{"configs":{}},"attributes":{"sap.watt.common.setting":["{\"build\":{\"targetFolder\":\"dist\",\"sourceFolder\":\"webapp\"},\"projectType\":[]}"]},"description":"","mixinTypes":["fullmtabuild"]}

@@ -1,0 +1,18 @@
+{
+  "welcomeFile": "/ui/index.html",
+  "authenticationMethod": "route",
+  "logout": {
+    "logoutEndpoint": "/do/logout"
+  },
+  "routes": [
+    {
+      "source": "^/ui/(.*)$",
+      "target": "$1",
+      "localDir": "webapp"
+    },
+    {
+      "source": "^/booking/(.*)$",
+      "destination": "backend"
+    }
+  ]
+}

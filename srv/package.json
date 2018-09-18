@@ -1,0 +1,26 @@
+{
+  "name": "serve",
+  "dependencies": {
+    "@sap/cds": ">=2.8",
+    "express": "4.16.3",
+    "@sap/xssec": "2.1.12",
+    "@sap/xsenv": "1.2.9",
+    "hdb": "0.16.0"
+  },
+  "scripts": {
+    "postinstall": "node .install.js && cds build/all --project .. --clean",
+    "start": "node ./node_modules/@sap/cds/bin/cds.js serve gen/csn.json"
+  },
+  "engines": {
+    "node": "8.x",
+    "npm": "6.x"
+  },
+  "cds": {
+    "data": {
+          "driver": "hana",
+          "hana": {
+                "tag": "hana"
+          }
+    }
+  }  
+}
