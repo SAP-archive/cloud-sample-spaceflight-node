@@ -51,7 +51,7 @@ Save the `package.json` file, which looks as shown below:
 
 These 2 lines will deploy the data model locally into a SQLite database. Later in Exercise 4, we will deploy this to HANA service in SAP Cloud Platform.
 
-7. Click [here](https://github.wdf.sap.corp/te18/cloud-samples-spaceflight-node/raw/master/docs/csv.zip) to download the CSV files zip folder. 
+7. Click [here](https://github.com/SAP/cloud-sample-spaceflight-node/raw/master/-exercises-/docs/csv.zip) to download the CSV files zip folder. 
 
 8. Unzip the file in your System File Explorer. Copy and paste the folder named csv into the following folder `<your-project-path>/<your-project-name>/db/src/`. Ensure that the CSV files are under the right path: `/db/src/csv`.
 
