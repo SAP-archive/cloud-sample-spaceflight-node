@@ -24,7 +24,7 @@ In this exercise, we will import the source code from Git service into SAP Web I
 
 2. You will be prompted to login, enter your credentials and click Log on.
 
-![Log on](./images/logon.png)
+![Log on](./images/logon.png) (UPDATE)
 
 3. The SAP Web IDE opens up where you will be asked to clone the repository. As we have not cloned it yet, click on Clone.
 
@@ -50,12 +50,13 @@ In this exercise, we will import the source code from Git service into SAP Web I
 
 ![Cloud Foundry Org Space](./images/cf_org_space.png)
 
-9. Open package.json file from the root folder and remove the following lines. These are lines specific to SQLite database that was used locally. Now as we will deploy the database artifacts into SAP HANA, these lines must be removed.
+9. Open package.json file and remove the following lines. These are lines specific to SQLite database that was used locally. Now as we will deploy the database artifacts into SAP HANA, these lines must be removed.
 ```
 "sqlite3": "^4.0.2"                                 // remove line from dependencies
 "driver": "sqlite",                                 // remove line from model
 "url": "cloud-samples-spaceflight-node.db"          // remove line from model
 ```
+
 10. Now right click on the db folder of the project and click on Build as shown:
 
 ![Build CDS](./images/build_db.png)
@@ -92,15 +93,7 @@ In this exercise, we will import the source code from Git service into SAP Web I
 
 ![Database table with content](./images/table_content.png)
 
-19. Open `mta.yml` file from the root folder and change the service-plan of `<project_name>-uaa` from `default` to `application`.
-```
-  - name: <project_name>-uaa
-    type: com.sap.xs.uaa
-    parameters:
-      service-plan: application
-``` 
-
-20. Right click the srv folder and choose `Build` and then choose `Build CDS`. 
+19. Right click the srv folder and choose `Build` and then choose `Build CDS`. 
 
 ![Build Service](./images/build_srv.png)
 
@@ -108,7 +101,7 @@ The log output can be seen in the console as below.
 
 ![Deploy to HANA](./images/build_srv_output.png)
 
-Include the following lines into the `package.json` file present within the `srv` folder
+<<< UGLY WORKAROUND >>>
 ```
   "cds": {
     "data": {
@@ -120,7 +113,7 @@ Include the following lines into the `package.json` file present within the `srv
   }  
 ```
 
-21. Right click the srv folder and choose `Run` and then choose `Run as Node.js Application`. This takes a couple of seconds as it deploys the service to cloud foundry.
+20. Right click the srv folder and choose `Run` and then choose `Run as Node.js Application`. This takes a couple of seconds as it deploys the service to cloud foundry.
 
 ![Run Service](./images/run_srv.png)
 
@@ -140,402 +133,229 @@ Change the $metadata part of the URL to something meaningful from our exposed se
 
 ![JSON response](./images/JSON.png)
 
-22. Goto [SAP Cloud Platform destinations](https://account.hana.ondemand.com/cockpit#/globalaccount/8fd39023-a237-4d71-9b6a-ed9d1719d275/neosubaccount/06b416a3-9282-4cb7-ae72-e23031b005ca/destinations) to create a destination.
+21. Goto [SAP Cloud Platform destinations](https://account.hana.ondemand.com/cockpit#/globalaccount/8fd39023-a237-4d71-9b6a-ed9d1719d275/neosubaccount/06b416a3-9282-4cb7-ae72-e23031b005ca/destinations) to create a destination.
 
 We just imported and built our data model and node service in part A of this exercise.
 
 ## Part B: Build the User Interface using SAP Web IDE
 
 1. Right click our project and choose `new` and then `HTML5 module`.
+
 ![html5 module](./images/html5_module.png)
 
 2. Choose the SAPUI5 Application template
+
 ![SAP UI5 Template](./images/sapui5_template.png)
 
 3. Enter Module Name as `ui` and Namespace as `space.itineraries.company`.
+
 ![Namespace](./images/namespace.png)
 
 4. Give the View Name as App and click on Finish
+
 ![App View](./images/app_view.png)
 
-5. The UI module code is generated. Expand the `ui` folder and then `webapp` folder. Within view and contoller folders you can see two generated files: App.view.xml and App.controller.js
+5. The UI module code is generated. Expand the `ui` folder and then `webapp` folder. Within view and controller folders you can see two generated files: App.view.xml and App.controller.js
 
 ![UI code structure](./images/ui_structure.png)
 
-6. Right click on the `view` folder and choose `new` -> `SAPUI5 view`.
+6. Open the `manifest.json` file present in the webapp folder under ui. Click on `Descriptor Editor` below and then choose the `DataSources` sub-tab above. Click the + button to add a data-source as shown.
+
+![Manifest](./images/manifest.png) 
+
+7. Choose `Service URL` from the tabs on the left. In the dropdown menu, pick the destination that appears in the dropdown menu. Under relative path enter `/` and click on `Test`. The service is now selected and click on `Next`.
+
+![Service URL](./images/service_url.png) 
+
+8. Leave the selection as `Use default model` and click Next.
+
+![Default Model](./images/default_model.png) 
+
+9. Click Finish. Save the manifest.json file. 
+
+![Adding data source](./images/DataSourceFinish.png) 
+
+10. Under view folder, replace the code in `App.view.xml` with the below code:
+```
+<mvc:View controllerName="space.itineraries.company.ui.controller.App" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+	<Carousel>
+		<mvc:XMLView viewName="space.itineraries.company.ui.view.ListBookings"/>
+		<mvc:XMLView viewName="space.itineraries.company.ui.view.CreateBooking"/>
+	</Carousel>
+</mvc:View>
+```
+This declares two XML Views: `ListBookings` and `CreateBooking`. We will create them in the next steps.
+
+11. Right click on the `view` folder and choose `new` -> `SAPUI5 view`.
+
 ![Create](./images/create_view.png)
 
-7. Give the name as `CreateBooking`, click on `Next` and then `Finish`. Repeat steps 6 to create another SAPUI5 view and this time give the name of the view as `ListBookings`. 
+12. Give the name as `CreateBooking`, click on `Next` and then `Finish`. Repeat step 11 to create another SAPUI5 view and this time give the name of the view as `ListBookings`. 
+
 ![Create Booking view](./images/CreateBooking.png)
+
 ![Finish](./images/CreateBookingFinish.png)
 
-8. Note that 2 additional files for CreateBooking and ListBookings are added under view and controller folders for each respectively.
+13. Note that 2 additional files for CreateBooking and ListBookings are added under view and controller folders for each respectively.
 
 ![Views structure](./images/addedViews.png)
 
-9. Under view folder, replace the code in `App.view.xml` with the below code:
+14. Right click on the `ListBookings.view.xml` file and choose `Open Layout Editor`
+
+![Open layout editor](./images/OpenLayoutEditor.png)
+
+This will open the modeling pane for the view as shown:
+
+![Layout editor](./images/LayoutEditor.png)
+
+15. On the right side panel, click on the `entity set` button and choose the OData service that was added in steps 6 to 9.
+
+![Select entity set](./images/SelectEntitySet.png)
+
+Select the option __Define entity set and set the selected control as template.__.
+For the field __Entity Set__ select the value `/Bookings` from the drop-down.
+And for __Expand Associations__ select `Itinerary`.
+Click the OK button to save the configuration.
+
+![ConfigEntitySet](./images/ConfigEntitySet.png)
+
+Provide a Title such as `Space Itineraries Company` for the page title.
+![Page Title](./images/PageTitle.png)
+
+16. In the `Search for control` field enter the value __list__ and drag and drop the `List` control on the view.
+
+![List control](./images/ListControl.png)
+
+17. Select the list item on the view, by clicking on the `List Item 1` object and verify that it is selected by checking the control chain:
+
+![Select List Item](./images/SelectListItem.png)
+
+Adapt the property `Title` by clicking on the `Bind this property` button on the right side of the property.
+
+![Change title](./images/ChangeTitle1.png)
+
+A window with all the data fields and a text area appear to customize the title. Compose a value such as: `{CustomerName} travels from {Itinerary/Name}`. Double click the data fields to use them as a part of the text.
+
+![Change title 2](./images/ChangeTitle2.png)
+
+Repeat the same process for the property `Description`. Enter the value `Booking number {BookingNo} on {DateOfTravel}`.
+
+![Change Description](./images/ChangeDescription1.png)
+
+![Change Description](./images/ChangeDescription2.png)
+
+And lastly, change the `type` of the list item from the properties pane to `Inactive`.
+
+![Change Type](./images/ChangeType.png)
+
+> As a workaround to a known issue that will be fixed we need to change a line in the current view. Please right click the `ListBookings.view.xml` and choose `Open Code Editor` option. Now replace line number 4 with the following: `<Page title="Title" content="{path:'/Bookings',parameters:{$expand:'Itinerary($select=Name)'}}">`
+
+18. Let us move on to the second view `CreateBooking`. Open the `CreateBooking.view.xml` file by double-clicking on it in the file structure. Replace the content with the code snippet below:
 ```
-<mvc:View controllerName="space.itineraries.company.ui.controller.App" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
-	displayBlock="true" xmlns="sap.m">
-	<App id="idAppControl">
-		<Carousel>
-			<pages>
-				<Page title="{i18n>appDescription}">
-					<mvc:XMLView viewName="space.itineraries.company.ui.view.CreateBooking"/>
-				</Page>
-				<Page title="{i18n>appDescription}">
-					<mvc:XMLView viewName="space.itineraries.company.ui.view.ListBookings"/>
-				</Page>
-			</pages>
-		</Carousel>
+<mvc:View controllerName="space.itineraries.company.ui.controller.CreateBooking" xmlns="sap.m" xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc">
+	<App>
+		<pages>
+			<Page title="{i18n>AppTitle}">
+				<Panel headerText="{i18n>createBookingPanelTitle}" class="sapUiResponsiveMargin" width="auto">
+					<VBox class="sapUiSmallMargin">
+						<Label text="Name:" labelFor="customerNameInput"/>
+						<Input id="customerNameInput"
+							value="{ path:'newBooking>/CustomerName', type:'sap.ui.model.type.String', constraints : { minLength : 1 } }"
+							valueLiveUpdate="true" required="true" width="60%" class="sapUiSmallMarginBottom"/>
+						<Label text="Email:" labelFor="emailInput"/>
+						<Input id="emailInput"
+							value="{ path:'newBooking>/EmailAddress', type:'sap.ui.model.type.String', constraints : { search : '\\S+@\\S+\\.\\S+' } }"
+							valueLiveUpdate="true" required="true" width="60%" class="sapUiSmallMarginBottom"/>
+						<Label text="Choose a journey:" labelFor="selectedItineraryId"/>
+						<Select id="selectedItineraryId" width="60%" class="sapUiSmallMarginBottom" items="{ path: '/Itineraries', sorter: { path: 'Name'} }">
+							<core:Item key="{ID}" text="{Name}"/>
+						</Select>
+						<Label text="Date of travel:" labelFor="dateOfTravel"/>
+						<DatePicker id="dateOfTravel"
+							value="{ path:'newBooking>/DateOfTravel', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', stringParsing: true } }"
+							required="true" class="sapUiSmallMarginBottom" width="60%"/>
+						<Label text="Number of passangers:" labelFor="numPassengers"/>
+						<Input id="numPassengers"
+							value="{ path:'newBooking>/NumberOfPassengers', type:'sap.ui.model.type.Integer', constraints : { minimum : 1 } }"
+							valueLiveUpdate="true" required="true" width="60%" class="sapUiSmallMarginBottom"/>
+						<Label text="Credit card number:" labelFor="creditCard"/>
+						<Input id="creditCard"
+							value="{ path:'newBooking>/PaymentInfo_CardNumber', type:'sap.ui.model.type.String', constraints : { maxLength: 16 } }"
+							valueLiveUpdate="true" required="true" width="60%" class="sapUiSmallMarginBottom"/>
+						<Button text="{i18n>bookButtonText}" press="onBook" class="sapUiSmallMarginEnd"/>
+					</VBox>
+				</Panel>
+			</Page>
+		</pages>
 	</App>
 </mvc:View>
 ```
 
-10. Replace the code in `CreateBooking.view.xml` with the following code:
-```
-<mvc:View
-  controllerName="space.itineraries.company.ui.controller.CreateBooking"
-  xmlns="sap.m"
-  xmlns:core="sap.ui.core"
-  xmlns:mvc="sap.ui.core.mvc">
-  <Panel
-	  headerText="{i18n>createBookingPanelTitle}"
-	  class="sapUiResponsiveMargin"
-		width="auto">
-    <VBox class ="sapUiSmallMargin">
-      <Label
-        text="Name:"
-        labelFor="customerNameInput"/>
-      <Input
-        id="customerNameInput"
-        value="{
-          path:'newBooking>/CustomerName',
-          type:'sap.ui.model.type.String',
-          formatOptions: {
-            style: 'medium',
-            stringParsing: true
-          },
-          constraints : {
-            minLength : 1
-          }
-        }"
-		  	valueLiveUpdate="true"
-        required="true"
-		  	width="60%"
-        class="sapUiSmallMarginBottom"/>
-      <Label
-        text="Email:"
-        labelFor="emailInput"/>
-      <Input
-        id="emailInput"
-        value="{
-          path:'newBooking>/EmailAddress',
-          type:'sap.ui.model.type.String',
-          formatOptions: {
-            style: 'medium',
-            stringParsing: true
-          },
-          constraints : {
-            search : '\\S+@\\S+\\.\\S+'
-          }
-        }"
-		  	valueLiveUpdate="true"
-        required="true"
-		  	width="60%"
-        class="sapUiSmallMarginBottom"/>
-      <Label
-			  text="Choose a journey:"
-        labelFor="selectedItineraryId"/>
-		  <Select
-        id = "selectedItineraryId"
-			  width="60%"
-        class="sapUiSmallMarginBottom"
-        items="{
-          path: '/Itineraries',
-          sorter: { path: 'Name'}
-        }">
-        <core:Item key="{ID}" text="{Name}"/>
-      </Select>
-      <Label
-        text="Date of travel:"
-        labelFor="dateOfTravel"/>
-      <DatePicker
-        id="dateOfTravel"
-        value="{
-          path:'newBooking>/DateOfTravel',
-          type:'sap.ui.model.type.Date',
-          formatOptions: {
-            style: 'medium',
-            stringParsing: true
-          }
-        }"
-        required="true"
-        class="sapUiSmallMarginBottom"
-        width="60%"
-      />
-      <Label
-        text="Number of passangers:"
-        labelFor="numPassengers"/>
-      <Input
-        id="numPassengers"
-        value="{
-          path:'newBooking>/NumberOfPassengers',
-          type:'sap.ui.model.type.Integer',
-          formatOptions: {
-            style: 'medium',
-            stringParsing: true
-          },
-          constraints : {
-            minLength : 1
-          }
-        }"
-        required="true"
-        width="60%"
-        class="sapUiSmallMarginBottom"
-      />
-      <Label
-        text="Credit card number:"
-        labelFor="creditCard"/>
-      <Input
-        id="creditCard"
-        value="{
-          path:'newBooking>/PaymentInfo_CardNumber',
-          type:'sap.ui.model.type.Number',
-          formatOptions: {
-            style: 'medium',
-            stringParsing: true
-          },
-          constraints : {
-            minLength : 16
-          }
-        }"
-        required="true"
-        width="60%"
-        class="sapUiSmallMarginBottom"
-      />
-      <Button
-		    text="{i18n>bookButtonText}"
-		  	press="onBook"
-			  class="sapUiSmallMarginEnd"/>
-    </VBox>
-  </Panel>
-</mvc:View>
-```
-11. Replace the code in `ListBookings.view.xml` with the following code:
-```
-<mvc:View
-	controllerName="space.itineraries.company.ui.controller.ListBookings"
-	xmlns="sap.m"
-	xmlns:mvc="sap.ui.core.mvc"
-	displayBlock="true">
-  <Panel
-	  headerText="{i18n>bookingsPageTitle}"
-	  class="sapUiResponsiveMargin"
-		width="auto">
-    <content>
-      <Table
-        id="bookingsList"
-        items="{
-          path: '/Bookings'
-        }">
-        <headerToolbar>
-          <OverflowToolbar>
-            <content>
-              <ToolbarSpacer/>
-              <Button
-                id="refreshBookingsButton"
-                icon="sap-icon://refresh"
-                tooltip="{i18n>refreshButtonText}"
-                press="onRefresh"/>
-            </content>
-          </OverflowToolbar>
-        </headerToolbar>
-        <columns>
-          <Column id="customerNameColumn">
-            <Text text="{i18n>nameLabelText}"/>
-          </Column>
-          <Column id="emailColumn">
-            <Text text="{i18n>emailLabelText}"/>
-          </Column>
-          <Column id="dateOfTravelColumn">
-            <Text text="{i18n>dateOfTravelLabelText}"/>
-          </Column>
-          <Column id="costColumn">
-            <Text text="{i18n>costLabelText}"/>
-          </Column>
-        </columns>
-        <items>
-          <ColumnListItem>
-            <cells>
-              <Label text="{CustomerName}"/>
-            </cells>
-            <cells>
-              <Label text="{EmailAddress}"/>
-            </cells>
-            <cells>
-              <Label text="{DateOfTravel}"/>
-            </cells>
-            <cells>
-              <Label text="{Cost}"/>
-            </cells>
-          </ColumnListItem>
-        </items>
-      </Table>
-    </content>
-  </Panel>
-</mvc:View>
-```
-12. Under controller folder, replace the code in `CreateBooking.controller.js` with the below code:
-```
-sap.ui.define([
-  "sap/ui/core/mvc/Controller",
-  "sap/ui/model/json/JSONModel",
-  "sap/ui/model/odata/v4/ODataListBinding",
-  "sap/m/MessageToast"
-], function (Controller, JSONModel, ODataListBinding, MessageToast) {
-  "use strict";
-  return Controller.extend("space.itineraries.company.ui.controller.App", {
-    onInit: function () {
-      var newBookingModel = new JSONModel({
-        BookingNo: "",
-        CustomerName: "",
-        EmailAddress: "",
-        DateOfTravel: "",
-        Cost: null,
-        NumberOfPassengers: null,
-        Itinerary_ID: null,
-        PaymentInfo_CardNumber: null
-      });
-      this.getView().setModel(newBookingModel, "newBooking");
-    },
-
-    onBook: function () {
-      var oModel = this.getView().getModel(),
-          newBookingModel = this.getView().getModel("newBooking"),
-          oBinding = new ODataListBinding(oModel, "/Bookings");
-
-      // get the id of the selected itinerary
-      newBookingModel.setProperty("/Itinerary_ID", this.byId("selectedItineraryId").getSelectedKey());
-
-      // assign random cost between 3000 and 1000 space money
-      newBookingModel.setProperty("/Cost", Math.floor((Math.random() * (3000 - 1000) + 1000)).toString());
-
-      // assign random string with lenght 16 for the BookingNo
-      newBookingModel.setProperty("/BookingNo",
-        (Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10))
-          .toUpperCase());
-
-      var oContext = oBinding.create(JSON.parse(newBookingModel.getJSON()));
-      oContext.created().then(function () {      
-        MessageToast.show("created");
-      });
-      
-      // clear up the form
-      Object.keys(JSON.parse(newBookingModel.getJSON())).forEach(prop => newBookingModel.setProperty(`/${prop}`, null));
-    }
-  });
-});
-```
-13. Replace the code in `ListBookings.controller.js` with the below code:
+19. Open the `CreateBooking.controller.js` file under controller folder and replacing the content with the following code snippet:
 ```
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"sap/m/MessageToast",
-	"sap/m/MessageBox"
-], function (Controller, MessageToast, MessageBox) {
+	"sap/ui/model/json/JSONModel",
+	"sap/m/MessageToast"
+], function (Controller, JSONModel, MessageToast) {
 	"use strict";
-
-	return Controller.extend("space.itineraries.company.ui.controller.ListBookings", {
-
-		/**
-		 *  Hook for initializing the controller
-		 */
-		onInit : function () {
+	return Controller.extend("space.itineraries.company.ui.controller.CreateBooking", {
+		onInit: function () {
+			var newBookingModel = new JSONModel({
+				BookingNo: "",
+				CustomerName: "",
+				EmailAddress: "",
+				DateOfTravel: "",
+				Cost: null,
+				NumberOfPassengers: null,
+				Itinerary_ID: null,
+				PaymentInfo_CardNumber: null
+			});
+			this.getView().setModel(newBookingModel, "newBooking");
 		},
 
-		/**
-		 * Refresh the data.
-		 */
-		onRefresh : function () {
-			var oBinding = this.byId("bookingsList").getBinding("items");
+		onBook: function () {
+			var oModel = this.getView().getModel(),
+				newBookingModel = this.getView().getModel("newBooking"),
+				oBinding = oModel.bindList("/Bookings");
 
-			if (oBinding.hasPendingChanges()) {
-				MessageBox.error(this._getText("refreshNotPossibleMessage"));
-				return;
-			}
-			oBinding.refresh();
-			MessageToast.show(this._getText("refreshSuccessMessage"));
-		},
+			// get the id of the selected itinerary
+			newBookingModel.setProperty("/Itinerary_ID", this.byId("selectedItineraryId").getSelectedKey());
 
-		/**
-		 * Convenience method for retrieving a translatable text.
-		 * @param {string} sTextId - the ID of the text to be retrieved.
-		 * @param {Array} [aArgs] - optional array of texts for placeholders.
-		 * @returns {string} the text belonging to the given ID.
-		 */
-		_getText : function (sTextId, aArgs) {
-			return this.getOwnerComponent().getModel("i18n").getResourceBundle().getText(sTextId, aArgs);
+			// assign random cost between 3000 and 1000 space money
+			newBookingModel.setProperty("/Cost", Math.floor((Math.random() * (3000 - 1000) + 1000)).toString());
+
+			// assign random string with lenght 16 for the BookingNo
+			newBookingModel.setProperty("/BookingNo",
+				(Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10))
+				.toUpperCase());
+
+			var oContext = oBinding.create(JSON.parse(newBookingModel.getJSON()));
+			oContext.created().then(function () {
+				MessageToast.show("created");
+			});
+
+			// clear up the form
+			Object.keys(JSON.parse(newBookingModel.getJSON())).forEach(prop => newBookingModel.setProperty(`/${prop}`, null));
 		}
 	});
 });
 ```
-14. Under i18n folder, replace the content in `i18n.properties` file with the following values:
+20. Under i18n folder, replace the content in `i18n.properties` file with the following values:
 ```
-appTitle=SPICY
-
-appDescription=SPace Itineraries CompanY
-
-#XTIT: Page Title
-bookingsPageTitle=My Bookings
-
-# Toolbar
-#XTOL: Tooltip for refresh data
-refreshButtonText=Refresh Data
-
-# Table Area
-#XFLD: Label for Customer Name
-nameLabelText=Customer Name
-
-#XFLD: Label for Email
-emailLabelText=Email
-
-#XFLD: Label for Date of travel
-dateOfTravelLabelText=Date of travel
-
-#XFLD: Label for Cost
-costLabelText=Cost
-
-# Messages
-#XMSG: Message for refresh failed
-refreshNotPossibleMessage=Before refreshing, please save or revert your changes
-
-#XMSG: Message for refresh succeeded
-refreshSuccessMessage=Data refreshed
-
 createBookingPanelTitle=Create a booking
-
 bookButtonText=Book
+AppTitle=Space Itineraries Company
 ``` 
 
-14. Open the `manifest.json` file present in the webapp folder under ui. Click on `Descriptor Editor` below and then choose the `DataSources` sub-tab above. Click the + button to add a data-source as shown.
-![Manifest](./images/manifest.png) 
+21. Now right click the `ui` folder and `Run as a Web Application`. 
 
-15. Choose `Service URL` from the tabs on the left. In the dropdown menu, pick the destination that appears in the dropdown menu. Under relative path enter `/` and click on `Test`. The service is now selected and click on `Next`.
-![Service URL](./images/service_url.png) 
-
-16. Leave the selection as `Use default model` and click Next.
-![Default Model](./images/default_model.png) 
-
-17. Click Finish. Save the manifest.json file. 
-![Adding data source](./images/DataSourceFinish.png) 
-
-18. Now right click the `ui` folder and `Run as a Web Application`. 
 ![Run UI](./images/run_ui.png) 
 
-19. Now bookings can be created on this page and on traversing to the next page, the bookings can be viewed.
+22. Now bookings can be created on this page and on traversing to the next page, the bookings can be viewed.
 
-![Web UI](./images/UIScreen1.png) 
+![Web UI](./images/UIScreen1.png)
 
 ![Web UI](./images/UIScreen2.png)
 
