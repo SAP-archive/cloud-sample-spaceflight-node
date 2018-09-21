@@ -28,7 +28,7 @@ This helps us to use the command, `cds new`, in the next step to create a new pr
 ```
 cds new <enter-your-project-name>
 ```
-Here it will be prompted to select the modules that the project will require. Select the following modules: database and service modules by clicking arrow keys and space bar as shown below.
+Here, you will be prompted to select the modules that the project will require. Select the following modules: database and service modules by clicking arrow keys and space bar as shown below.
 
 ![Alt text](./images/db_srv.png?raw=true)
 
