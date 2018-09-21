@@ -2,7 +2,7 @@
 
 SPICY (Space Itinerary Company) is the most popular travel technology company in our milky way. Owing to the increasing demand in space travel, SPICY is now building a website where it offers users from all planets to login and book their next space flight. You, as a part of the software engineering team of SPICY, have chosen SAP Cloud Platform to build this website. 
 
-Click [here](./-exercises-/docs/CNA375.pptx) for the presentation.
+Click [here](./-exercises-/docs/CNA375.pdf) for the presentation.
 
 ![SPICY](./-exercises-/images/scenario.png?raw=true)
 
