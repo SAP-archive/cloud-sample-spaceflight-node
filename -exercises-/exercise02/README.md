@@ -85,7 +85,9 @@ for (const tableName in csv) {
       return csv2json().fromFile(`./db/src/csv/${csv[tableName]}.csv`)
     })
     .then((values) => {
-      return cds.run(INSERT.into(tableName).rows(values))
+      module.exports = () => {
+       return cds.run(INSERT.into(tableName).rows(values))
+      }
     })
     .then((rowCount) => {
       console.log(`Inserted successfully ${rowCount} rows in table ${tableName}`)
