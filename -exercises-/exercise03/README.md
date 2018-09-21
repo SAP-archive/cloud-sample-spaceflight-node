@@ -150,7 +150,7 @@ Now click on Send and we can see that our booking is created successfully with a
 
 19. Execute the command `git init` in your terminal.
 
-20. Execute the command `git config user.email cna375-395@teched.cloud.sap` in your terminal.
+20. Execute the command `git config user.email <EMAIL>` in your terminal. <EMAIL> is the mail address provided for your user.
 
 21. Execute the command `git remote add origin <URL>` in your terminal. <URL> is the link that was copied in step 17.
 
