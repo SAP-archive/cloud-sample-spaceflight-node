@@ -46,7 +46,7 @@ In this exercise, we will import the source code from Git service into SAP Web I
 
 ![Cloud Foundry URL](./images/cf_url.png)
 
-8. You will be prompted to login. Enter your Cloud Foundry log on credentials: email and password and then your organization and space will be automatically be populated as shown.
+8. You will be prompted to login. Enter your Cloud Foundry log on credentials: email and password and then your organization and space will be automatically be populated as shown. Click on 'Save' and 'Install Builder'.
 
 ![Cloud Foundry Org Space](./images/cf_org_space.png)
 
