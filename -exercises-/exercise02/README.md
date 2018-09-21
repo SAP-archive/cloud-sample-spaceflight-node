@@ -62,7 +62,6 @@ These 2 lines will deploy the data model locally into a SQLite database. Later i
 Include the following code snippet into `init.js`. This will initialize our tables with corresponding data from the path /db/src/csv
 ```
 const cds = require('@sap/cds')
-cds.connect()
 const csv2json = require('csvtojson')
 
 const csv = {
@@ -77,27 +76,24 @@ const csv = {
   teched_space_trip_SpacePorts: 'spaceports'
 }
 
-let chain = Promise.resolve()
+module.exports = () => {
+  let chain = Promise.resolve()
 
-for (const tableName in csv) {
-  chain = chain
-    .then(() => {
-      return csv2json().fromFile(`./db/src/csv/${csv[tableName]}.csv`)
-    })
-    .then((values) => {
-      module.exports = () => {
-       return cds.run(INSERT.into(tableName).rows(values))
-      }
-    })
-    .then((rowCount) => {
-      console.log(`Inserted successfully ${rowCount} rows in table ${tableName}`)
-    })
+  for (const tableName in csv) {
+    chain = chain
+      .then(() => {
+        return csv2json().fromFile(`./db/src/csv/${csv[tableName]}.csv`)
+      })
+      .then((values) => {
+        return cds.run(INSERT.into(tableName).rows(values))
+      })
+      .then((rowCount) => {
+        console.log(`Inserted successfully ${rowCount} rows in table ${tableName}`)
+      })
+  }
+
+  return chain
 }
-
-chain = chain
-  .then(() => {
-    return cds.disconnect()
-  })
 ```
 
 10. Now execute `cds deploy` command. This command creates all our entities as tables in SQLite locally and executes code from init.js to initialize these tables with data from the provided CSV files. 
