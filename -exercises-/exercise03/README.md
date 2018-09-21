@@ -174,7 +174,7 @@ Steps 19 to 21 can be seen in the below screenshot:
 
 ![Alt text](./images/git_commit.png?raw=true)
 
-21. Click on the 3 dots and choose Push to and choose origin URL as shown:
+21. Click on the 3 dots and choose Push to and choose origin URL as shown (you may need to provide the cloud platform credentials here):
 
 ![Alt text](./images/git_push1.png?raw=true)
 
