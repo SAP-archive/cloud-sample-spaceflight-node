@@ -12,7 +12,7 @@ This exercise is structured into two parts: <br /><br />
 **A.) Import, build and deploy the project into SAP Web IDE <br />
 B.) Build the User Interface using SAP Web IDE <br />**
 
-In this exercise, we will import the source code from Git service into SAP Web IDE. In SAP Web IDE, the database artifacts are deployed to SAP DBaaS service(SAP HANA) running on SAP Cloud Platform Cloud Foundry environment.
+In this exercise, we will import the source code from Git service into SAP Web IDE. In SAP Web IDE, the database artifacts are deployed to SAP DBaaS service (SAP HANA) running on SAP Cloud Platform Cloud Foundry environment.
 
 ## Exercise description: 
 
