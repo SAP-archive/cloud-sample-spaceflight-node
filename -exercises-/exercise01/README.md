@@ -60,7 +60,7 @@ Choose the file with an extension of .vsix that was downloaded in step 4.
 
 The project contains db and srv folders which corresponds to the Database and Service modules. 
 
-Package.json file contains the list of dependencies of the project. The "node modules" folder contains dowloaded packages of these dependencies in our local develoment environment. Currently, there is just one dependency on "@sap/cds" which is downloaded to node_modules folder.
+Package.json file contains the list of dependencies of the project. The "node_modules" folder contains dowloaded packages of these dependencies in our local develoment environment. Currently, there is just one dependency on "@sap/cds" which is downloaded to node_modules folder.
 
 Congratulations, you just set up your local development environment and completed Exercise 1.
 
