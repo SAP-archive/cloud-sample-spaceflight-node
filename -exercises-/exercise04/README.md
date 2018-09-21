@@ -12,7 +12,7 @@ This exercise is structured into two parts: <br /><br />
 **A.) Import, build and deploy the project into SAP Web IDE <br />
 B.) Build the User Interface using SAP Web IDE <br />**
 
-In this exercise, we will import the source code from Git service into SAP Web IDE. In SAP Web IDE, the database artifacts are deployed to SAP DBaaS service (SAP HANA) running on SAP Cloud Platform Cloud Foundry environment.
+In this exercise, we will import the source code from Git service into SAP Web IDE. In SAP Web IDE, the database artifacts are deployed to SAP DBaaS service(SAP HANA) running on SAP Cloud Platform Cloud Foundry environment.
 
 ## Exercise description: 
 
@@ -24,7 +24,7 @@ In this exercise, we will import the source code from Git service into SAP Web I
 
 2. You will be prompted to login, enter your credentials and click Log on.
 
-![Log on](./images/logon.png) (UPDATE)
+![Log on](./images/logon.png)
 
 3. The SAP Web IDE opens up where you will be asked to clone the repository. As we have not cloned it yet, click on Clone.
 
@@ -46,17 +46,16 @@ In this exercise, we will import the source code from Git service into SAP Web I
 
 ![Cloud Foundry URL](./images/cf_url.png)
 
-8. You will be prompted to login. Enter your Cloud Foundry log on credentials: email and password and then your organization and space will be automatically be populated as shown. Click on 'Save' and 'Install Builder'.
+8. You will be prompted to login. Enter your Cloud Foundry log on credentials: email and password and then your organization and space will be automatically be populated as shown.
 
 ![Cloud Foundry Org Space](./images/cf_org_space.png)
 
-9. Open package.json file and remove the following lines. These are lines specific to SQLite database that was used locally. Now as we will deploy the database artifacts into SAP HANA, these lines must be removed.
+9. Open package.json file from the root folder and remove the following lines. These are lines specific to SQLite database that was used locally. Now as we will deploy the database artifacts into SAP HANA, these lines must be removed.
 ```
 "sqlite3": "^4.0.2"                                 // remove line from dependencies
 "driver": "sqlite",                                 // remove line from model
 "url": "cloud-samples-spaceflight-node.db"          // remove line from model
 ```
-
 10. Now right click on the db folder of the project and click on Build as shown:
 
 ![Build CDS](./images/build_db.png)
@@ -93,7 +92,15 @@ In this exercise, we will import the source code from Git service into SAP Web I
 
 ![Database table with content](./images/table_content.png)
 
-19. Right click the srv folder and choose `Build` and then choose `Build CDS`. 
+19. Open `mta.yml` file from the root folder and change the service-plan of `<project_name>-uaa` from `default` to `application`.
+```
+  - name: <project_name>-uaa
+    type: com.sap.xs.uaa
+    parameters:
+      service-plan: application
+``` 
+
+20. Right click the srv folder and choose `Build` and then choose `Build CDS`. 
 
 ![Build Service](./images/build_srv.png)
 
@@ -101,7 +108,7 @@ The log output can be seen in the console as below.
 
 ![Deploy to HANA](./images/build_srv_output.png)
 
-<<< UGLY WORKAROUND >>>
+Include the following lines into the `package.json` file present within the `srv` folder
 ```
   "cds": {
     "data": {
@@ -113,7 +120,7 @@ The log output can be seen in the console as below.
   }  
 ```
 
-20. Right click the srv folder and choose `Run` and then choose `Run as Node.js Application`. This takes a couple of seconds as it deploys the service to cloud foundry.
+21. Right click the srv folder and choose `Run` and then choose `Run as Node.js Application`. This takes a couple of seconds as it deploys the service to cloud foundry.
 
 ![Run Service](./images/run_srv.png)
 
@@ -133,7 +140,7 @@ Change the $metadata part of the URL to something meaningful from our exposed se
 
 ![JSON response](./images/JSON.png)
 
-21. Goto [SAP Cloud Platform destinations](https://account.hana.ondemand.com/cockpit#/globalaccount/8fd39023-a237-4d71-9b6a-ed9d1719d275/neosubaccount/06b416a3-9282-4cb7-ae72-e23031b005ca/destinations) to create a destination.
+22. Goto [SAP Cloud Platform destinations](https://account.hana.ondemand.com/cockpit#/globalaccount/8fd39023-a237-4d71-9b6a-ed9d1719d275/neosubaccount/06b416a3-9282-4cb7-ae72-e23031b005ca/destinations) to create a destination.
 
 We just imported and built our data model and node service in part A of this exercise.
 
