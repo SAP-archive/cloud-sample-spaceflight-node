@@ -83,7 +83,7 @@ module.exports = function ({ teched_flight_trip_Bookings }) {
 ```
 7. Now we will restart our server so that it can reflect the custom logic that we just added by pressing Cntrl + C in the terminal and again running the `cds serve all` command. 
 
-8. Now that we have our Booking Service running, let us create a booking by sending an HTTP POST request. Launch Postman app in your desktop and create a POST request with this URL: http://localhost:4004/booking/Bookings The header and body of the request should be as follows:
+8.  Launch Postman app in your desktop. Now that we have our Booking Service running, let us create a booking by sending an HTTP POST request using Postman App. Create a POST request with this URL: http://localhost:4004/booking/Bookings The header and body of the request should be as follows:
 
 Header:
 ```
@@ -111,6 +111,19 @@ Now click on Send and we can see that our booking is created successfully with a
 ![Alt text](./images/post_success.png?raw=true)
 
 9. Based on our logic, we should be able to create only upto 5 passengers on the same date and same itinerary (Assumption: 1 spacecraft per itinerary; Spacecraft capactiy: 5). Now if we try to create another booking with Number of Passengers as 5 for the same date and itinerary, it should fail with an HTTP 409 status code as shown:
+
+```
+{
+      "BookingNo"               : "20180726GA1A1",
+      "Itinerary_ID"            : "1",
+      "CustomerName"            : "Captain Kirk",
+      "EmailAddress"            : "markwatney@mars.iss",
+      "DateOfTravel"            : "2018-12-02T14:00:00Z",   
+      "Cost"                    : "1000.0",
+      "NumberOfPassengers"      : 5,
+      "PaymentInfo_CardNumber"  : "45887465625662"
+}
+```
 
 ![Alt text](./images/post_fail.png?raw=true)
 
