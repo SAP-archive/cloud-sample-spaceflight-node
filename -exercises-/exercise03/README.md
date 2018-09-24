@@ -35,7 +35,34 @@ service BookingService {
 }
 ```
 
-2. Run the following command in the terminal to serve the Booking Service:
+2. Now let us include some custom logic to ensure that not more than 5 passengers are flying in the same spacecraft, as we assume that our spacecraft capacity is 5. For simplicity sake, we assume there is one spacecraft flying every day for each itinerary in a specific space route. Create a file called booking-service.js in the same folder `/srv/booking-service.js` and add the following code:
+```javascript
+/**
+ * Custom logic for booking-service defined in ./booking-service.cds
+ * Check to restric number of passenger traveling on a space craft to 5
+ */
+module.exports = function ({ teched_flight_trip_Bookings }) {
+
+    this.before ('CREATE', teched_flight_trip_Bookings, (cds) => {
+  
+      cds.run(()=>{
+         SELECT.from ('teched_flight_trip_Bookings')
+          .where ({DateOfTravel: cds.data.DateOfTravel, and : {Itinerary_ID: cds.data.Itinerary_ID} })
+        
+      }).then(( [bookings] ) => {
+          let totalPassengers = 0
+          for (let booking of bookings) {
+            totalPassengers = totalPassengers + booking.NumberOfPassengers
+            if (totalPassengers + cds.data.NumberOfPassengers >= 5)
+              cds.error (409, "Spacecraft Tickets Sold out for your Date and Destination, sorry")
+          }
+      })
+      
+    })
+  }
+```
+
+3. Run the following command in the terminal to serve the Booking Service:
 ```
 cds serve all
 ```
@@ -43,47 +70,19 @@ Now we see the information that our service is served at the URL: http://localho
 
 ![Alt text](./images/cds_serve_all.png?raw=true)
 
-3. Open [this URL](http://localhost:4004/) in the browser and click on the /booking service as shown:
+4. Open [this URL](http://localhost:4004/) in the browser and click on the /booking service as shown:
 
 ![Alt text](./images/oData_services.png?raw=true)
 
-4. The XML metadata information of the exposed oData service  is seen. In addition the URL now is changed to http://localhost:4004/booking/$metadata
+5. The XML metadata information of the exposed oData service  is seen. In addition the URL now is changed to http://localhost:4004/booking/$metadata
 
 ![Alt text](./images/xml.png?raw=true)
 
-5. Replace the $metadata part of the URL with any of the entity names present in the code of step 1 to see the actual contents present in the different entities. For example, on changing the URL to http://localhost:4004/booking/Planets, the contents can be seen as shown below:
+6. Replace the $metadata part of the URL with any of the entity names present in the code of step 1 to see the actual contents present in the different entities. For example, on changing the URL to http://localhost:4004/booking/Planets, the contents can be seen as shown below:
 
 ![Alt text](./images/planets.png?raw=true)
 
-6. Now let us include some custom logic to ensure that not more than 5 passengers are flying in the same spacecraft, as we assume that our spacecraft capacity is 5. For simplicity sake, we assume there is one spacecraft flying every day for each itinerary in a specific space route. Create a file called booking-service.js in the same folder `/srv/booking-service.js` and add the following code:
-```
-/**
- * Custom logic for booking-service defined in ./booking-service.cds
- * Check to restric number of passenger traveling on a space craft to 5
- */
-module.exports = function ({ teched_flight_trip_Bookings }) {
-
-  this.before ('CREATE', teched_flight_trip_Bookings, (cds) => {
-
-    cds.run(()=>{
-       SELECT.from ('teched_flight_trip_Bookings')
-        .where ({DateOfTravel: cds.data.DateOfTravel, and : {Itinerary_ID: cds.data.Itinerary_ID} })
-      
-    }).then(( [bookings] ) => {
-        let totalPassengers = 0
-        for (let booking of bookings) {
-          totalPassengers = totalPassengers + booking.NumberOfPassengers
-          if (totalPassengers + cds.data.NumberOfPassengers >= 5)
-            cds.error (409, "Spacecraft Tickets Sold out for your Date and Destination, sorry")
-        }
-    })
-    
-  })
-}
-```
-7. Now we will restart our server so that it can reflect the custom logic that we just added by pressing Cntrl + C in the terminal and again running the `cds serve all` command. 
-
-8.  Launch Postman app in your desktop. Now that we have our Booking Service running, let us create a booking by sending an HTTP POST request using Postman App. Create a POST request with this URL: http://localhost:4004/booking/Bookings The header and body of the request should be as follows:
+7.  Launch Postman app in your desktop. Now that we have our Booking Service running, let us create a booking by sending an HTTP POST request using Postman App. Create a POST request with this URL: http://localhost:4004/booking/Bookings The header and body of the request should be as follows:
 
 Header:
 ```
@@ -110,7 +109,7 @@ Now click on Send and we can see that our booking is created successfully with a
 
 ![Alt text](./images/post_success.png?raw=true)
 
-9. Based on our logic, we should be able to create only upto 5 passengers on the same date and same itinerary (Assumption: 1 spacecraft per itinerary; Spacecraft capactiy: 5). Now if we try to create another booking with Number of Passengers as 5 for the same date and itinerary, it should fail with an HTTP 409 status code as shown:
+8. Based on our logic, we should be able to create only upto 5 passengers on the same date and same itinerary (Assumption: 1 spacecraft per itinerary; Spacecraft capactiy: 5). Now if we try to create another booking with Number of Passengers as 5 for the same date and itinerary, it should fail with an HTTP 409 status code as shown:
 
 ```
 {
@@ -127,54 +126,54 @@ Now click on Send and we can see that our booking is created successfully with a
 
 ![Alt text](./images/post_fail.png?raw=true)
 
-10. In the next exercise we will deploy our data model and service to SAP Cloud Platform and build a UI for our app using SAP Web IDE. In order to do this we are first going to push the code to Git Service of SAP Cloud Platform. 
+9. In the next exercise we will deploy our data model and service to SAP Cloud Platform and build a UI for our app using SAP Web IDE. In order to do this we are first going to push the code to Git Service of SAP Cloud Platform. 
 
-11. Launch [SAP Cloud Platform cockpit](https://account.hana.ondemand.com/) on your browser. Log on with the credentials (Email and Password) provided by the instructors of the SAP TechEd 2018 session CNA375.
+10. Launch [SAP Cloud Platform cockpit](https://account.hana.ondemand.com/) on your browser. Log on with the credentials (Email and Password) provided by the instructors of the SAP TechEd 2018 session CNA375.
 
 ![Alt text](./images/logon.png?raw=true)
 
-12. Now click on the global account Teched2018 
+11. Now click on the global account Teched2018 
 
 ![Alt text](./images/global-account.png?raw=true)
 
-13. Choose sub-account CNA375neo
+12. Choose sub-account CNA375neo
 
 ![Alt text](./images/sub-account.png?raw=true)
 
-14. Choose services tab from the left and filter for git service. Choose `Git Service`.
+13. Choose services tab from the left and filter for git service. Choose `Git Service`.
 
 ![Alt text](./images/gitservice.png?raw=true)
 
-15. Click on Go to service.
+14. Click on Go to service.
 
 ![Alt text](./images/gotogit.png?raw=true)
 
-16. Create a repository here by clicking on New repository and enter the name as `CNA<NUMBER>`. <NUMBER> should be the User that you get for this session. Uncheck the `Create empty Commit` and click OK. The reason for creating the repository with this name is that all participants of this session will create repositores and this will help you to uniquely identify your repository. 
+15. Create a repository here by clicking on New repository and enter the name as `CNA<NUMBER>`. <NUMBER> should be the User that you get for this session. Uncheck the `Create empty Commit` and click OK. The reason for creating the repository with this name is that all participants of this session will create repositores and this will help you to uniquely identify your repository. 
 
 ![Alt text](./images/git_repo_create.png?raw=true)
 
-17. Now click on your repository and copy the Repository URL. This will be used in step 21.
+16. Now click on your repository and copy the Repository URL. This will be used in step 21.
 
 ![Alt text](./images/git_repo.png?raw=true)
 
-18. Switch back to Visual studio code and open the `.gitignore` file present in the root folder of your project and append this line `cloud-sample-spaceflight-node.db` to the end, so that we do not push the local SQLite database. 
+17. Switch back to Visual studio code and open the `.gitignore` file present in the root folder of your project and append this line `*.db` to the end, so that we do not push the local SQLite database. 
 
 ![Alt text](./images/gitignore.png?raw=true)
 
-19. Execute the command `git init` in your terminal.
+18. Execute the command `git init` in your terminal.
 
-20. Execute the command `git config user.email <EMAIL>` in your terminal. `<EMAIL>` is the mail address provided for your user.
+19. Execute the command `git config user.email <EMAIL>` in your terminal. `<EMAIL>` is the mail address provided for your user.
 
-21. Execute the command `git remote add origin <URL>` in your terminal. `<URL>` is the link that was copied in step 17.
+20. Execute the command `git remote add origin <URL>` in your terminal. `<URL>` is the link that was copied in step 17.
 
-Steps 19 to 21 can be seen in the below screenshot:
+Steps 18 to 20 can be seen in the below screenshot:
 ![Alt text](./images/git_init.png?raw=true)
 
-20. Click on the Source Control tab of Visual Studio Code on the left and type a message 'Source code of Space travel node app' and click on the Commit button (Tick button) as shown:
+21. Click on the Source Control tab of Visual Studio Code on the left and type a message 'Source code of Space travel node app' and click on the Commit button (Tick button) as shown:
 
 ![Alt text](./images/git_commit.png?raw=true)
 
-21. Click on the 3 dots and choose Push to and choose origin URL as shown (you may need to provide the cloud platform credentials here):
+22. Click on the 3 dots and choose Push to and choose origin URL as shown (you may need to provide the cloud platform credentials here):
 
 ![Alt text](./images/git_push1.png?raw=true)
 

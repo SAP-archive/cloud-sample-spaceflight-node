@@ -6,61 +6,79 @@
 
 ## Objective
 
-In this exercise, we will understand the data model of the [base space-flight project](https://github.com/SAP/cloud-sample-spaceflight). Using the base model, we create tables in a local SQLite database and load data from CSV files. We will further extend the data model to include payment information for space travel bookings.
+In this exercise, we will understand and extend the data model of the [space-flight project](https://github.com/SAP/cloud-sample-spaceflight). Using this as the base model, we create tables in a local SQLite database and load data from CSV files. We will further extend the data model to include payment information for space travel bookings.
 
 ## Exercise description
 
-1. Open the package.json file in the root folder of your project and include the following dependencies and save.
-```
+1. Open the package.json file in the root folder of your project and include the following dependencies.
+```json
     "express": "^4.16.3",
     "csvtojson": "2.0.8",
     "sqlite3": "^4.0.2",
     "spaceflight-model": "git://github.com/SAP/cloud-sample-spaceflight"
 ```
 
-The package.json files looks as shown below:
-![Alt text](./images/package.png?raw=true) 
+Next, add the following 2 lines to include the SQLite driver and URL under cds.data.model of the same file:
+```json
+      "driver":"sqlite",            
+      "url": "cloud-sample-spaceflight-node.db"
+```
 
-2. Go to `View` menu and choose `Integrated Terminal`. This invokes the terminal within the VS Code editor.
+These 2 lines will deploy the data model locally into a SQLite database.
+
+The package.json file looks as shown below:
+![Alt text](./images/package.png?raw=true)
+
+2. Go to `View` menu and choose `Terminal`. This invokes the Terminal within the VS Code editor.
 
 ![Alt text](./images/invoke_terminal.png?raw=true) 
 
-3. Execute the command `npm install` from the integrated terminal of VS Code. 
+3. Execute the command `npm install` from the Terminal of VS Code. Make sure that this command is executed from the path of the project in the terminal.
 ```
 npm install
 ```
 ![Alt text](./images/npm_install.png?raw=true)
 
-4. Within the db folder, open the data-model.cds file and replace the generated code with the following code. We are reusing the data model of the project, [cloud-sample-spaceflight](https://github.com/SAP/cloud-sample-spaceflight).
-
+4. Within the db folder, open the `data-model.cds` file and replace the generated code with the following code. We are reusing the data model of the project, [cloud-sample-spaceflight](https://github.com/SAP/cloud-sample-spaceflight) which can be seen in the second and third lines of code below. 
 ```
+namespace teched.payment.trip;
 using teched.flight.trip as flight from 'spaceflight-model/db/flight-model';
 using teched.space.trip as space from 'spaceflight-model/db/space-model';
+entity PaymentInfo {
+    key CardNumber : String(16) not null;
+    CardType      : String(15) not null;
+    CVV            : Integer not null;
+    CardHolder     : String(30) not null;
+    CardExpiry     : DateTime not null;
+}
+
+extend flight.Bookings {
+    PaymentInfo  : Association to PaymentInfo;
+};
 ```
-5. Now execute the cds compile command on the integrated terminal passing the data-model.cds file as a parameter. A json showing the entities that will be created can be seen.
+In the last 10 lines of [base model project's data model](https://github.com/SAP/cloud-sample-spaceflight/blob/master/db/flight-model.cds), we can notice that there is no information regarding Payment. Hence we also add a new entity called `PaymentInfo` and extend the `Bookings` entity from the base model to include an association to our newly created entity. 
+
+The overall entity relationship of our data model is as shown below, with PaymentInfo being the newly added one:
+![Alt text](./images/data_model.jpg?raw=true)
+
+And our `data-model.cds` file looks as shown:
+
+![Alt text](./images/dataModelExtend.png?raw=true)
+
+5. Execute the cds compile command in terminal passing the data-model.cds file as a parameter. A json showing the entities that will be created can be seen.
 ```
 cds compile db/data-model.cds
 ```
-6. Goto package.json file present in the root folder of the project and add the following 2 lines to include the SQLite driver and URL under cds.data.model:
-```
-      "driver":"sqlite",            
-      "url": "cloud-sample-spaceflight-node.db"
-```
-Save the `package.json` file, which looks as shown below:
-![Alt text](./images/sql_driver.png?raw=true)
+6. Click [here](https://github.com/SAP/cloud-sample-spaceflight-node/raw/master/-exercises-/docs/csv.zip) to download the CSV files zip folder. 
 
-These 2 lines will deploy the data model locally into a SQLite database. Later in Exercise 4, we will deploy this to HANA service in SAP Cloud Platform.
+7. Unzip the file in your System File Explorer. Copy and paste the folder named csv into the following folder `<your-project-path>/<your-project-name>/db/src/`. Ensure that the CSV files are under the right path: `/db/src/csv`.
 
-7. Click [here](https://github.com/SAP/cloud-sample-spaceflight-node/raw/master/-exercises-/docs/csv.zip) to download the CSV files zip folder. 
+8. Inside the db folder create a file named `init.js` by clicking the Create file button and giving it the name as shown. Make sure the init.js file is under the path `<your-project-path>/<your-project-name>/db/init.js`
 
-8. Unzip the file in your System File Explorer. Copy and paste the folder named csv into the following folder `<your-project-path>/<your-project-name>/db/src/`. Ensure that the CSV files are under the right path: `/db/src/csv`.
+![Initializing from CSV](./images/init.png?raw=true)
 
-9. At the db level create a file named init.js by clicking the Create file button and giving it the name as shown. Make sure the init.js file is under the path `<your-project-path>/<your-project-name>/db/init.js`
-
-![Alt text](./images/init.png?raw=true)
-
-Include the following code snippet into `init.js`. This will initialize our tables with corresponding data from the path /db/src/csv
-```
+9. Include the following code snippet into `init.js`. This will initialize our tables with corresponding data from the path /db/src/csv
+```javascript
 const cds = require('@sap/cds')
 const csv2json = require('csvtojson')
 
@@ -100,11 +118,11 @@ module.exports = () => {
 ```
 cds deploy
 ```
-![Alt text](./images/table_initialize.png?raw=true)
+![Initializing](./images/table_initialize.png?raw=true)
 
-11. This can be verified by accessing the local SQLite database. To do this goto `View` menu and choose `Command Palette...`.
+11. Let us verify if the tables were created in the local SQLite database. To do this goto `View` menu and choose `Command Palette...`.
 
-![Alt text](./images/command_palette.png?raw=true)
+![Command Palette](./images/command_palette.png?raw=true)
 
 Type SQLite and choose SQlite: Open Database in Explorer
 ![Alt text](./images/SQLite_open.png?raw=true)
@@ -112,59 +130,16 @@ Type SQLite and choose SQlite: Open Database in Explorer
 Choose `cloud-sample-spaceflight-node.db` as the database and press enter. 
 ![Alt text](./images/open_db.png?raw=true)
 
-This opens the SQLITE EXPLORER at the bottom left. Click on it and expand the database, `cloud-sample-spaceflight-node.db` where we can see the list of tables created. `cloud-sample-spaceflight-node.db` is the name of the local SQLite database that was provided in step 6.
+This opens the SQLITE EXPLORER at the bottom left. Click on it and expand the database, `cloud-sample-spaceflight-node.db`, where we can see the list of tables created. `cloud-sample-spaceflight-node.db` is the name of the local SQLite database that was provided in `package.json` as URL for database.
 
-![Alt text](./images/sqlite_left.png?raw=true)
+All tables are created. Note that the `PaymentInfo` table that was defined by us in our data-model.cds file is also created.
+
+![Alt text](./images/payment_table.png?raw=true)
 
 Right click on any of the tables and choose `Show Table` to see its contents. Here we can see the contents of the table `teched_space_trip_AstronomicalBodies`
 
 ![Alt text](./images/table_contents.png?raw=true)
 
-12. Now we will extend the base model. In the file, `/node_modules/spaceflight-model/db/flight-model.cds`, it can be noticed that Bookings entity does not have any information regarding payment details as shown in the screenshot below. 
-
-![Alt text](./images/bookings.png?raw=true)
-
-Hence we will add a new entity to our project called `PaymentInfo` and extend the `Bookings` entity from the base model to include an association to our newly created entity. This is done by adding some code to the file `/db/data-model.cds`
-
-Include the following as the first line of the file `/db/data-model.cds`
-```
-namespace teched.payment.trip;
-```
-Append the below code to the file `/db/data-model.cds` and save the file.
-```
-entity PaymentInfo {
-    key CardNumber : String(16) not null;
-    CardType      : String(15) not null;
-    CVV            : Integer not null;
-    CardHolder     : String(30) not null;
-    CardExpiry     : DateTime not null;
-}
-
-extend flight.Bookings {
-    PaymentInfo  : Association to PaymentInfo;
-};
-```
-
-Hence this is how our `data-model.cds` file looks now.
-
-![Alt text](./images/dataModelExtend.png?raw=true)
-
-13. Now compile this data model by executing the following command in the terminal:
-```
-cds compile ./db/data-model.cds
-```
-We can see PaymentInfo in addition to the tables that were created previously.
-
-![Alt text](./images/payment_compile.png?raw=true)
-
-14. Deploy the data model again to create the paymentinfo table locaclly. This is done by executing the following command:
-```
-cds deploy
-```
-To verify if this table was created in SQLite, click on Refresh button of SQLite Explorer, and the PaymentInfo table can be seen as below.
-
-![Alt text](./images/payment_table.png?raw=true)
-
-In the next exercise let us see how to expose our table entities as oData services and how to include custom logic to create bookings.
+Congratulations, you completed Exercise 2 successfully. In the next exercise let us see how to expose our table entities as oData services and how to include custom logic to create bookings.
 
 Click [here](../exercise03/README.md) to continue with Exercise 3.

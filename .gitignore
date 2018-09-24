@@ -11,4 +11,4 @@ gen
 *.mtar
 
 .DS_Store
-cloud-sample-spaceflight-node.db
+*.db
