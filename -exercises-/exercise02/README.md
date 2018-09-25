@@ -12,16 +12,16 @@ In this exercise, we will understand and extend the data model of the [space-fli
 
 1. Open the package.json file in the root folder of your project and include the following dependencies.
 ```json
-    "express": "^4.16.3",
-    "csvtojson": "2.0.8",
-    "sqlite3": "^4.0.2",
+    "express"   : "^4.16.3",
+    "csvtojson" : "2.0.8",
+    "sqlite3"   : "^4.0.2",
     "spaceflight-model": "git://github.com/SAP/cloud-sample-spaceflight"
 ```
 
-Next, add the following 2 lines to include the SQLite driver and URL under cds.data.model of the same file:
+Next, add the following 2 lines to include the SQLite driver and URL under cds.data.model of the same file and save the file:
 ```json
       "driver":"sqlite",            
-      "url": "cloud-sample-spaceflight-node.db"
+      "url"   : "cloud-sample-spaceflight-node.db"
 ```
 
 These 2 lines will deploy the data model locally into a SQLite database.
@@ -33,13 +33,13 @@ The package.json file looks as shown below:
 
 ![Alt text](./images/invoke_terminal.png?raw=true) 
 
-3. Execute the command `npm install` from the Terminal of VS Code. Make sure that this command is executed from the path of the project in the terminal.
+3. Save the package.json file and execute the command `npm install` from the Terminal of VS Code. Make sure that this command is executed from the root folder of the project in the terminal such as `/Users/Student/cloud-sample-spaceflight-node/`.
 ```
 npm install
 ```
-![Alt text](./images/npm_install.png?raw=true)
+![NPM Install](./images/npm_install.png?raw=true)
 
-4. Within the db folder, open the `data-model.cds` file and replace the generated code with the following code. We are reusing the data model of the project, [cloud-sample-spaceflight](https://github.com/SAP/cloud-sample-spaceflight) which can be seen in the second and third lines of code below. 
+4. Within the db folder, open the `data-model.cds` file and replace the generated code with the following code. We are reusing the data model of the project, [cloud-sample-spaceflight](https://github.com/SAP/cloud-sample-spaceflight) which can be seen in the second and third lines of code below. In step 1, the base project's git URL is added to package.json file as a dependency and in step 3, npm install downloads the base project contents into  `<your-project-path>/cloud-sample-spaceflight-node/node_modules/` folder.
 ```
 namespace teched.payment.trip;
 using teched.flight.trip as flight from 'spaceflight-model/db/flight-model';
@@ -65,19 +65,15 @@ And our `data-model.cds` file looks as shown:
 
 ![Alt text](./images/dataModelExtend.png?raw=true)
 
-5. Execute the cds compile command in terminal passing the data-model.cds file as a parameter. A json showing the entities that will be created can be seen.
-```
-cds compile db/data-model.cds
-```
-6. Click [here](https://github.com/SAP/cloud-sample-spaceflight-node/raw/master/-exercises-/docs/csv.zip) to download the CSV files zip folder. 
+5. Click [here](https://github.com/SAP/cloud-sample-spaceflight-node/raw/master/-exercises-/docs/csv.zip) to download the CSV files zip folder. 
 
-7. Unzip the file in your System File Explorer. Copy and paste the folder named csv into the following folder `<your-project-path>/<your-project-name>/db/src/`. Ensure that the CSV files are under the right path: `/db/src/csv`.
+6. Unzip the file in your System File Explorer. Copy and paste the folder named csv into the following folder `<your-project-path>/cloud-sample-spaceflight-node/db/src/`. Ensure that the CSV files are under the right path: `/db/src/csv`.
 
-8. Inside the db folder create a file named `init.js` by clicking the Create file button and giving it the name as shown. Make sure the init.js file is under the path `<your-project-path>/<your-project-name>/db/init.js`
+7. Inside the db folder create a file named `init.js` by clicking the Create file button and giving it the name as shown. Make sure the init.js file is under the path `<your-project-path>/cloud-sample-spaceflight-node/db/init.js`
 
 ![Initializing from CSV](./images/init.png?raw=true)
 
-9. Include the following code snippet into `init.js`. This will initialize our tables with corresponding data from the path /db/src/csv
+8. Include the following code snippet into `init.js`. This will initialize our tables with corresponding data from the path `/db/src/csv`
 ```javascript
 const cds = require('@sap/cds')
 const csv2json = require('csvtojson')
@@ -114,13 +110,13 @@ module.exports = () => {
 }
 ```
 
-10. Now execute `cds deploy` command. This command creates all our entities as tables in SQLite locally and executes code from init.js to initialize these tables with data from the provided CSV files. 
+9. Now execute `cds deploy` command. This command creates all entities as tables in SQLite local database. It also executes the code from `db/init.js` to initialize the tables with data from the provided CSV files.
 ```
 cds deploy
 ```
 ![Initializing](./images/table_initialize.png?raw=true)
 
-11. Let us verify if the tables were created in the local SQLite database. To do this goto `View` menu and choose `Command Palette...`.
+10. Let us verify if the tables were created in the local SQLite database. To do this goto `View` menu and choose `Command Palette...`.
 
 ![Command Palette](./images/command_palette.png?raw=true)
 

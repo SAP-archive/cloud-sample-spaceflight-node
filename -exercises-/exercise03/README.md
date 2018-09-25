@@ -6,9 +6,17 @@
 
 ## Objective
 
-In this exercise, we will learn to expose our data model entities as OData services. We will also include custom logic to limit the number of passengers in each space craft. 
+In this exercise, we will learn to expose our data model entities as OData services. We will also include custom logic to limit the number of passengers in each space craft.
+
+This exercise is structured into two parts. the second part is optional: <br /><br />
+[A.) Add custom logic and expose data model entities as OData services](#part-a:) <br />
+[B.) Push the code to Git service of SAP Cloud Platform (Optional)](#part-b:) <br />
+
+In this exercise, we will import the source code from Git service into SAP Web IDE. In SAP Web IDE, the database artifacts are deployed to SAP DBaaS service(SAP HANA) running on SAP Cloud Platform Cloud Foundry environment.
 
 ## Exercise description
+
+# Part A: Add custom logic and expose data model entities as OData services
 
 1. Rename the file inside `/srv/` folder from `my-service.cds` to `booking-service.cds` and replace the generated code with the below lines of code. This code exposes our data-model entities as oData service.
 ```
@@ -35,7 +43,7 @@ service BookingService {
 }
 ```
 
-2. Now let us include some custom logic to ensure that not more than 5 passengers are flying in the same spacecraft, as we assume that our spacecraft capacity is 5. For simplicity sake, we assume there is one spacecraft flying every day for each itinerary in a specific space route. Create a file called booking-service.js in the same folder `/srv/booking-service.js` and add the following code:
+2. Let us include some custom logic to ensure that not more than 5 passengers are flying in the same spacecraft, as we assume that our spacecraft capacity is 5. For simplicity sake, we assume there is one spacecraft flying every day for each itinerary in a specific space route. Create a file called booking-service.js in the same folder `/srv/booking-service.js` and add the following code. Note that this file name is same as that of the of the service created in step 1, `booking-service.cds`. In case the naming is different, add the annotation `@(impl:service.js)` to the `booking-service.cds` file.
 ```javascript
 /**
  * Custom logic for booking-service defined in ./booking-service.cds
@@ -89,7 +97,7 @@ Header:
 Content-Type: application/json;IEEE754Compatible=true
 ```
 Body:
-```
+```json
 {
       "BookingNo"               : "20180726GA1A0",
       "Itinerary_ID"            : "1",
@@ -110,8 +118,7 @@ Now click on Send and we can see that our booking is created successfully with a
 ![Alt text](./images/post_success.png?raw=true)
 
 8. Based on our logic, we should be able to create only upto 5 passengers on the same date and same itinerary (Assumption: 1 spacecraft per itinerary; Spacecraft capactiy: 5). Now if we try to create another booking with Number of Passengers as 5 for the same date and itinerary, it should fail with an HTTP 409 status code as shown:
-
-```
+```json
 {
       "BookingNo"               : "20180726GA1A1",
       "Itinerary_ID"            : "1",
@@ -126,54 +133,58 @@ Now click on Send and we can see that our booking is created successfully with a
 
 ![Alt text](./images/post_fail.png?raw=true)
 
-9. In the next exercise we will deploy our data model and service to SAP Cloud Platform and build a UI for our app using SAP Web IDE. In order to do this we are first going to push the code to Git Service of SAP Cloud Platform. 
+Congratulations, we successfully included custom logic to our code and exposed the data model entities as oData services. In part B of this exercise, we will create a repositorz and push the code to Git service of SAP Cloud Platform. Part B is optional. In case you directly want to move to the next exercise, click [here](../exercise04/README.md).
 
-10. Launch [SAP Cloud Platform cockpit](https://account.hana.ondemand.com/) on your browser. Log on with the credentials (Email and Password) provided by the instructors of the SAP TechEd 2018 session CNA375.
+# Part B: Push the code to Git service of SAP Cloud Platform (Optional)
+
+In the next exercise we will deploy our data model and service to SAP Cloud Platform and build a UI for our app using SAP Web IDE. In order to do this we are first going to push the code to Git Service of SAP Cloud Platform. 
+
+1. Launch [SAP Cloud Platform cockpit](https://account.hana.ondemand.com/) on your browser. Log on with the credentials (Email and Password) provided by the instructors of the SAP TechEd 2018 session CNA375.
 
 ![Alt text](./images/logon.png?raw=true)
 
-11. Now click on the global account Teched2018 
+2. Now click on the global account Teched2018 
 
 ![Alt text](./images/global-account.png?raw=true)
 
-12. Choose sub-account CNA375neo
+3. Choose sub-account CNA375neo
 
 ![Alt text](./images/sub-account.png?raw=true)
 
-13. Choose services tab from the left and filter for git service. Choose `Git Service`.
+4. Choose services tab from the left and filter for git service. Choose `Git Service`.
 
 ![Alt text](./images/gitservice.png?raw=true)
 
-14. Click on Go to service.
+5. Click on Go to service.
 
 ![Alt text](./images/gotogit.png?raw=true)
 
-15. Create a repository here by clicking on New repository and enter the name as `CNA<NUMBER>`. <NUMBER> should be the User that you get for this session. Uncheck the `Create empty Commit` and click OK. The reason for creating the repository with this name is that all participants of this session will create repositores and this will help you to uniquely identify your repository. 
+6. Create a repository here by clicking on New repository and enter the name as `CNA<NUMBER>`. `NUMBER` should be from the User that you get for this session Ex: `395` from cna375-`395`@teched.cloud.sap. Uncheck the `Create empty Commit` and click OK. The reason for creating the repository with this name is that all participants of this session will create repositores and this will help you to uniquely identify your repository. 
 
 ![Alt text](./images/git_repo_create.png?raw=true)
 
-16. Now click on your repository and copy the Repository URL. This will be used in step 21.
+7. Now click on your repository and copy the Repository URL. This will be used in step 11.
 
 ![Alt text](./images/git_repo.png?raw=true)
 
-17. Switch back to Visual studio code and open the `.gitignore` file present in the root folder of your project and append this line `*.db` to the end, so that we do not push the local SQLite database. 
+8. Switch back to Visual studio code and open the `.gitignore` file present in the root folder of your project and append this line `*.db` to the end, so that we do not push the local SQLite database. 
 
 ![Alt text](./images/gitignore.png?raw=true)
 
-18. Execute the command `git init` in your terminal.
+9. Execute the command `git init` in your terminal. Make sure this command is executed at the root folder of the project.
 
-19. Execute the command `git config user.email <EMAIL>` in your terminal. `<EMAIL>` is the mail address provided for your user.
+10. Execute the command `git config user.email <EMAIL>` in your terminal. `<EMAIL>` is the mail address provided for your user Ex: `cna375-395@teched.cloud.sap`
 
-20. Execute the command `git remote add origin <URL>` in your terminal. `<URL>` is the link that was copied in step 17.
+11. Execute the command `git remote add origin <URL>` in your terminal. `<URL>` is the link that was copied in step 7.
 
-Steps 18 to 20 can be seen in the below screenshot:
+The last 3 steps can be seen in the below screenshot:
 ![Alt text](./images/git_init.png?raw=true)
 
-21. Click on the Source Control tab of Visual Studio Code on the left and type a message 'Source code of Space travel node app' and click on the Commit button (Tick button) as shown:
+12. Click on the Source Control tab of Visual Studio Code on the left and type a message `Source code of Space travel node app` and click on the Commit button (Tick button) as shown:
 
 ![Alt text](./images/git_commit.png?raw=true)
 
-22. Click on the 3 dots and choose Push to and choose origin URL as shown (you may need to provide the cloud platform credentials here):
+13. Click on the 3 dots and choose Push to and choose origin URL as shown (you may need to provide the credentials: email and password here):
 
 ![Alt text](./images/git_push1.png?raw=true)
 

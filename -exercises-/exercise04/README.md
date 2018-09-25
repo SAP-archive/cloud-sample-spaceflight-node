@@ -18,7 +18,7 @@ In this exercise, we will import the source code from Git service into SAP Web I
 
 ## Part A: Import, build and deploy the project into SAP Web IDE
 
-1. Switch to the SAP Cloud Platform Cockpit where you have your git repository. Click on Web IDE button as shown to launch SAP WebIDE.
+1. Launch the [SAP Cloud Platform Cockpit's git service](https://account.hana.ondemand.com/cockpit#/globalaccount/8fd39023-a237-4d71-9b6a-ed9d1719d275/neosubaccount/06b416a3-9282-4cb7-ae72-e23031b005ca/git). If you completed part B of exercise 3, choose your repository if not provide your credentials (email and password) to first login and then choose `cloud-sample-spaceflight-node` and click on it. Click on the `Web IDE` button as shown to launch SAP WebIDE.
 
 ![Cockpit SAP WebIDE](./images/cockpit_webide.png)
 
@@ -26,11 +26,15 @@ In this exercise, we will import the source code from Git service into SAP Web I
 
 ![Log on](./images/logon.png)
 
-3. The SAP Web IDE opens up where you will be asked to clone the repository. As we have not cloned it yet, click on Clone.
+3. Once the SAP Web IDE loads, choose `File` -> `Git` -> `Clone Repository`. 
+
+![clone](./images/clone1.png)
+
+If SAP Web IDE prompts to clone the repository directly, just click on `Clone`.
 
 ![clone](./images/clone.png) 
 
-4. You will be asked to enter the credentials once again. Enter the User that was provided to you and your password. The authentication in 2nd step is for your SAP WebIDE access, and here this is to authenticate access to your git repository that contains the code. There could be several members cloning and working on a common project repository and this ensures only members within the sub-account are able to clone the repository.
+4. You will be asked to enter the credentials once again. Enter the credentials (email and password) provided by the CNA375 session owners. The authentication in step 2 is for the SAP WebIDE access, and here in this step it is to verify access to the git repository that contains the code. There could be several members cloning and working on a common project repository and this ensures only members within the sub-account are able to clone the repository.
 
 ![clone_auth](./images/clone_auth.png) 
 
@@ -50,7 +54,7 @@ In this exercise, we will import the source code from Git service into SAP Web I
 
 ![Cloud Foundry Org Space](./images/cf_org_space.png)
 
-9. Open package.json file from the root folder and remove the following lines. These are lines specific to SQLite database that was used locally. Now as we will deploy the database artifacts into SAP HANA, these lines must be removed.
+9. Open package.json file from the root folder,`cloud-sample-spaceflight-node/package.json`, and remove the highlighted lines. These are lines specific to SQLite database that was used locally. Now as we will deploy the database artifacts into SAP HANA, these lines must be removed.
 ```
 "sqlite3": "^4.0.2"                                 // remove line from dependencies
 "driver": "sqlite",                                 // remove line from model
@@ -64,7 +68,7 @@ In this exercise, we will import the source code from Git service into SAP Web I
 
 ![Deploy to HANA](./images/deploy_hana.png)
 
-12. Goto `Tools` menu on the top -> choose `Preferences` -> click `Features` in the left tabs -> enter `hana` in the search field -> Switch ON the `SAP HANA Database Explorer` as shown:
+12. In order to view the created database tables, we enable SAP HANA Database Explorer on SAP Web IDE. To do this goto `Tools` menu on the top -> choose `Preferences` -> click `Features` in the left tabs -> enter `hana` in the search field -> Switch ON the `SAP HANA Database Explorer` as shown:
 
 ![DB Explorer](./images/db_explorer.png)
 
@@ -108,7 +112,7 @@ The log output can be seen in the console as below.
 
 ![Deploy to HANA](./images/build_srv_output.png)
 
-Include the following lines into the `package.json` file present within the `srv` folder
+Include the following lines to the `srv/package.json` file. Note that this package.json file resides in the `srv` folder. 
 ```
   "cds": {
     "data": {
