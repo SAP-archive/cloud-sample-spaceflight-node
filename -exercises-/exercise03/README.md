@@ -2,23 +2,19 @@
 
 ## Estimated time
 
-20 minutes
+25 minutes (Part A: 15 minutes, Part B: 10 minutes)
 
 ## Objective
 
 In this exercise, we will learn to expose our data model entities as OData services. We will also include custom logic to limit the number of passengers in each space craft.
 
-This exercise is structured into two parts. the second part is optional: <br /><br />
-[A.) Add custom logic and expose data model entities as OData services](#part-a:) <br />
-[B.) Push the code to Git service of SAP Cloud Platform (Optional)](#part-b:) <br />
-
-In this exercise, we will import the source code from Git service into SAP Web IDE. In SAP Web IDE, the database artifacts are deployed to SAP DBaaS service(SAP HANA) running on SAP Cloud Platform Cloud Foundry environment.
-
-## Exercise description
+This exercise is structured into two parts. The second part is optional: <br /><br />
+## [A.) Add custom logic and expose data model entities as OData services](#part-a:-add-custom-logic-and-expose-data-model-entities-as-odata-services)<br />
+## [B.) Push the code to git service of SAP Cloud Platform (optional)](#part-b:-push-the-code-to-git-service-of-sap-cloud-platform-(optional))<br />
 
 # Part A: Add custom logic and expose data model entities as OData services
 
-1. Rename the file inside `/srv/` folder from `my-service.cds` to `booking-service.cds` and replace the generated code with the below lines of code. This code exposes our data-model entities as oData service.
+1. Rename the file inside `cloud-sample-spaceflight-node/srv/` folder from `my-service.cds` to `booking-service.cds` and __replace__ the generated code with the below lines of code. This code exposes our data-model entities as oData service.
 ```
 using teched.flight.trip as flight from '../db/data-model';
 using teched.space.trip as space from '../db/data-model';
@@ -43,7 +39,7 @@ service BookingService {
 }
 ```
 
-2. Let us include some custom logic to ensure that not more than 5 passengers are flying in the same spacecraft, as we assume that our spacecraft capacity is 5. For simplicity sake, we assume there is one spacecraft flying every day for each itinerary in a specific space route. Create a file called booking-service.js in the same folder `/srv/booking-service.js` and add the following code. Note that this file name is same as that of the of the service created in step 1, `booking-service.cds`. In case the naming is different, add the annotation `@(impl:service.js)` to the `booking-service.cds` file.
+2. Let us include some custom logic to ensure that not more than 5 passengers are flying in the same spacecraft, as we assume that the spacecraft capacity is 5. For simplicity sake, we assume there is one spacecraft flying every day for each itinerary in a specific space route. Create a file called booking-service.js in the same folder `/cloud-sample-spaceflight-node/srv/` and add the following code. Note that this file name is same as that of the of the service created in step 1, `booking-service.cds`. In case the naming is different, add the annotation `@(impl:service.js)` to the `booking-service.cds` file.
 ```javascript
 /**
  * Custom logic for booking-service defined in ./booking-service.cds
@@ -62,7 +58,7 @@ module.exports = function ({ teched_flight_trip_Bookings }) {
           for (let booking of bookings) {
             totalPassengers = totalPassengers + booking.NumberOfPassengers
             if (totalPassengers + cds.data.NumberOfPassengers >= 5)
-              cds.error (409, "Spacecraft Tickets Sold out for your Date and Destination, sorry")
+              cds.error (409, "Spacecraft tickets sold out for your Date/Destination, sorry!")
           }
       })
       
@@ -74,7 +70,7 @@ module.exports = function ({ teched_flight_trip_Bookings }) {
 ```
 cds serve all
 ```
-Now we see the information that our service is served at the URL: http://localhost:4004 as shown below
+Now we see the information that our service is served at the URL: http://localhost:4004 as shown below:
 
 ![Alt text](./images/cds_serve_all.png?raw=true)
 
@@ -86,7 +82,7 @@ Now we see the information that our service is served at the URL: http://localho
 
 ![Alt text](./images/xml.png?raw=true)
 
-6. Replace the $metadata part of the URL with any of the entity names present in the code of step 1 to see the actual contents present in the different entities. For example, on changing the URL to http://localhost:4004/booking/Planets, the contents can be seen as shown below:
+6. Replace the $metadata part of the URL with `Planets` to see the actual contents present in the Astronomical Bodies entity. Hence, on changing the URL to http://localhost:4004/booking/Planets, the contents can be seen as shown below:
 
 ![Alt text](./images/planets.png?raw=true)
 
@@ -109,7 +105,7 @@ Body:
       "PaymentInfo_CardNumber"  : "45887465625662"
 }
 ```
-Below is a screenshot showing the header details:
+Below is a screenshot showing the request's header details:
 
 ![Alt text](./images/post_header.png?raw=true)
 
@@ -117,7 +113,7 @@ Now click on Send and we can see that our booking is created successfully with a
 
 ![Alt text](./images/post_success.png?raw=true)
 
-8. Based on our logic, we should be able to create only upto 5 passengers on the same date and same itinerary (Assumption: 1 spacecraft per itinerary; Spacecraft capactiy: 5). Now if we try to create another booking with Number of Passengers as 5 for the same date and itinerary, it should fail with an HTTP 409 status code as shown:
+8. Based on our logic, we should be able to create only upto 5 passengers on the same date and same itinerary (Assumption: 1 spacecraft per itinerary; Spacecraft capactiy: 5). Now let us try to create another booking with Number of Passengers as 5 (or more) for the same date and itinerary. Replace the body of the request with the below JSON contents.
 ```json
 {
       "BookingNo"               : "20180726GA1A1",
@@ -125,33 +121,32 @@ Now click on Send and we can see that our booking is created successfully with a
       "CustomerName"            : "Captain Kirk",
       "EmailAddress"            : "markwatney@mars.iss",
       "DateOfTravel"            : "2018-12-02T14:00:00Z",   
-      "Cost"                    : "1000.0",
+      "Cost"                    : "5000.0",
       "NumberOfPassengers"      : 5,
       "PaymentInfo_CardNumber"  : "45887465625662"
 }
 ```
+The request should fail with an HTTP 409 status code as shown:
 
 ![Alt text](./images/post_fail.png?raw=true)
 
-Congratulations, we successfully included custom logic to our code and exposed the data model entities as oData services. In part B of this exercise, we will create a repositorz and push the code to Git service of SAP Cloud Platform. Part B is optional. In case you directly want to move to the next exercise, click [here](../exercise04/README.md).
+Congratulations, we successfully included custom logic to our code and exposed the data model entities as oData services. In part B of this exercise, we will create a repository and push the code to git service of SAP Cloud Platform. Part B is optional. In case you directly want to move to the next exercise, click [here](../exercise04/README.md).
 
-# Part B: Push the code to Git service of SAP Cloud Platform (Optional)
+# Part B: Push the code to git service of SAP Cloud Platform (optional)
 
-In the next exercise we will deploy our data model and service to SAP Cloud Platform and build a UI for our app using SAP Web IDE. In order to do this we are first going to push the code to Git Service of SAP Cloud Platform. 
-
-1. Launch [SAP Cloud Platform cockpit](https://account.hana.ondemand.com/) on your browser. Log on with the credentials (Email and Password) provided by the instructors of the SAP TechEd 2018 session CNA375.
+1. Launch [SAP Cloud Platform cockpit](https://account.hana.ondemand.com/) on your browser. Click log on and provide your credentials (Email and Password) provided by the instructors of the SAP TechEd 2018 session CNA375. Here the email, `cna375-395@teched.cloud.sap`, is used.
 
 ![Alt text](./images/logon.png?raw=true)
 
-2. Now click on the global account Teched2018 
+2. Click on the global account `TechEd2018` 
 
 ![Alt text](./images/global-account.png?raw=true)
 
-3. Choose sub-account CNA375neo
+3. Click on sub-account `CNA375neo` tile.
 
 ![Alt text](./images/sub-account.png?raw=true)
 
-4. Choose services tab from the left and filter for git service. Choose `Git Service`.
+4. Press `Services` tab from the left and filter for `git` in the search box. Click `Git Service`.
 
 ![Alt text](./images/gitservice.png?raw=true)
 
@@ -159,36 +154,46 @@ In the next exercise we will deploy our data model and service to SAP Cloud Plat
 
 ![Alt text](./images/gotogit.png?raw=true)
 
-6. Create a repository here by clicking on New repository and enter the name as `CNA<NUMBER>`. `NUMBER` should be from the User that you get for this session Ex: `395` from cna375-`395`@teched.cloud.sap. Uncheck the `Create empty Commit` and click OK. The reason for creating the repository with this name is that all participants of this session will create repositores and this will help you to uniquely identify your repository. 
+6. Create a repository here by clicking on New repository and enter the name as `CNA<NUMBER>`. `NUMBER` should be from the User that you get for this session Ex: `395` from cna375-`395`@teched.cloud.sap. Uncheck the `Create empty Commit` and click `OK`. The reason for creating the repository with this name is that all participants of this session will create repositores and this will help you to uniquely identify your repository. 
 
 ![Alt text](./images/git_repo_create.png?raw=true)
 
-7. Now click on your repository and copy the Repository URL. This will be used in step 11.
+7. Now click on your repository and note down the Repository URL. This will be used in step 11 and in the next exercise.
 
 ![Alt text](./images/git_repo.png?raw=true)
 
-8. Switch back to Visual studio code and open the `.gitignore` file present in the root folder of your project and append this line `*.db` to the end, so that we do not push the local SQLite database. 
+8. Switch back to Visual studio code and open the `.gitignore` file present in the root folder of your project and append this line `*.db` to the end, so that we do not push the locally created SQLite database. 
 
 ![Alt text](./images/gitignore.png?raw=true)
 
 9. Execute the command `git init` in your terminal. Make sure this command is executed at the root folder of the project.
 
-10. Execute the command `git config user.email <EMAIL>` in your terminal. `<EMAIL>` is the mail address provided for your user Ex: `cna375-395@teched.cloud.sap`
+10. Execute the command `git config user.email <EMAIL>` in your terminal. `<EMAIL>` is the email address provided for your user Ex: `cna375-395@teched.cloud.sap`
 
-11. Execute the command `git remote add origin <URL>` in your terminal. `<URL>` is the link that was copied in step 7.
+11. Execute the command `git remote add origin <URL>` in your terminal. `<URL>` is the link that was noted in step 7. Switch to the browser, copy the URL and provide it as a parameter to this command.
 
 The last 3 steps can be seen in the below screenshot:
 ![Alt text](./images/git_init.png?raw=true)
 
-12. Click on the Source Control tab of Visual Studio Code on the left and type a message `Source code of Space travel node app` and click on the Commit button (Tick button) as shown:
+12. Click on the `Source Control` tab of VS Code editor on the left and type a message `Source code of Space travel node app` and click on the Commit button (Tick button) as shown:
 
 ![Alt text](./images/git_commit.png?raw=true)
 
-13. Click on the 3 dots and choose Push to and choose origin URL as shown (you may need to provide the credentials: email and password here):
+Click on `Yes` in the popup that says "There are no staged changes to commit. Would you like to automatically stage all your changes and commit them directly".
+
+![Alt text](./images/stage.png?raw=true)
+
+13. Click on the 3 dots and choose `Push to...`
 
 ![Alt text](./images/git_push1.png?raw=true)
 
+Choose the URL as shown 
 ![Alt text](./images/git_push2.png?raw=true)
+
+Enter your credentials (email and password) here:
+![Alt text](./images/repo_username.png?raw=true)
+
+![Alt text](./images/repo_password.png?raw=true)
 
 Congratulations, we successfully included custom logic to our code and pushed it to a git repository. In the next exercise, we will import this code into SAP Web IDE, and build a  User Interface for the app.
 

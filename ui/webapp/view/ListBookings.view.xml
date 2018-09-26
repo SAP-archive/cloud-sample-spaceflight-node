@@ -1,61 +1,38 @@
-<mvc:View
-	controllerName="space.itineraries.company.ui.controller.ListBookings"
-	xmlns="sap.m"
-	xmlns:mvc="sap.ui.core.mvc"
-	displayBlock="true">
-  <Panel
-	  headerText="{i18n>bookingsPageTitle}"
-	  class="sapUiResponsiveMargin"
-		width="auto">
-    <content>
-      <Table
-        id="bookingsList"
-        items="{
-          path: '/Bookings'
-        }">
-        <headerToolbar>
-          <OverflowToolbar>
-            <content>
-              <ToolbarSpacer/>
-              <Button
-                id="refreshBookingsButton"
-                icon="sap-icon://refresh"
-                tooltip="{i18n>refreshButtonText}"
-                press="onRefresh"/>
-            </content>
-          </OverflowToolbar>
-        </headerToolbar>
-        <columns>
-          <Column id="customerNameColumn">
-            <Text text="{i18n>nameLabelText}"/>
-          </Column>
-          <Column id="emailColumn">
-            <Text text="{i18n>emailLabelText}"/>
-          </Column>
-          <Column id="dateOfTravelColumn">
-            <Text text="{i18n>dateOfTravelLabelText}"/>
-          </Column>
-          <Column id="costColumn">
-            <Text text="{i18n>costLabelText}"/>
-          </Column>
-        </columns>
-        <items>
-          <ColumnListItem>
-            <cells>
-              <Label text="{CustomerName}"/>
-            </cells>
-            <cells>
-              <Label text="{EmailAddress}"/>
-            </cells>
-            <cells>
-              <Label text="{DateOfTravel}"/>
-            </cells>
-            <cells>
-              <Label text="{Cost}"/>
-            </cells>
-          </ColumnListItem>
-        </items>
-      </Table>
-    </content>
-  </Panel>
+<mvc:View controllerName="space.itineraries.company.ui.controller.CreateBooking" xmlns="sap.m" xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc">
+	<App>
+		<pages>
+			<Page title="{i18n>AppTitle}">
+				<Panel headerText="{i18n>createBookingPanelTitle}" class="sapUiResponsiveMargin" width="auto">
+					<VBox class="sapUiSmallMargin">
+						<Label text="Name:" labelFor="customerNameInput"/>
+						<Input id="customerNameInput"
+							value="{ path:'newBooking>/CustomerName', type:'sap.ui.model.type.String', constraints : { minLength : 1 } }"
+							valueLiveUpdate="true" required="true" width="60%" class="sapUiSmallMarginBottom"/>
+						<Label text="Email:" labelFor="emailInput"/>
+						<Input id="emailInput"
+							value="{ path:'newBooking>/EmailAddress', type:'sap.ui.model.type.String', constraints : { search : '\\S+@\\S+\\.\\S+' } }"
+							valueLiveUpdate="true" required="true" width="60%" class="sapUiSmallMarginBottom"/>
+						<Label text="Choose a journey:" labelFor="selectedItineraryId"/>
+						<Select id="selectedItineraryId" width="60%" class="sapUiSmallMarginBottom" items="{ path: '/Itineraries', sorter: { path: 'Name'} }">
+							<core:Item key="{ID}" text="{Name}"/>
+						</Select>
+						<Label text="Date of travel:" labelFor="dateOfTravel"/>
+						<DatePicker id="dateOfTravel"
+							value="{ path:'newBooking>/DateOfTravel', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', stringParsing: true } }"
+							required="true" class="sapUiSmallMarginBottom" width="60%"/>
+						<Label text="Number of passangers:" labelFor="numPassengers"/>
+						<Input id="numPassengers"
+							value="{ path:'newBooking>/NumberOfPassengers', type:'sap.ui.model.type.Integer', constraints : { minimum : 1 } }"
+							valueLiveUpdate="true" required="true" width="60%" class="sapUiSmallMarginBottom"/>
+						<Label text="Credit card number:" labelFor="creditCard"/>
+						<Input id="creditCard"
+							value="{ path:'newBooking>/PaymentInfo_CardNumber', type:'sap.ui.model.type.String', constraints : { maxLength: 16 } }"
+							valueLiveUpdate="true" required="true" width="60%" class="sapUiSmallMarginBottom"/>
+						<Button text="{i18n>bookButtonText}" press="onBook" class="sapUiSmallMarginEnd"/>
+					</VBox>
+				</Panel>
+			</Page>
+		</pages>
+	</App>
 </mvc:View>

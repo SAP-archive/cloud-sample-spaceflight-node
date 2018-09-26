@@ -23,9 +23,9 @@
       "path": "/booking",
       "target": {
         "type": "destination",
-        "name": "spaceflight_odata"
+        "name": "cna375-395"
       },
-      "description": "spaceflight_odata"
+      "description": "cna375-395"
     }
   ],
   "sendWelcomeFileRedirect": true

@@ -21,7 +21,6 @@ modules:
         properties:
           url: '${default-url}'
     requires:
-      - name: cloud-sample-spaceflight-node-uaa
       - name: cloud-sample-spaceflight-node-hdi-container
   - name: ui
     type: html5
@@ -40,7 +39,6 @@ modules:
           name: backend
           url: '~{url}'
           forwardAuthToken: true
-
 resources:
   - name: cloud-sample-spaceflight-node-hdi-container
     properties:

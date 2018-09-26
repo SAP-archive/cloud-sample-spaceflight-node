@@ -8,67 +8,67 @@
 
 In this exercise, we will build a User Interface based on SAP UI5 so that users can create a booking from the UI of our app.
 
-This exercise is structured into two parts: <br /><br />
-**A.) Import, build and deploy the project into SAP Web IDE <br />
-B.) Build the User Interface using SAP Web IDE <br />**
-
-In this exercise, we will import the source code from Git service into SAP Web IDE. In SAP Web IDE, the database artifacts are deployed to SAP DBaaS service(SAP HANA) running on SAP Cloud Platform Cloud Foundry environment.
-
-## Exercise description: 
+This exercise is structured into two parts: <br />
+## [A.) Import, build and deploy the project into SAP Web IDE](#part-a:-import,-build-and-deploy-the-project-into-sap-web-ide) <br />
+## [B.) Build the User Interface using SAP Web IDE](#part-b:-build-the-user-interface-using-sap-web-ide)<br />
 
 ## Part A: Import, build and deploy the project into SAP Web IDE
 
-1. Launch the [SAP Cloud Platform Cockpit's git service](https://account.hana.ondemand.com/cockpit#/globalaccount/8fd39023-a237-4d71-9b6a-ed9d1719d275/neosubaccount/06b416a3-9282-4cb7-ae72-e23031b005ca/git). If you completed part B of exercise 3, choose your repository if not provide your credentials (email and password) to first login and then choose `cloud-sample-spaceflight-node` and click on it. Click on the `Web IDE` button as shown to launch SAP WebIDE.
+In this part, we will import the locally developed code of exercise 1 to 3 into SAP Web IDE. The database and service components will be deployed to Cloud Foundry.
 
-![Cockpit SAP WebIDE](./images/cockpit_webide.png)
-
-2. You will be prompted to login, enter your credentials and click Log on.
+1. Launch [SAP Web IDE](https://webidecp-di26c7ouv0.dispatcher.hana.ondemand.com/). You will be prompted to login, provide your credentials (Email and Password) provided by the instructors of SAP TechEd 2018 session CNA375. In the screenshot below, the email: `cna375-395@teched.cloud.sap`, is used.
 
 ![Log on](./images/logon.png)
 
-3. Once the SAP Web IDE loads, choose `File` -> `Git` -> `Clone Repository`. 
+2. Choose `File` -> `Git` -> `Clone Repository`. 
 
 ![clone](./images/clone1.png)
 
-If SAP Web IDE prompts to clone the repository directly, just click on `Clone`.
+3. If you completed part B of exercise 3, enter the repository URL that you noted down in exercise 3 part B's step 7.
+
+For example, your URL could look like: `https://git.hana.ondemand.com/di26c7ouv0/cna395`
+
+If you skipped part B of exercise 3, then provide this URL, `https://git.hana.ondemand.com/di26c7ouv0/cna375ex3`, and click `clone`.
 
 ![clone](./images/clone.png) 
 
-4. You will be asked to enter the credentials once again. Enter the credentials (email and password) provided by the CNA375 session owners. The authentication in step 2 is for the SAP WebIDE access, and here in this step it is to verify access to the git repository that contains the code. There could be several members cloning and working on a common project repository and this ensures only members within the sub-account are able to clone the repository.
+4. You will be asked to enter the credentials once again. Enter the credentials (email and password) provided by the CNA375 session owners. The authentication in step 1 is for the SAP WebIDE access, and here in this step it authorizes access to the git repository.
 
 ![clone_auth](./images/clone_auth.png) 
 
-5. Now you will be able to see the code that was cloned into your SAP Web IDE workspace.
+5. Now we will be able to see the code that was cloned into our SAP Web IDE workspace.
 
 ![project_structure](./images/project_structure.png)
 
-6. Right click on your project and click on project settings. 
+6. Right click on your project, choose `Project` and then click on `Project Settings`. 
 
 ![Project Settings](./images/project_settings.png)
 
-7. Choose the Cloud foundry tab and from the list of dropdown options choose the url, "https://api.cf.eu10.hana.ondemand.com".
+7. Choose the `Cloud Foundry` tab and from the list of dropdown options choose the url, `https://api.cf.eu10.hana.ondemand.com`.
 
 ![Cloud Foundry URL](./images/cf_url.png)
 
-8. You will be prompted to login. Enter your Cloud Foundry log on credentials: email and password and then your organization and space will be automatically be populated as shown.
+8. You will be prompted to login. Enter your Cloud Foundry log on credentials (same email and password).
+
+![Cloud Foundry Org Space](./images/CFLogon.png)
+
+The organization and space will be automatically be populated as shown. Click on `Save`.
 
 ![Cloud Foundry Org Space](./images/cf_org_space.png)
 
-9. Open package.json file from the root folder,`cloud-sample-spaceflight-node/package.json`, and remove the highlighted lines. These are lines specific to SQLite database that was used locally. Now as we will deploy the database artifacts into SAP HANA, these lines must be removed.
-```
-"sqlite3": "^4.0.2"                                 // remove line from dependencies
-"driver": "sqlite",                                 // remove line from model
-"url": "cloud-samples-spaceflight-node.db"          // remove line from model
-```
-10. Now right click on the db folder of the project and click on Build as shown:
+9. Open package.json file from the root folder, `<git_repo_name>/package.json`, and remove the highlighted lines shown below. These are lines specific to SQLite database that was used locally. As we deploy the database artifacts into SAP HANA, these lines must be removed.
+
+![Package.json](./images/package_remove_lines.png)
+
+10. Now right click on the `db` folder of the project and click on `Build` as shown. This takes roughly about a minute.
 
 ![Build CDS](./images/build_db.png)
 
-11. The log output can be seen in the console as below. 
+11. The log output can be seen in the console as below.
 
 ![Deploy to HANA](./images/deploy_hana.png)
 
-12. In order to view the created database tables, we enable SAP HANA Database Explorer on SAP Web IDE. To do this goto `Tools` menu on the top -> choose `Preferences` -> click `Features` in the left tabs -> enter `hana` in the search field -> Switch ON the `SAP HANA Database Explorer` as shown:
+12. In order to view the created database tables, we enable SAP HANA Database Explorer on SAP Web IDE. To do this goto `Tools` menu on the top -> choose `Preferences` -> click `Features` in the left tabs -> enter `hana database` in the search field -> Switch ON the `SAP HANA Database Explorer` as shown and click `Save`.
 
 ![DB Explorer](./images/db_explorer.png)
 
@@ -76,35 +76,39 @@ If SAP Web IDE prompts to clone the repository directly, just click on `Clone`.
 
 ![Refresh](./images/refresh.png)
 
-14. After the reload we will have the aditional database explorer tab on the left. Click on this tab and the Database Explorer Connectivity window can be seen as below:
+14. After the reload we will have the aditional `database explorer` tab on the left. Click on this tab and the Database Explorer Connectivity popup can be seen as below:
 
 ![DB Explorer tab](./images/db_explorer_tab.png)
 
-15. Click Connect button in the above image and add a HDI database container. Choose the + button shown below:
+15. Click `Connect` button in the above image and add a HDI database container. If you are using this tab for the first time, you will have a popup as below. Click `Yes`:
+
+![Add DB](./images/add_db_popup.png)
+
+Else Choose the + button shown below to add a database:
 
 ![Add DB](./images/plus.png)
 
-16. Choose the HDI Container with the name of your project under the organization `TechEd2018_CNA375-TechEd` and click `OK`.
+16. Click on the HDI Container with the name of your project and the organization `TechEd2018_CNA375-TechEd` and click `OK`.
  
 ![Add DB](./images/add_db.png)
 
-17. Now the database can be seen with the tables as shown:
+17. Click on `Tables` and then on any table to see the database columns:
 
 ![Add DB](./images/hana_data_model.png)
 
-18. Click on Open Data button to see the content provided from the CSV files into the tables:
+18. Click on `Open Data` button to see the table contents:
 
 ![Database table with content](./images/table_content.png)
 
-19. Open `mta.yml` file from the root folder and change the service-plan of `<project_name>-uaa` from `default` to `application`.
-```
-  - name: <project_name>-uaa
-    type: com.sap.xs.uaa
-    parameters:
-      service-plan: application
-``` 
+19. Switch to the `Development` tab of Web IDE and right click on `mta.yml` file from the root folder and click `Open MTA Editor`.
 
-20. Right click the srv folder and choose `Build` and then choose `Build CDS`. 
+![open_mta](./images/open_mta.png)
+
+Click on `srv` tab and then scroll down to `Requires` section and click on `cloud-sample-spaceflight-node-uaa(resource)`. Then press the delete button as shown and save the file.
+
+![application](./images/remove_uaa.png)
+
+20. Right click the `srv` folder and choose `Build` and then click `Build` again. 
 
 ![Build Service](./images/build_srv.png)
 
@@ -112,7 +116,7 @@ The log output can be seen in the console as below.
 
 ![Deploy to HANA](./images/build_srv_output.png)
 
-Include the following lines to the `srv/package.json` file. Note that this package.json file resides in the `srv` folder. 
+Include the following lines to the `srv/package.json` file. Note that this `package.json` file resides inside the `srv` folder. 
 ```
   "cds": {
     "data": {
@@ -124,19 +128,23 @@ Include the following lines to the `srv/package.json` file. Note that this packa
   }  
 ```
 
-21. Right click the srv folder and choose `Run` and then choose `Run as Node.js Application`. This takes a couple of seconds as it deploys the service to cloud foundry.
+This file now looks as shown below with the added lines highlighted:
+
+![srv package.json](./images/srv_package.png)
+
+21. Right click the `srv` folder and choose `Run` and then choose `Run as Node.js Application`. This takes a couple of seconds as it deploys the service to cloud foundry.
 
 ![Run Service](./images/run_srv.png)
 
-The running Node.js application can be seen here. 
+The running Node.js application can be seen here. Note down this URL to be used in the next step.
 
 ![Running Service](./images/running_srv.png)
 
-On clicking the URL we can see the service information.
+On clicking the URL above we can see the service information.
 
-![Running Service](./images/srv_url.png)
+![Running Service](./images/srv_url.png) 
 
-Click on the /booking service to access the XML metadata information of the oData service exposed. In addition the URL now is changed to http://<service_URL>/booking/$metadata
+Click on the `/booking` service to access the XML metadata information of the oData service exposed. In addition the URL now is changed to http://<service_URL>/booking/$metadata
 
 ![Running Service](./images/xml_metadata.png)
 
@@ -144,17 +152,25 @@ Change the $metadata part of the URL to something meaningful from our exposed se
 
 ![JSON response](./images/JSON.png)
 
-22. Goto [SAP Cloud Platform destinations](https://account.hana.ondemand.com/cockpit#/globalaccount/8fd39023-a237-4d71-9b6a-ed9d1719d275/neosubaccount/06b416a3-9282-4cb7-ae72-e23031b005ca/destinations) to create a destination.
+22. Goto [SAP Cloud Platform destinations](https://account.hana.ondemand.com/cockpit#/globalaccount/8fd39023-a237-4d71-9b6a-ed9d1719d275/neosubaccount/06b416a3-9282-4cb7-ae72-e23031b005ca/destinations) to create a destination. Press `New Destination`
 
-We just imported and built our data model and node service in part A of this exercise.
+![New Destination](./images/new_destination.png)
+
+Provide the `Name` as `cna375-xxx`, where xxx is from your email. As we use the email `cna375-395@teched.cloud.sap` in the exercise description, the screenshot shows the name as `cna375-395`. Provide `URL` as the one noted from the last step along with the path /booking as shown in the screenshot. Click on `New Property` button twice to include the two properties `WebIDEEnabled` and `WebIDEUsage` with values `true` and `odata_gen` respectively. 
+
+Leave the rest of the populated fields as it is and click `Save`.
+
+![SAPCP Destination](./images/destination.png)
+
+Congratulations, we successfully imported and built our data model and node service in part A of this exercise.
 
 ## Part B: Build the User Interface using SAP Web IDE
 
-1. Right click our project and choose `new` and then `HTML5 module`.
+1. Right click our project and choose `New` and then `HTML5 Module`.
 
 ![html5 module](./images/html5_module.png)
 
-2. Choose the SAPUI5 Application template
+2. Choose the `SAPUI5 Application` template.
 
 ![SAP UI5 Template](./images/sapui5_template.png)
 
@@ -162,11 +178,11 @@ We just imported and built our data model and node service in part A of this exe
 
 ![Namespace](./images/namespace.png)
 
-4. Give the View Name as App and click on Finish
+4. Give the View Name as `App` and click on `Finish`.
 
 ![App View](./images/app_view.png)
 
-5. The UI module code is generated. Expand the `ui` folder and then `webapp` folder. Within view and controller folders you can see two generated files: App.view.xml and App.controller.js
+5. The UI module code is generated. Expand the `ui` folder and then `webapp` folder. Within view and controller folders you can see two generated files: `App.view.xml` and `App.controller.js`
 
 ![UI code structure](./images/ui_structure.png)
 
@@ -174,20 +190,20 @@ We just imported and built our data model and node service in part A of this exe
 
 ![Manifest](./images/manifest.png) 
 
-7. Choose `Service URL` from the tabs on the left. In the dropdown menu, pick the destination that appears in the dropdown menu. Under relative path enter `/` and click on `Test`. The service is now selected and click on `Next`.
+7. Choose `Service URL` from the tabs on the left. In the dropdown menu, select the destination that you created in the last step of part A of this exercise. Note that destinations created by all participants appear in the dropdown menu. Under relative path enter `/` and click on `Test`. Once the test is successful the button gets disabled. The service is now selected and click on `Next`.
 
 ![Service URL](./images/service_url.png) 
 
-8. Leave the selection as `Use default model` and click Next.
+8. Leave the selection as `Use default model` and click `Next`.
 
 ![Default Model](./images/default_model.png) 
 
-9. Click Finish. Save the manifest.json file. 
+9. Click `Finish`. Save the manifest.json file. 
 
 ![Adding data source](./images/DataSourceFinish.png) 
 
-10. Under view folder, replace the code in `App.view.xml` with the below code:
-```
+10. Under `view` folder, replace the code in `App.view.xml` with the below code:
+```xml
 <mvc:View controllerName="space.itineraries.company.ui.controller.App" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
 	<Carousel>
 		<mvc:XMLView viewName="space.itineraries.company.ui.view.ListBookings"/>
@@ -211,7 +227,7 @@ This declares two XML Views: `ListBookings` and `CreateBooking`. We will create 
 
 ![Views structure](./images/addedViews.png)
 
-14. Right click on the `ListBookings.view.xml` file and choose `Open Layout Editor`
+14. Right click on the `ListBookings.view.xml` file and choose `Open Layout Editor`.
 
 ![Open layout editor](./images/OpenLayoutEditor.png)
 
@@ -219,25 +235,25 @@ This will open the modeling pane for the view as shown:
 
 ![Layout editor](./images/LayoutEditor.png)
 
-15. On the right side panel, click on the `entity set` button and choose the OData service that was added in steps 6 to 9.
-
-![Select entity set](./images/SelectEntitySet.png)
-
-Select the option __Define entity set and set the selected control as template.__.
-For the field __Entity Set__ select the value `/Bookings` from the drop-down.
-And for __Expand Associations__ select `Itinerary`.
-Click the OK button to save the configuration.
-
-![ConfigEntitySet](./images/ConfigEntitySet.png)
-
-Provide a Title such as `Space Itineraries Company` for the page title.
+Provide a Title such as `Space Itineraries Company` for the page title on the right side.
 ![Page Title](./images/PageTitle.png)
 
-16. In the `Search for control` field enter the value __list__ and drag and drop the `List` control on the view.
+15. In the `Search for control` field enter the value `list` and drag and drop the `List` control on the view.
 
 ![List control](./images/ListControl.png)
 
-17. Select the list item on the view, by clicking on the `List Item 1` object and verify that it is selected by checking the control chain:
+16. On the right side panel, click on the `entity set` button and choose the OData service that was added in steps 6 to 9. Note that you do this at the List level and not on the Page or the List item levels.
+
+![Select entity set](./images/SelectEntitySet.png)
+
+Select the option `Define entity set and set the selected control as template`.
+For the field `Entity Set` select the value `/Bookings` from the drop-down.
+And for `Expand Associations` select `Itinerary`.
+Click the `OK` button to save the configuration.
+
+![ConfigEntitySet](./images/ConfigEntitySet.png)
+
+17. Select the list item on the view, by clicking on the `List Item 1` object and verify that it is selected by checking that the control chain contains `Standard List Item`:
 
 ![Select List Item](./images/SelectListItem.png)
 
@@ -255,14 +271,17 @@ Repeat the same process for the property `Description`. Enter the value `Booking
 
 ![Change Description](./images/ChangeDescription2.png)
 
-And lastly, change the `type` of the list item from the properties pane to `Inactive`.
+And lastly, change the `type` of the list item from the properties pane to `Inactive` and save the file.
 
 ![Change Type](./images/ChangeType.png)
 
-> As a workaround to a known issue that will be fixed we need to change a line in the current view. Please right click the `ListBookings.view.xml` and choose `Open Code Editor` option. Now replace line number 4 with the following: `<Page title="Title" content="{path:'/Bookings',parameters:{$expand:'Itinerary($select=Name)'}}">`
-
-18. Let us move on to the second view `CreateBooking`. Open the `CreateBooking.view.xml` file by double-clicking on it in the file structure. Replace the content with the code snippet below:
+> As a workaround to a known issue that will be fixed we need to change a line in the current view. Please right click the `ListBookings.view.xml` and choose `Open Code Editor` option. Now replace line number 4 with the following and save the file: 
+```xml
+<Page title="Space Itineraries Company" content="{path:'/Bookings',parameters:{$expand:'Itinerary($select=Name)'}}">
 ```
+
+18. Let us move on to the second view `CreateBooking`. Open the `CreateBooking.view.xml` file by double-clicking on it in the file structure. __Replace__ the content with the code snippet below:
+```xml
 <mvc:View controllerName="space.itineraries.company.ui.controller.CreateBooking" xmlns="sap.m" xmlns:core="sap.ui.core"
 	xmlns:mvc="sap.ui.core.mvc">
 	<App>
@@ -303,8 +322,8 @@ And lastly, change the `type` of the list item from the properties pane to `Inac
 </mvc:View>
 ```
 
-19. Open the `CreateBooking.controller.js` file under controller folder and replacing the content with the following code snippet:
-```
+19. Open the `CreateBooking.controller.js` file under `controller` folder and __replace__ the contents with the following code snippet and save the file:
+```js
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/model/json/JSONModel",
@@ -353,7 +372,7 @@ sap.ui.define([
 	});
 });
 ```
-20. Under i18n folder, replace the content in `i18n.properties` file with the following values:
+20. Under i18n folder, __replace__ the contents in `i18n.properties` file with the following values and save the file:
 ```
 createBookingPanelTitle=Create a booking
 bookButtonText=Book
@@ -366,9 +385,11 @@ AppTitle=Space Itineraries Company
 
 22. Now bookings can be created on this page and on traversing to the next page, the bookings can be viewed.
 
-![Web UI](./images/UIScreen1.png)
-
 ![Web UI](./images/UIScreen2.png)
+
+Note that you need to create bookings to view it in this page.
+
+![Web UI](./images/UIScreen1.png)
 
 Congratulations. We just built a UI for our Space travel bookings app. In the next exercise we will build and deploy the full-stack application to SAP Cloud Platform.
 

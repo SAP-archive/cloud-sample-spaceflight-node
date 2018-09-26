@@ -1,5 +1,4 @@
 const cds = require('@sap/cds')
-cds.connect()
 const csv2json = require('csvtojson')
 
 const csv = {
@@ -14,22 +13,21 @@ const csv = {
   teched_space_trip_SpacePorts: 'spaceports'
 }
 
-let chain = Promise.resolve()
+module.exports = () => {
+  let chain = Promise.resolve()
 
-for (const tableName in csv) {
-  chain = chain
-    .then(() => {
-      return csv2json().fromFile(`./db/src/csv/${csv[tableName]}.csv`)
-    })
-    .then((values) => {
-      return cds.run(INSERT.into(tableName).rows(values))
-    })
-    .then((rowCount) => {
-      console.log(`Inserted successfully ${rowCount} rows in table ${tableName}`)
-    })
+  for (const tableName in csv) {
+    chain = chain
+      .then(() => {
+        return csv2json().fromFile(`./db/src/csv/${csv[tableName]}.csv`)
+      })
+      .then((values) => {
+        return cds.run(INSERT.into(tableName).rows(values))
+      })
+      .then((rowCount) => {
+        console.log(`Inserted successfully ${rowCount} rows in table ${tableName}`)
+      })
+  }
+
+  return chain
 }
-
-chain = chain
-  .then(() => {
-    return cds.disconnect()
-  })

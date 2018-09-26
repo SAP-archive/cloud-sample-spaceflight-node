@@ -1,4 +1,4 @@
-<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
 	<edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
 		<edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
 	</edmx:Reference>
@@ -24,7 +24,7 @@
 		<edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
 	</edmx:Reference>
 	<edmx:DataServices>
-		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="BookingService">
+		<Schema Namespace="BookingService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
 			<EntityContainer Name="EntityContainer">
 				<EntitySet Name="PaymentInfo" EntityType="BookingService.PaymentInfo"/>
 				<EntitySet Name="Bookings" EntityType="BookingService.Bookings">
@@ -105,10 +105,10 @@
 				<Key>
 					<PropertyRef Name="ID"/>
 				</Key>
-				<Property Name="createdAt" Type="Edm.DateTimeOffset"/>
-				<Property Name="createdBy" Type="Edm.String" MaxLength="111"/>
 				<Property Name="modifiedAt" Type="Edm.DateTimeOffset"/>
-				<Property Name="modifiedBy" Type="Edm.String" MaxLength="111"/>
+				<Property Name="createdAt" Type="Edm.DateTimeOffset"/>
+				<Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+				<Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
 				<Property Name="ID" Type="Edm.Guid" Nullable="false"/>
 				<Property Name="BookingNo" Type="Edm.String" MaxLength="25"/>
 				<NavigationProperty Name="Itinerary" Type="BookingService.Itineraries" Partner="Bookings">
@@ -346,6 +346,26 @@
 				<NavigationProperty Name="Departures" Type="Collection(BookingService.SpaceRoutes)" Partner="StartingPlanet"/>
 				<NavigationProperty Name="Spaceports" Type="Collection(BookingService.Spaceports)" Partner="OnPlanet"/>
 			</EntityType>
+			<Annotations Target="BookingService.Bookings/modifiedAt">
+				<Annotation Term="UI.HiddenFilter" Bool="true"/>
+				<Annotation Term="Common.Label" String="{i18n&gt;changedOn}"/>
+				<Annotation Term="Core.Immutable" Bool="true"/>
+			</Annotations>
+			<Annotations Target="BookingService.Bookings/createdAt">
+				<Annotation Term="UI.HiddenFilter" Bool="true"/>
+				<Annotation Term="Common.Label" String="{i18n&gt;createdOn}"/>
+				<Annotation Term="Core.Immutable" Bool="true"/>
+			</Annotations>
+			<Annotations Target="BookingService.Bookings/createdBy">
+				<Annotation Term="UI.HiddenFilter" Bool="true"/>
+				<Annotation Term="Common.Label" String="{i18n&gt;createdBy}"/>
+				<Annotation Term="Core.Immutable" Bool="true"/>
+			</Annotations>
+			<Annotations Target="BookingService.Bookings/modifiedBy">
+				<Annotation Term="UI.HiddenFilter" Bool="true"/>
+				<Annotation Term="Common.Label" String="{i18n&gt;changedBy}"/>
+				<Annotation Term="Core.Immutable" Bool="true"/>
+			</Annotations>
 			<Annotations Target="BookingService.Itineraries"/>
 			<Annotations Target="BookingService.EntityContainer/Itineraries">
 				<Annotation Term="Capabilities.DeleteRestrictions">

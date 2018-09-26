@@ -24,7 +24,7 @@ npm i -g @sap/generator-cds
 ```
 This helps us to use the command, `cds new`, in the next step to create a new project.
 
-3. Next, type the `cds new` command to create a new project along with a project name. Here, we will use `cloud-sample-spaceflight-node` as the project name.
+3. Execute `cds new` command to create a new project by providing the project name as a parameter. Here, let us use `cloud-sample-spaceflight-node` as the project name.
 ```
 cds new cloud-sample-spaceflight-node
 ```
@@ -40,15 +40,17 @@ The project files being created can be seen.
 
 ![Alt text](./images/project.png?raw=true)
 
-4. Goto [SAP Development tools page](https://tools.hana.ondemand.com/#cloud) and scroll down to the end to download the CDS extension as shown. This may trigger the license agreement information popup if you are accessing the page for the first time. Make sure I agree button is checked and proceed.
+4. Goto [SAP Development tools page](https://tools.hana.ondemand.com/#cloud) and scroll down to the end to download the CDS extension as shown. This may trigger the license agreement popup if you are accessing the page for the first time. Click the `I Have Read And Agree` button and proceed.
 
 ![Alt text](./images/cds_plugin.png?raw=true "CDS plugin for VS Code")
 
-5. Launch the Visual Studio Code (VS Code) editor from your desktop and click on the `Extensions` tab (last tab) on the upper left corner to get into the Extensions view and then click on the icon with 3 dots to install the CDS extension that we downloaded in the previous step.
+![Alt text](./images/cds_plugin_license.png?raw=true "CDS plugin License Agreement")
+
+5. Launch the Visual Studio Code (VS Code) editor from your desktop and click on the `Extensions` tab (last tab) on the upper left corner. Click on the icon with 3 dots to install the CDS extension that we downloaded in the previous step.
 
 ![Alt text](./images/cds_vs_code.png?raw=true "CDS plugin for VS Code")
 
-Choose the file with an extension of .vsix that was downloaded in step 4.
+Choose the file with an extension of .vsix that was downloaded in the previous step.
 
 6. Once the extension is installed, a reload will be prompted. Click on `Reload Now` as shown.
 
@@ -60,7 +62,7 @@ Choose the file with an extension of .vsix that was downloaded in step 4.
 
 The project contains db and srv folders which corresponds to the Database and Service modules. 
 
-Package.json file contains the list of dependencies of the project. The "node_modules" folder contains dowloaded packages of these dependencies in our local develoment environment. Currently, there is just one dependency on "@sap/cds" which is downloaded to node_modules folder.
+Package.json file contains the list of dependencies of the project. The "node_modules" folder contains dowloaded packages of these dependencies in our local develoment environment.
 
 Congratulations, you just set up your local development environment and completed Exercise 1.
 

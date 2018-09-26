@@ -15,12 +15,12 @@
     "node": "8.x",
     "npm": "6.x"
   },
-  "cds": {
+    "cds": {
     "data": {
           "driver": "hana",
           "hana": {
                 "tag": "hana"
           }
-    }
+      }
   }  
 }

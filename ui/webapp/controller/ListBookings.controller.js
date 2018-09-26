@@ -1,40 +1,45 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller",
-	"sap/m/MessageToast",
-	"sap/m/MessageBox"
-], function (Controller, MessageToast, MessageBox) {
+	"sap/ui/core/mvc/Controller"
+], function (Controller) {
 	"use strict";
 
 	return Controller.extend("space.itineraries.company.ui.controller.ListBookings", {
 
 		/**
-		 *  Hook for initializing the controller
+		 * Called when a controller is instantiated and its View controls (if available) are already created.
+		 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
+		 * @memberOf space.itineraries.company.ui.view.ListBookings
 		 */
-		onInit : function () {
-		},
+		//	onInit: function() {
+		//
+		//	},
 
 		/**
-		 * Refresh the data.
+		 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
+		 * (NOT before the first rendering! onInit() is used for that one!).
+		 * @memberOf space.itineraries.company.ui.view.ListBookings
 		 */
-		onRefresh : function () {
-			var oBinding = this.byId("bookingsList").getBinding("items");
-
-			if (oBinding.hasPendingChanges()) {
-				MessageBox.error(this._getText("refreshNotPossibleMessage"));
-				return;
-			}
-			oBinding.refresh();
-			MessageToast.show(this._getText("refreshSuccessMessage"));
-		},
+		//	onBeforeRendering: function() {
+		//
+		//	},
 
 		/**
-		 * Convenience method for retrieving a translatable text.
-		 * @param {string} sTextId - the ID of the text to be retrieved.
-		 * @param {Array} [aArgs] - optional array of texts for placeholders.
-		 * @returns {string} the text belonging to the given ID.
+		 * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
+		 * This hook is the same one that SAPUI5 controls get after being rendered.
+		 * @memberOf space.itineraries.company.ui.view.ListBookings
 		 */
-		_getText : function (sTextId, aArgs) {
-			return this.getOwnerComponent().getModel("i18n").getResourceBundle().getText(sTextId, aArgs);
-		}
+		//	onAfterRendering: function() {
+		//
+		//	},
+
+		/**
+		 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
+		 * @memberOf space.itineraries.company.ui.view.ListBookings
+		 */
+		//	onExit: function() {
+		//
+		//	}
+
 	});
+
 });

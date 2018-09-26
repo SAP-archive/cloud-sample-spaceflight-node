@@ -1,15 +1,6 @@
-<mvc:View controllerName="space.itineraries.company.ui.controller.App" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
-	displayBlock="true" xmlns="sap.m">
-	<App id="idAppControl">
-		<Carousel>
-			<pages>
-				<Page title="{i18n>appDescription}">
-					<mvc:XMLView viewName="space.itineraries.company.ui.view.CreateBooking"/>
-				</Page>
-				<Page title="{i18n>appDescription}">
-					<mvc:XMLView viewName="space.itineraries.company.ui.view.ListBookings"/>
-				</Page>
-			</pages>
-		</Carousel>
-	</App>
+<mvc:View controllerName="space.itineraries.company.ui.controller.App" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+	<Carousel>
+		<mvc:XMLView viewName="space.itineraries.company.ui.view.ListBookings"/>
+		<mvc:XMLView viewName="space.itineraries.company.ui.view.CreateBooking"/>
+	</Carousel>
 </mvc:View>

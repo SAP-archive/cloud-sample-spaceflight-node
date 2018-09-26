@@ -14,12 +14,12 @@
 			"version": "0.0.0"
 		},
 		"dataSources": {
-			"spaceflight_odata": {
+			"cna375-395": {
 				"uri": "/booking/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "4.0",
-					"localUri": "localService/spaceflight_odata/metadata.xml"
+					"localUri": "localService/metadata.xml"
 				}
 			}
 		}
@@ -79,7 +79,7 @@
 					"synchronizationMode": "None",
 					"groupId": "$direct"
 				},
-				"dataSource": "spaceflight_odata",
+				"dataSource": "cna375-395",
 				"preload": true
 			}
 		},

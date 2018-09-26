@@ -1,127 +1,15 @@
-<mvc:View
-  controllerName="space.itineraries.company.ui.controller.CreateBooking"
-  xmlns="sap.m"
-  xmlns:core="sap.ui.core"
-  xmlns:mvc="sap.ui.core.mvc">
-  <Panel
-	  headerText="{i18n>createBookingPanelTitle}"
-	  class="sapUiResponsiveMargin"
-		width="auto">
-    <VBox class ="sapUiSmallMargin">
-      <Label
-        text="Name:"
-        labelFor="customerNameInput"/>
-      <Input
-        id="customerNameInput"
-        value="{
-          path:'newBooking>/CustomerName',
-          type:'sap.ui.model.type.String',
-          formatOptions: {
-            style: 'medium',
-            stringParsing: true
-          },
-          constraints : {
-            minLength : 1
-          }
-        }"
-		  	valueLiveUpdate="true"
-        required="true"
-		  	width="60%"
-        class="sapUiSmallMarginBottom"/>
-      <Label
-        text="Email:"
-        labelFor="emailInput"/>
-      <Input
-        id="emailInput"
-        value="{
-          path:'newBooking>/EmailAddress',
-          type:'sap.ui.model.type.String',
-          formatOptions: {
-            style: 'medium',
-            stringParsing: true
-          },
-          constraints : {
-            search : '\\S+@\\S+\\.\\S+'
-          }
-        }"
-		  	valueLiveUpdate="true"
-        required="true"
-		  	width="60%"
-        class="sapUiSmallMarginBottom"/>
-      <Label
-			  text="Choose a journey:"
-        labelFor="selectedItineraryId"/>
-		  <Select
-        id = "selectedItineraryId"
-			  width="60%"
-        class="sapUiSmallMarginBottom"
-        items="{
-          path: '/Itineraries',
-          sorter: { path: 'Name'}
-        }">
-        <core:Item key="{ID}" text="{Name}"/>
-      </Select>
-      <Label
-        text="Date of travel:"
-        labelFor="dateOfTravel"/>
-      <DatePicker
-        id="dateOfTravel"
-        value="{
-          path:'newBooking>/DateOfTravel',
-          type:'sap.ui.model.type.Date',
-          formatOptions: {
-            style: 'medium',
-            stringParsing: true
-          }
-        }"
-        required="true"
-        class="sapUiSmallMarginBottom"
-        width="60%"
-      />
-      <Label
-        text="Number of passangers:"
-        labelFor="numPassengers"/>
-      <Input
-        id="numPassengers"
-        value="{
-          path:'newBooking>/NumberOfPassengers',
-          type:'sap.ui.model.type.Integer',
-          formatOptions: {
-            style: 'medium',
-            stringParsing: true
-          },
-          constraints : {
-            minLength : 1
-          }
-        }"
-        required="true"
-        width="60%"
-        class="sapUiSmallMarginBottom"
-      />
-      <Label
-        text="Credit card number:"
-        labelFor="creditCard"/>
-      <Input
-        id="creditCard"
-        value="{
-          path:'newBooking>/PaymentInfo_CardNumber',
-          type:'sap.ui.model.type.Number',
-          formatOptions: {
-            style: 'medium',
-            stringParsing: true
-          },
-          constraints : {
-            minLength : 16
-          }
-        }"
-        required="true"
-        width="60%"
-        class="sapUiSmallMarginBottom"
-      />
-      <Button
-		    text="{i18n>bookButtonText}"
-		  	press="onBook"
-			  class="sapUiSmallMarginEnd"/>
-    </VBox>
-  </Panel>
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="space.itineraries.company.ui.controller.CreateBooking" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:cd="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<App>
+		<pages>
+			<Page title="Space Itineraries Company" content="{path:'/Bookings',parameters:{$expand:'Itinerary($select=Name)'}}">
+				<content>
+				    <List noDataText="Drop list items here" id="list0">
+				        <items>
+				            <StandardListItem title="{CustomerName} travels from {Itinerary/Name}" description="Booking number {BookingNo} on {DateOfTravel}" icon="sap-icon://picture" id="item0"/>
+				        </items>
+				    </List>
+				</content>
+			</Page>
+		</pages>
+	</App>
 </mvc:View>
