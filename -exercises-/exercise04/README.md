@@ -9,8 +9,8 @@
 In this exercise, we will build a User Interface based on SAP UI5 so that users can create a booking from the UI of our app.
 
 This exercise is structured into two parts: <br />
-## [A.) Import, build and deploy the project into SAP Web IDE](#part-a:-import,-build-and-deploy-the-project-into-sap-web-ide) <br />
-## [B.) Build the User Interface using SAP Web IDE](#part-b:-build-the-user-interface-using-sap-web-ide)<br />
+## [A.) Import, build and deploy the project into SAP Web IDE](https://github.com/SAP/cloud-sample-spaceflight-node/tree/master/-exercises-/exercise04#part-a-import-build-and-deploy-the-project-into-sap-web-ide) <br />
+## [B.) Build the User Interface using SAP Web IDE](https://github.com/SAP/cloud-sample-spaceflight-node/tree/master/-exercises-/exercise04#part-b-build-the-user-interface-using-sap-web-ide)<br />
 
 ## Part A: Import, build and deploy the project into SAP Web IDE
 
