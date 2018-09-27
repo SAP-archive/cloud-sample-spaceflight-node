@@ -9,8 +9,8 @@
 In this exercise, we will learn to expose our data model entities as OData services. We will also include custom logic to limit the number of passengers in each space craft.
 
 This exercise is structured into two parts. The second part is optional: <br /><br />
-## [A.) Add custom logic and expose data model entities as OData services](#part-a:-add-custom-logic-and-expose-data-model-entities-as-odata-services)<br />
-## [B.) Push the code to git service of SAP Cloud Platform (optional)](#part-b:-push-the-code-to-git-service-of-sap-cloud-platform-(optional))<br />
+## [A.) Add custom logic and expose data model entities as OData services](https://github.com/SAP/cloud-sample-spaceflight-node/blob/master/-exercises-/exercise03/README.md#part-a-add-custom-logic-and-expose-data-model-entities-as-odata-services)<br />
+## [B.) Push the code to git service of SAP Cloud Platform (optional)](https://github.com/SAP/cloud-sample-spaceflight-node/blob/master/-exercises-/exercise03/README.md#part-b-push-the-code-to-git-service-of-sap-cloud-platform-optional)<br />
 
 # Part A: Add custom logic and expose data model entities as OData services
 
