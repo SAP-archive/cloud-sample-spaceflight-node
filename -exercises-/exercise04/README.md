@@ -280,7 +280,34 @@ And lastly, change the `type` of the list item from the properties pane to `Inac
 <List noDataText="Drop list items here" id="list0" items="{path:'/Bookings',parameters:{$expand:'Itinerary($select=Name)'}}">
 ```
 
-17. Let us move on to the second view `CreateBooking`. Open the `CreateBooking.view.xml` file by double-clicking on it in the file structure. __Replace__ the content with the code snippet below:
+17. Now we will add a Refresh button. Search for the control `Button` in the list on the left-hand side of the pane and drag and drop it to the upper right corner of the view:
+
+![Add Button](./images/AddButton.png)
+
+Let's move the properties of the button. First, change the text of it to `Refresh` and move to the `Events` for our button:
+
+![Button Props](./images/ButtonProps.png)
+
+Add behaviour for the `Press` event with choosing the option `New function`:
+
+![New Function](./images/NewFunction.png)
+
+In the dialog enter for the function name the value `onRefresh` and click OK:
+
+![New Function Name](./images/NewFunctionName.png)
+
+Now open the menu for the `Press` event once again and choose `Open in Editor`:
+
+![Open In Editor](./images/OpenInEditor.png)
+
+This will open the `ListBookings.controller.js` with a focus on the newly created `onRefresh` function. We will add the actual refresh logic and the function should look like this:
+````javascript
+onRefresh: function (oEvent) {
+  this.byId("list0").getBinding("items").refresh();
+}
+````
+
+18. Let us move on to the second view `CreateBooking`. Open the `CreateBooking.view.xml` file by double-clicking on it in the file structure. __Replace__ the content with the code snippet below:
 ```xml
 <mvc:View controllerName="space.itineraries.company.ui.controller.CreateBooking" xmlns="sap.m" xmlns:core="sap.ui.core"
 	xmlns:mvc="sap.ui.core.mvc">
@@ -305,7 +332,7 @@ And lastly, change the `type` of the list item from the properties pane to `Inac
 						<DatePicker id="dateOfTravel"
 							value="{ path:'newBooking>/DateOfTravel', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', stringParsing: true } }"
 							required="true" class="sapUiSmallMarginBottom" width="60%"/>
-						<Label text="Number of passangers:" labelFor="numPassengers"/>
+						<Label text="Number of passengers:" labelFor="numPassengers"/>
 						<Input id="numPassengers"
 							value="{ path:'newBooking>/NumberOfPassengers', type:'sap.ui.model.type.Integer', constraints : { minimum : 1 } }"
 							valueLiveUpdate="true" required="true" width="60%" class="sapUiSmallMarginBottom"/>
@@ -322,7 +349,7 @@ And lastly, change the `type` of the list item from the properties pane to `Inac
 </mvc:View>
 ```
 
-18. Open the `CreateBooking.controller.js` file under `controller` folder and __replace__ the contents with the following code snippet and save the file:
+19. Open the `CreateBooking.controller.js` file under `controller` folder and __replace__ the contents with the following code snippet and save the file:
 ```js
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
@@ -372,18 +399,18 @@ sap.ui.define([
 	});
 });
 ```
-19. Under i18n folder, __replace__ the contents in `i18n.properties` file with the following values and save the file:
+20. Under i18n folder, __replace__ the contents in `i18n.properties` file with the following values and save the file:
 ```
 createBookingPanelTitle=Create a booking
 bookButtonText=Book
 AppTitle=Space Itineraries Company
 ``` 
 
-20. Now right click the `ui` folder and `Run as a Web Application`. 
+21. Now right click the `ui` folder and `Run as a Web Application`. 
 
 ![Run UI](./images/run_ui.png) 
 
-21. Now bookings can be created on this page and on traversing to the next page, the bookings can be viewed.
+22. Now bookings can be created on this page and on traversing to the next page, the bookings can be viewed.
 
 ![Web UI](./images/UIScreen2.png)
 
