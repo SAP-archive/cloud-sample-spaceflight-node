@@ -13,7 +13,7 @@ In this exercise, we will learn to set up our local development environment and 
 In this exercise, we will understand the data model of the [base space-flight project](https://github.com/SAP/cloud-sample-spaceflight). Using the base model, we create tables in a local SQLite database and load data from CSV files. We will further extend the data model to include payment information for space travel bookings.
 
 ### [Exercise 03: Add custom logic restricting the number of travellers in a spacecraft](./-exercises-/exercise03/README.md)
-n this exercise, we will learn to expose our data model entities as OData services. We will also include custom logic to limit the number of passengers in each space craft. 
+In this exercise, we will learn to expose our data model entities as OData services. We will also include custom logic to limit the number of passengers in each space craft. 
 
 ### [Exercise 04: Build a User Interface using SAP UI5 from SAP Web IDE](./-exercises-/exercise04/README.md)
 In this exercise, we will import the code into SAP Web IDE and build a User Interface based on SAP UI5 so that users can create a booking from the UI of our app.
