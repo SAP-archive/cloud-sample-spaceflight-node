@@ -246,7 +246,7 @@ Provide a Title such as `Space Itineraries Company` for the page title on the ri
 
 ![Select List Item](./images/SelectListItem.png)
 
-On the right side panel, click on the `entity set` button and choose the OData service that was added in steps 6 to 9. Note that you do this at List item level.
+On the right side panel, click on the `entity set` button and choose the OData service that was added in steps 6 to 9.
 
 ![Select entity set](./images/SelectEntitySet.png)
 
