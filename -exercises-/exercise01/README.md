@@ -10,7 +10,7 @@ In this exercise we will learn to set up our local development environment and c
 
 ## Exercise description
 
-1. Open the command line terminal and install cds command line tool. We will use it during the exercises in the local development scenario.
+1. Open the command line terminal and install cds command line tool.
 ```
 npm i -g @sap/cds
 ```
