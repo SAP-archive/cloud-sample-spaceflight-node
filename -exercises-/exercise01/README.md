@@ -10,7 +10,7 @@ In this exercise we will learn to set up our local development environment and c
 
 ## Exercise description
 
-1. Open the command line terminal and install cds command line tool.
+1. Open the command line terminal and install cds command line tool. We will use it during the exercises in the local development scenario.
 ```
 npm i -g @sap/cds
 ```
@@ -18,7 +18,7 @@ Now, the following command should print the version information
 ```
 cds --version
 ```
-2. Install cds generator command line tool.
+2. Install cds generator command line tool. The generator creates the basic project structure through an interactive wizard.
 ```
 npm i -g @sap/generator-cds
 ```
