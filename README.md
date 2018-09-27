@@ -19,7 +19,7 @@ In this exercise, we will learn to expose our data model entities as OData servi
 In this exercise, we will import the code into SAP Web IDE and build a User Interface based on SAP UI5 so that users can create a booking from the UI of our app.
 
 ### [Exercise 05: Deploy the application to SAP Cloud Platform Cloud Foundry environment](./-exercises-/exercise05/README.md)
-In this exercise, we will deploy the application to SAP Cloud Platform Cloud Foundry environment. The multiple components of the app is visualized and monitored from SAP Cloud Platform Cockpit.
+In this exercise, we will deploy the application to SAP Cloud Platform Cloud Foundry environment. The multiple components of the app are visualized and monitored from SAP Cloud Platform Cockpit.
 
 ## Requirements
 
