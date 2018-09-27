@@ -242,7 +242,11 @@ Provide a Title such as `Space Itineraries Company` for the page title on the ri
 
 ![List control](./images/ListControl.png)
 
-16. On the right side panel, click on the `entity set` button and choose the OData service that was added in steps 6 to 9. Note that you do this at the List level and not on the Page or the List item levels.
+16. Select the list item on the view, by clicking on the `List Item 1` object and verify that it is selected by checking that the control chain contains `Standard List Item`:
+
+![Select List Item](./images/SelectListItem.png)
+
+On the right side panel, click on the `entity set` button and choose the OData service that was added in steps 6 to 9. Note that you do this at List item level.
 
 ![Select entity set](./images/SelectEntitySet.png)
 
@@ -252,10 +256,6 @@ And for `Expand Associations` select `Itinerary`.
 Click the `OK` button to save the configuration.
 
 ![ConfigEntitySet](./images/ConfigEntitySet.png)
-
-17. Select the list item on the view, by clicking on the `List Item 1` object and verify that it is selected by checking that the control chain contains `Standard List Item`:
-
-![Select List Item](./images/SelectListItem.png)
 
 Adapt the property `Title` by clicking on the `Bind this property` button on the right side of the property.
 
@@ -280,7 +280,7 @@ And lastly, change the `type` of the list item from the properties pane to `Inac
 <Page title="Space Itineraries Company" content="{path:'/Bookings',parameters:{$expand:'Itinerary($select=Name)'}}">
 ```
 
-18. Let us move on to the second view `CreateBooking`. Open the `CreateBooking.view.xml` file by double-clicking on it in the file structure. __Replace__ the content with the code snippet below:
+17. Let us move on to the second view `CreateBooking`. Open the `CreateBooking.view.xml` file by double-clicking on it in the file structure. __Replace__ the content with the code snippet below:
 ```xml
 <mvc:View controllerName="space.itineraries.company.ui.controller.CreateBooking" xmlns="sap.m" xmlns:core="sap.ui.core"
 	xmlns:mvc="sap.ui.core.mvc">
@@ -322,7 +322,7 @@ And lastly, change the `type` of the list item from the properties pane to `Inac
 </mvc:View>
 ```
 
-19. Open the `CreateBooking.controller.js` file under `controller` folder and __replace__ the contents with the following code snippet and save the file:
+18. Open the `CreateBooking.controller.js` file under `controller` folder and __replace__ the contents with the following code snippet and save the file:
 ```js
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
@@ -372,18 +372,18 @@ sap.ui.define([
 	});
 });
 ```
-20. Under i18n folder, __replace__ the contents in `i18n.properties` file with the following values and save the file:
+19. Under i18n folder, __replace__ the contents in `i18n.properties` file with the following values and save the file:
 ```
 createBookingPanelTitle=Create a booking
 bookButtonText=Book
 AppTitle=Space Itineraries Company
 ``` 
 
-21. Now right click the `ui` folder and `Run as a Web Application`. 
+20. Now right click the `ui` folder and `Run as a Web Application`. 
 
 ![Run UI](./images/run_ui.png) 
 
-22. Now bookings can be created on this page and on traversing to the next page, the bookings can be viewed.
+21. Now bookings can be created on this page and on traversing to the next page, the bookings can be viewed.
 
 ![Web UI](./images/UIScreen2.png)
 
