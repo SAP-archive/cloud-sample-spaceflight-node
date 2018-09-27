@@ -39,7 +39,7 @@ service BookingService {
 }
 ```
 
-2. Let us include some custom logic to ensure that not more than 5 passengers are flying in the same spacecraft, as we assume that the spacecraft capacity is 5. For simplicity sake, we assume there is one spacecraft flying every day for each itinerary in a specific space route. Create a file called booking-service.js in the same folder `/cloud-sample-spaceflight-node/srv/` and add the following code. Note that this file name is same as that of the of the service created in step 1, `booking-service.cds`. In case the naming is different, add the annotation `@(impl:service.js)` to the `booking-service.cds` file.
+2. Let us include some custom logic to ensure that not more than 5 passengers are flying in the same spacecraft, as we assume that the spacecraft capacity is 5. For simplicity sake, we assume there is one spacecraft flying every day for each itinerary in a specific space route. Create a file called booking-service.js in the same folder `/cloud-sample-spaceflight-node/srv/` and add the following code. Note that this file name is same as that of the of the service created in step 1, `booking-service.cds`, except for the extension. In case the naming is different, add the annotation `@(impl:service.js)` to the `booking-service.cds` file.
 ```javascript
 /**
  * Custom logic for booking-service defined in ./booking-service.cds
