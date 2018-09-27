@@ -275,9 +275,9 @@ And lastly, change the `type` of the list item from the properties pane to `Inac
 
 ![Change Type](./images/ChangeType.png)
 
-> As a workaround to a known issue that will be fixed we need to change a line in the current view. Please right click the `ListBookings.view.xml` and choose `Open Code Editor` option. Now replace line number 4 with the following and save the file: 
+> As a workaround to a known issue that will be fixed we need to change a line in the current view. Please right click the `ListBookings.view.xml` and choose `Open Code Editor` option. Now replace line number 6 with the following and save the file: 
 ```xml
-<Page title="Space Itineraries Company" content="{path:'/Bookings',parameters:{$expand:'Itinerary($select=Name)'}}">
+<List noDataText="Drop list items here" id="list0" items="{path:'/Bookings',parameters:{$expand:'Itinerary($select=Name)'}}">
 ```
 
 17. Let us move on to the second view `CreateBooking`. Open the `CreateBooking.view.xml` file by double-clicking on it in the file structure. __Replace__ the content with the code snippet below:
