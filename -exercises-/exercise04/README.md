@@ -200,7 +200,20 @@ Congratulations, we successfully imported and built our data model and node serv
 
 9. Click `Finish`. Save the manifest.json file. 
 
-![Adding data source](./images/DataSourceFinish.png) 
+![Adding data source](./images/DataSourceFinish.png)
+
+Now go the the raw form of the `manifest.json` with clicking on __CodeEditor__ at the bottom:
+
+![Code Editor](./images/CodeEditorManifest.png)
+
+Navigate the the `models` property of the top-level property `sap.ui5` (around row number 68). Replace the value of the `groupId` setting to `"$auto"` and add a new setting `"autoExpandSelect" : true`. Both together look like this:
+```json
+	"groupId": "$auto",
+	"autoExpandSelect" : true
+```
+
+![Manifest](./images/Manifest.png)
+
 
 10. Under `view` folder, replace the code in `App.view.xml` with the below code:
 ```xml
@@ -252,7 +265,6 @@ On the right side panel, click on the `entity set` button and choose the OData s
 
 Select the option `Define entity set and set the selected control as template`.
 For the field `Entity Set` select the value `/Bookings` from the drop-down.
-And for `Expand Associations` select `Itinerary`.
 Click the `OK` button to save the configuration.
 
 ![ConfigEntitySet](./images/ConfigEntitySet.png)
@@ -274,11 +286,6 @@ Repeat the same process for the property `Description`. Enter the value `Booking
 And lastly, change the `type` of the list item from the properties pane to `Inactive` and save the file.
 
 ![Change Type](./images/ChangeType.png)
-
-> As a workaround to a known issue that will be fixed we need to change a line in the current view. Please right click the `ListBookings.view.xml` and choose `Open Code Editor` option. Now replace line number 6 with the following and save the file: 
-```xml
-<List noDataText="Drop list items here" id="list0" items="{path:'/Bookings',parameters:{$expand:'Itinerary($select=Name)'}}">
-```
 
 17. Now we will add a Refresh button. Search for the control `Button` in the list on the left-hand side of the pane and drag and drop it to the upper right corner of the view:
 
