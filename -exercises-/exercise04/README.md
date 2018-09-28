@@ -242,7 +242,11 @@ Provide a Title such as `Space Itineraries Company` for the page title on the ri
 
 ![List control](./images/ListControl.png)
 
-16. On the right side panel, click on the `entity set` button and choose the OData service that was added in steps 6 to 9. Note that you do this at the List level and not on the Page or the List item levels.
+16. Select the list item on the view, by clicking on the `List Item 1` object and verify that it is selected by checking that the control chain contains `Standard List Item`:
+
+![Select List Item](./images/SelectListItem.png)
+
+On the right side panel, click on the `entity set` button and choose the OData service that was added in steps 6 to 9.
 
 ![Select entity set](./images/SelectEntitySet.png)
 
@@ -252,10 +256,6 @@ And for `Expand Associations` select `Itinerary`.
 Click the `OK` button to save the configuration.
 
 ![ConfigEntitySet](./images/ConfigEntitySet.png)
-
-17. Select the list item on the view, by clicking on the `List Item 1` object and verify that it is selected by checking that the control chain contains `Standard List Item`:
-
-![Select List Item](./images/SelectListItem.png)
 
 Adapt the property `Title` by clicking on the `Bind this property` button on the right side of the property.
 
@@ -275,10 +275,37 @@ And lastly, change the `type` of the list item from the properties pane to `Inac
 
 ![Change Type](./images/ChangeType.png)
 
-> As a workaround to a known issue that will be fixed we need to change a line in the current view. Please right click the `ListBookings.view.xml` and choose `Open Code Editor` option. Now replace line number 4 with the following and save the file: 
+> As a workaround to a known issue that will be fixed we need to change a line in the current view. Please right click the `ListBookings.view.xml` and choose `Open Code Editor` option. Now replace line number 6 with the following and save the file: 
 ```xml
-<Page title="Space Itineraries Company" content="{path:'/Bookings',parameters:{$expand:'Itinerary($select=Name)'}}">
+<List noDataText="Drop list items here" id="list0" items="{path:'/Bookings',parameters:{$expand:'Itinerary($select=Name)'}}">
 ```
+
+17. Now we will add a Refresh button. Search for the control `Button` in the list on the left-hand side of the pane and drag and drop it to the upper right corner of the view:
+
+![Add Button](./images/AddButton.png)
+
+Let's move the properties of the button. First, change the text of it to `Refresh` and move to the `Events` for our button:
+
+![Button Props](./images/ButtonProps.png)
+
+Add behaviour for the `Press` event with choosing the option `New function`:
+
+![New Function](./images/NewFunction.png)
+
+In the dialog enter for the function name the value `onRefresh` and click OK:
+
+![New Function Name](./images/NewFunctionName.png)
+
+Now open the menu for the `Press` event once again and choose `Open in Editor`:
+
+![Open In Editor](./images/OpenInEditor.png)
+
+This will open the `ListBookings.controller.js` with a focus on the newly created `onRefresh` function. We will add the actual refresh logic and the function should look like this:
+````javascript
+onRefresh: function (oEvent) {
+  this.byId("list0").getBinding("items").refresh();
+}
+````
 
 18. Let us move on to the second view `CreateBooking`. Open the `CreateBooking.view.xml` file by double-clicking on it in the file structure. __Replace__ the content with the code snippet below:
 ```xml
@@ -305,7 +332,7 @@ And lastly, change the `type` of the list item from the properties pane to `Inac
 						<DatePicker id="dateOfTravel"
 							value="{ path:'newBooking>/DateOfTravel', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', stringParsing: true } }"
 							required="true" class="sapUiSmallMarginBottom" width="60%"/>
-						<Label text="Number of passangers:" labelFor="numPassengers"/>
+						<Label text="Number of passengers:" labelFor="numPassengers"/>
 						<Input id="numPassengers"
 							value="{ path:'newBooking>/NumberOfPassengers', type:'sap.ui.model.type.Integer', constraints : { minimum : 1 } }"
 							valueLiveUpdate="true" required="true" width="60%" class="sapUiSmallMarginBottom"/>
