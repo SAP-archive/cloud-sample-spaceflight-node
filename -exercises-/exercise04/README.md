@@ -235,7 +235,7 @@ This will open the modeling pane for the view as shown:
 
 ![Layout editor](./images/LayoutEditor.png)
 
-Provide a Title such as `Space Itineraries Company` for the page title on the right side.
+Click on the highlighted blue XML Page to view the Page properties. Provide a Title such as `Space Itineraries Company` for the page title property on the right side.
 ![Page Title](./images/PageTitle.png)
 
 15. In the `Search for control` field enter the value `list` and drag and drop the `List` control on the view.
@@ -284,7 +284,7 @@ And lastly, change the `type` of the list item from the properties pane to `Inac
 
 ![Add Button](./images/AddButton.png)
 
-Let's move the properties of the button. First, change the text of it to `Refresh` and move to the `Events` for our button:
+Let's move to the properties of the button. First, change the text of it to `Refresh` and move to the `Events` for our button:
 
 ![Button Props](./images/ButtonProps.png)
 
