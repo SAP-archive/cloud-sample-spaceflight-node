@@ -90,7 +90,7 @@ Now we see the information that our service is served at the URL: http://localho
 
 ![Alt text](./images/planets.png?raw=true)
 
-7.  Launch Postman app in your desktop. Now that we have our Booking Service running, let us create a booking by sending an HTTP POST request using Postman App. Create a POST request with this URL: http://localhost:4004/booking/Bookings The header and body of the request should be as follows:
+7.  Launch Postman app in your system. Now that we have our Booking Service running, let us create a booking by sending an HTTP POST request using Postman App. Create a POST request with this URL: http://localhost:4004/booking/Bookings The header and body of the request should be as follows:
 
 Header:
 ```
