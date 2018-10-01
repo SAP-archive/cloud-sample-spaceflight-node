@@ -417,13 +417,11 @@ AppTitle=Space Itineraries Company
 
 ![Run UI](./images/run_ui.png) 
 
-22. Now bookings can be created on this page and on traversing to the next page, the bookings can be viewed.
-
-![Web UI](./images/UIScreen2.png)
-
-Note that you need to create bookings to view it in this page.
+22. Now bookings can be viewed and created from the UI. Note that initially the bookings list may be empty as there are no bookings created yet.
 
 ![Web UI](./images/UIScreen1.png)
+
+![Web UI](./images/UIScreen2.png)
 
 Congratulations. We just built a UI for our Space travel bookings app. In the next exercise we will build and deploy the full-stack application to SAP Cloud Platform.
 
