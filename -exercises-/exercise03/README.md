@@ -158,7 +158,7 @@ Congratulations, we successfully included custom logic to our code and exposed t
 
 ![Alt text](./images/gotogit.png?raw=true)
 
-6. Create a repository here by clicking on New repository and enter the name as `CNA<NUMBER>`. `NUMBER` should be from the User that you get for this session Ex: `395` from cna375-`395`@teched.cloud.sap. Uncheck the `Create empty Commit` and click `OK`. The reason for creating the repository with this name is that all participants of this session will create repositores and this will help you to uniquely identify your repository. 
+6. Create a repository here by clicking on New repository and enter the name as `cna<NUMBER>`. `NUMBER` should be from the User that you get for this session Ex: `395` from cna375-`395`@teched.cloud.sap. Uncheck the `Create empty Commit` and click `OK`. The reason for creating the repository with this name is that all participants of this session will create repositores and this will help you to uniquely identify your repository. 
 
 ![Alt text](./images/git_repo_create.png?raw=true)
 
