@@ -206,7 +206,7 @@ Now go the the raw form of the `manifest.json` with clicking on __CodeEditor__ a
 
 ![Code Editor](./images/CodeEditorManifest.png)
 
-Navigate the the `models` property of the top-level property `sap.ui5` (around row number 68). Replace the value of the `groupId` setting to `"$auto"` and add a new setting `"autoExpandSelect" : true`. Both together look like this:
+Navigate to top-level property `sap.ui5` (around row number 68) and then to the property `models`. Replace the value of the `groupId` setting to `"$auto"` and add a new setting `"autoExpandSelect" : true`. Both together look like this:
 ```json
 	"groupId": "$auto",
 	"autoExpandSelect" : true
