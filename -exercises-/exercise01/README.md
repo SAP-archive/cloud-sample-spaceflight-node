@@ -10,8 +10,10 @@ In this exercise we will learn to set up our local development environment and c
 
 ## Exercise description
 
-1. Open the command line terminal and install cds command line tool.
+1. Open the command line terminal and install cds command line tool. You may also require to set up your proxy as the first 2 lines below:
 ```
+npm config set proxy http://proxy:8080
+npm config set https-proxy http://proxy:8080
 npm i -g @sap/cds
 ```
 Now, the following command should print the version information
