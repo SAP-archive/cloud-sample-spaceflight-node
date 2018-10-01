@@ -48,7 +48,7 @@ The project files being created can be seen.
 
 ![Alt text](./images/cds_plugin_license.png?raw=true "CDS plugin License Agreement")
 
-5. Launch the Visual Studio Code (VS Code) editor from your desktop and click on the `Extensions` tab (last tab) on the upper left corner. Click on the icon with 3 dots to install the CDS extension that we downloaded in the previous step.
+5. Launch the Visual Studio Code (VS Code) editor from your system and click on the `Extensions` tab (last tab) on the upper left corner. Click on the icon with 3 dots to install the CDS extension that we downloaded in the previous step.
 
 ![Alt text](./images/cds_vs_code.png?raw=true "CDS plugin for VS Code")
 
