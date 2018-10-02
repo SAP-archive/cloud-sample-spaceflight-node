@@ -26,7 +26,7 @@ xs-app.json now looks as shown below:
 
 ![MTA Editor.json](./images/mta_editor.png?raw=true)
 
-Choose `ui` module and scroll down to `requires` section and click on the + button and pick the option `srv_api(provider)` as shown:
+Choose `ui` module and scroll down to `requires` section, Click on the + button and pick the option `srv_api(provider)` as shown:
 
 ![requires](./images/srv_api.png?raw=true)
 
@@ -37,6 +37,14 @@ url: ~{url}
 forwardAuthToken: true
 ```
 ![properties](./images/properties.png?raw=true)
+
+Now click on `dest_cloud-sample-spaceflight-node` and delete it using the delete button as shown below.
+
+![Destination delete](./images/destination.png?raw=true)
+
+And then goto the `Resources` tab in the top and choose `uaa_cloud-sample-spaceflight-node`. Change the service-plan from `default` to `application` as shown:
+
+![default2app](./images/default2app.png?raw=true)
 
 Finally save the `mta.yaml` file.
 
