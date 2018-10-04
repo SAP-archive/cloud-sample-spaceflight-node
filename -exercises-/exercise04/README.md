@@ -76,7 +76,7 @@ The organization and space will be automatically be populated as shown. Click on
 
 ![Refresh](./images/refresh.png)
 
-14. After the reload we will have the aditional `database explorer` tab on the left. Click on this tab and the Database Explorer Connectivity popup can be seen as below:
+14. After the reload we will have the aditional `database explorer` tab on the left(highlighted in the screenshot). Click on this tab and the Database Explorer Connectivity popup can be seen as below:
 
 ![DB Explorer tab](./images/db_explorer_tab.png)
 
@@ -187,6 +187,8 @@ Congratulations, we successfully imported and built our data model and node serv
 ![UI code structure](./images/ui_structure.png)
 
 6. Open the `manifest.json` file present in the webapp folder under ui. Click on `Descriptor Editor` below and then choose the `DataSources` sub-tab above. Click the + button to add a data-source.
+
+![Manifest Data Source](./images/manifest_ds.png)
 
 7. Choose `Service URL` from the tabs on the left. In the dropdown menu, select the destination that you created in the last step of part A of this exercise. Note that destinations created by all participants appear in the dropdown menu. Under relative path enter `/` and click on `Test`. Once the test is successful the button gets disabled. The service is now selected and click on `Next`.
 

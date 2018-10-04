@@ -179,7 +179,7 @@ Congratulations, we successfully included custom logic to our code and exposed t
 The last 3 steps can be seen in the below screenshot:
 ![Alt text](./images/git_init.png?raw=true)
 
-12. Click on the `Source Control` tab of VS Code editor on the left and type a message `Source code of Space travel node app` and click on the Commit button (Tick button) as shown:
+12. Click on the `Source Control` tab of VS Code editor on the left(highlighted in the screenshot) and type a message `Source code of Space travel node app` and click on the Commit button (Tick button) as shown:
 
 ![Alt text](./images/git_commit.png?raw=true)
 

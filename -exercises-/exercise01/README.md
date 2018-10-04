@@ -40,13 +40,13 @@ The project files being created can be seen.
 
 ![Alt text](./images/project.png?raw=true)
 
-4. Goto [SAP Development tools page](https://tools.hana.ondemand.com/#cloud) and scroll down to the end to download the CDS extension as shown. This may trigger the license agreement popup if you are accessing the page for the first time. Click the `I Have Read And Agree` button and proceed.
+4. Goto [SAP Development tools page](https://tools.hana.ondemand.com/#cloud) and scroll down to the end to download the CDS extension as shown. Click on the .vsix file and the file download will begin. This may trigger the license agreement popup if you are accessing the page for the first time. Click the `I Have Read And Agree` button and proceed. In case the downloaded file is a zip archive, extract it.
 
 ![Alt text](./images/cds_plugin.png?raw=true "CDS plugin for VS Code")
 
 ![Alt text](./images/cds_plugin_license.png?raw=true "CDS plugin License Agreement")
 
-5. Launch the Visual Studio Code (VS Code) editor from your system and click on the `Extensions` tab (last tab) on the upper left corner. Click on the icon with 3 dots to install the CDS extension that we downloaded in the previous step.
+5. Launch the Visual Studio Code (VS Code) editor from your system and click on the `Extensions` tab (last tab that is highlighted in the screenshot) on the upper left corner. Click on the icon with 3 dots to install the CDS extension that we downloaded in the previous step.
 
 ![Alt text](./images/cds_vs_code.png?raw=true "CDS plugin for VS Code")
 
@@ -56,7 +56,7 @@ Choose the file with an extension of .vsix that was downloaded in the previous s
 
 ![Alt text](./images/reload.png?raw=true "Reload VS Code")
 
-7. Goto the `Explorer` tab (first tab) of VS Code editor. Choose `File` menu and then click on `Open Folder`. Navigate to the path where the project was created from the command line tool in Step 3. This will open the project in VS Code as shown. 
+7. Goto the `Explorer` tab (first tab that is highlighted in the screenshot) of VS Code editor. Choose `File` menu and then click on `Open Folder`. Navigate to the path where the project was created from the command line tool in Step 3. This will open the project in VS Code as shown. 
 
 ![Alt text](./images/proj_vscode.png?raw=true)
 
