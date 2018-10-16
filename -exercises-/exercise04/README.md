@@ -316,40 +316,35 @@ onRefresh: function (oEvent) {
 
 18. Let us move on to the second view `CreateBooking`. Open the `CreateBooking.view.xml` file by double-clicking on it in the file structure. __Replace__ the content with the code snippet below:
 ```xml
-<mvc:View controllerName="space.itineraries.company.ui.controller.CreateBooking" xmlns="sap.m" xmlns:core="sap.ui.core"
-	xmlns:mvc="sap.ui.core.mvc">
+<mvc:View controllerName="space.itineraries.company.ui.controller.CreateBooking" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:semantic="sap.m.semantic" xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
 	<App>
 		<pages>
-			<Page title="{i18n>AppTitle}">
-				<Panel headerText="{i18n>createBookingPanelTitle}" class="sapUiResponsiveMargin" width="auto">
-					<VBox class="sapUiSmallMargin">
-						<Label text="Name:" labelFor="customerNameInput"/>
-						<Input id="customerNameInput"
-							value="{ path:'newBooking>/CustomerName', type:'sap.ui.model.type.String', constraints : { minLength : 1 } }"
-							valueLiveUpdate="true" required="true" width="60%" class="sapUiSmallMarginBottom"/>
-						<Label text="Email:" labelFor="emailInput"/>
-						<Input id="emailInput"
-							value="{ path:'newBooking>/EmailAddress', type:'sap.ui.model.type.String', constraints : { search : '\\S+@\\S+\\.\\S+' } }"
-							valueLiveUpdate="true" required="true" width="60%" class="sapUiSmallMarginBottom"/>
-						<Label text="Choose a journey:" labelFor="selectedItineraryId"/>
-						<Select id="selectedItineraryId" width="60%" class="sapUiSmallMarginBottom" items="{ path: '/Itineraries', sorter: { path: 'Name'} }">
-							<core:Item key="{ID}" text="{Name}"/>
+			<Page id="page" title="{i18n>AppTitle}">
+				<f:SimpleForm id="form" editable="true" layout="ResponsiveGridLayout" title="{i18n>createBookingPanelTitle}" labelSpanXL="4" labelSpanL="3"
+					labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0" columnsXL="2"
+					columnsL="1" columnsM="1">
+					<f:content>
+						<Label text="Name" labelFor="customerNameInput"/>
+						<Input id="customerNameInput" value="{CustomerName}"/>
+						<Label text="Email" labelFor="emailInput"/>
+						<Input id="emailInput" value="{EmailAddress}"/>
+						<Label text="Choose a journey" labelFor="selectedItineraryId"/>
+						<Select id="selectedItineraryId" items="{/Itineraries}" selectedKey="{Itinerary_ID}">
+							<core:ListItem key="{ID}" text="{Name}"/>
 						</Select>
-						<Label text="Date of travel:" labelFor="dateOfTravel"/>
+						<Label text="Date of travel" labelFor="dateOfTravel"/>
 						<DatePicker id="dateOfTravel"
-							value="{ path:'newBooking>/DateOfTravel', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', stringParsing: true } }"
-							required="true" class="sapUiSmallMarginBottom" width="60%"/>
-						<Label text="Number of passengers:" labelFor="numPassengers"/>
-						<Input id="numPassengers"
-							value="{ path:'newBooking>/NumberOfPassengers', type:'sap.ui.model.type.Integer', constraints : { minimum : 1 } }"
-							valueLiveUpdate="true" required="true" width="60%" class="sapUiSmallMarginBottom"/>
-						<Label text="Credit card number:" labelFor="creditCard"/>
-						<Input id="creditCard"
-							value="{ path:'newBooking>/PaymentInfo_CardNumber', type:'sap.ui.model.type.String', constraints : { maxLength: 16 } }"
-							valueLiveUpdate="true" required="true" width="60%" class="sapUiSmallMarginBottom"/>
-						<Button text="{i18n>bookButtonText}" press="onBook" class="sapUiSmallMarginEnd"/>
-					</VBox>
-				</Panel>
+							value="{ path: 'DateOfTravel', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', stringParsing: true }}"/>
+						<Label text="Number of passengers" labelFor="numPassengers"/>
+						<Input id="numPassengers" value="{NumberOfPassengers}"/>
+						<Label text="Credit card number" labelFor="creditCard"/>
+						<Input id="creditCard" value="{PaymentInfo_CardNumber}"/>
+						<Label/>
+						<Button text="{i18n>bookButtonText}" press="onBook" width="15%"/>
+					</f:content>
+				</f:SimpleForm>
 			</Page>
 		</pages>
 	</App>
@@ -360,48 +355,44 @@ onRefresh: function (oEvent) {
 ```js
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast"
-], function (Controller, JSONModel, MessageToast) {
+], function (Controller, MessageToast) {
 	"use strict";
+
 	return Controller.extend("space.itineraries.company.ui.controller.CreateBooking", {
-		onInit: function () {
-			var newBookingModel = new JSONModel({
-				BookingNo: "",
+		_createNewEntity: function (oView, isOnInit) {
+			var oModel = isOnInit ? this.getOwnerComponent().getModel() : oView.getModel(),
+				oListBinding = oModel.bindList("/Bookings", undefined, undefined, undefined, {
+					$$updateGroupId: "updateGroup"
+				});
+
+			var oContext = oListBinding.create({
+				BookingNo: (Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10)).toUpperCase(),
 				CustomerName: "",
 				EmailAddress: "",
-				DateOfTravel: "",
-				Cost: null,
-				NumberOfPassengers: null,
-				Itinerary_ID: null,
-				PaymentInfo_CardNumber: null
+				DateOfTravel: new Date().toJSON(),
+				Cost: Math.floor((Math.random() * (3000 - 1000) + 1000)).toString(),
+				NumberOfPassengers: 0,
+				Itinerary_ID: "",
+				PaymentInfo_CardNumber: ""
 			});
-			this.getView().setModel(newBookingModel, "newBooking");
+			oView.setBindingContext(oContext);
+		},
+		onInit: function () {
+			this._createNewEntity(this.getView(), true); // Create new entity on init so that binding works
 		},
 
 		onBook: function () {
-			var oModel = this.getView().getModel(),
-				newBookingModel = this.getView().getModel("newBooking"),
-				oBinding = oModel.bindList("/Bookings");
+			var that = this,
+				oView = this.getView(),
+				oModel = oView.getModel();
+			
+			oModel.submitBatch("updateGroup");
 
-			// get the id of the selected itinerary
-			newBookingModel.setProperty("/Itinerary_ID", this.byId("selectedItineraryId").getSelectedKey());
-
-			// assign random cost between 3000 and 1000 space money
-			newBookingModel.setProperty("/Cost", Math.floor((Math.random() * (3000 - 1000) + 1000)).toString());
-
-			// assign random string with lenght 16 for the BookingNo
-			newBookingModel.setProperty("/BookingNo",
-				(Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10))
-				.toUpperCase());
-
-			var oContext = oBinding.create(JSON.parse(newBookingModel.getJSON()));
-			oContext.created().then(function () {
-				MessageToast.show("created");
+			oView.getBindingContext().created().then(function () {
+				MessageToast.show("Booking created");
+				that._createNewEntity(oView, false); // when the entity is persisted in the backend, create another new entity and display it in the booking view
 			});
-
-			// clear up the form
-			Object.keys(JSON.parse(newBookingModel.getJSON())).forEach(prop => newBookingModel.setProperty(`/${prop}`, null));
 		}
 	});
 });
