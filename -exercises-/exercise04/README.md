@@ -379,7 +379,7 @@ sap.ui.define([
 			oView.setBindingContext(oContext);
 		},
 		onInit: function () {
-			this._createNewEntity(this.getView(), true); // Create new entity on init so that binding works
+			this._createNewEntity(this.getView(), true);
 		},
 
 		onBook: function () {
@@ -391,7 +391,7 @@ sap.ui.define([
 
 			oView.getBindingContext().created().then(function () {
 				MessageToast.show("Booking created");
-				that._createNewEntity(oView, false); // when the entity is persisted in the backend, create another new entity and display it in the booking view
+				that._createNewEntity(oView, false);
 			});
 		}
 	});
