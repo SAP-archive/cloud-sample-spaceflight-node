@@ -26,7 +26,7 @@ xs-app.json now looks as shown below:
 
 ![MTA Editor.json](./images/mta_editor.png?raw=true)
 
-Choose `ui` module and scroll down to `requires` section, Click on the + button and pick the option `srv_api(provider)` as shown:
+3. Choose `ui` module and scroll down to `requires` section, Click on the + button and pick the option `srv_api(provider)` as shown:
 
 ![requires](./images/srv_api.png?raw=true)
 
@@ -42,13 +42,21 @@ Now click on `dest_cloud-sample-spaceflight-node` and delete it using the delete
 
 ![Destination delete](./images/destination.png?raw=true)
 
-And then goto the `Resources` tab in the top and choose `uaa_cloud-sample-spaceflight-node`. Change the service-plan from `default` to `application` as shown:
+4. Goto the `Resources` tab of the same file in the top. Choose `uaa_cloud-sample-spaceflight-node`. Change the service-plan from `default` to `application` as shown:
 
 ![default2app](./images/default2app.png?raw=true)
 
+Choose `cloud-sample-spaceflight-node-uaa` and click on delete button as shown. 
+
+![Delete UAA](./images/delete_uaa.png?raw=true)
+
+Next choose `dest_cloud-sample-spaceflight-node` and click on delete button as shown. 
+
+![Delete destination](./images/delete_dest.png?raw=true)
+
 Finally save the `mta.yaml` file.
 
-3. Right click at the project level and choose `Build` and again click on `Build`. 
+5. Right click at the project level and choose `Build` and again click on `Build`. 
 
 ![Build Project](./images/build_project.png?raw=true)
 
@@ -56,17 +64,17 @@ This will generate a multi-target archive file as shown under a folder called `m
 
 ![MTAR generated](./images/generate_mtar.png?raw=true)
 
-4. Right click on the .mtar file -> choose `Deploy` -> click on `Deploy to SAP Cloud Platform`.
+6. Right click on the .mtar file -> choose `Deploy` -> click on `Deploy to SAP Cloud Platform`.
 
 ![Deploy](./images/deploy.png?raw=true)
 
-5. Enter the Cloud Foundry API Endpoint, Organization and Space as shown: (Space will differ for each user)
+7. Enter the Cloud Foundry API Endpoint, Organization and Space as shown: (Space will differ for each user)
 
 ![Deploy](./images/cf_org_space.png?raw=true)
 
 This will take around 5 to 10 minutes. And then your application is deployed to cloud foundry environment of SAP Cloud Platform.
 
-6. Go to [SAP Cloud Platform Cockpit](https://account.hana.ondemand.com/) and navigate into the right space to see your applications running. 
+8. Go to [SAP Cloud Platform Cockpit](https://account.hana.ondemand.com/) and navigate into the right space to see your applications running. 
 
 ![Apps](./images/apps.png?raw=true)
 
