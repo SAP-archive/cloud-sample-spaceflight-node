@@ -138,7 +138,7 @@ Congratulations, we successfully included custom logic to our code and exposed t
 
 # Part B: Push the code to git service of SAP Cloud Platform (optional)
 
-1. Launch [SAP Cloud Platform cockpit](https://account.hana.ondemand.com/) on your browser. Click log on and provide your credentials (Email and Password) provided by the instructors of the SAP TechEd 2018 session CNA375. Here the email, `cna375-395@teched.cloud.sap`, is used.
+1. Launch [SAP Cloud Platform cockpit](https://account.hana.ondemand.com/) on your browser. Click log on and provide your credentials (Email and Password) provided by the instructors of the SAP TechEd 2018 session CNA375. Here the example email is `cna375-XXX@teched.cloud.sap` - replace XXX with your personal number.
 
 ![Alt text](./images/logon.png?raw=true)
 
@@ -158,7 +158,7 @@ Congratulations, we successfully included custom logic to our code and exposed t
 
 ![Alt text](./images/gotogit.png?raw=true)
 
-6. Create a repository here by clicking on New repository and enter the name as `cna<NUMBER>`. `NUMBER` should be from the User that you get for this session Ex: `395` from cna375-`395`@teched.cloud.sap. Uncheck the `Create empty Commit` and click `OK`. The reason for creating the repository with this name is that all participants of this session will create repositores and this will help you to uniquely identify your repository. 
+6. Create a repository here by clicking on New repository and enter the name as `cnaXXX`, where `XXX` is the personal number you get. Uncheck the `Create empty Commit` and click `OK`. The reason for creating the repository with this name is that all participants of this session will create repositores and this will help you to uniquely identify your repository. 
 
 ![Alt text](./images/git_repo_create.png?raw=true)
 
