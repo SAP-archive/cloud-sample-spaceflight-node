@@ -16,7 +16,7 @@ This exercise is structured into two parts: <br />
 
 In this part, we will import the locally developed code of exercise 1 to 3 into SAP Web IDE. The database and service components will be deployed to Cloud Foundry.
 
-1. Launch [SAP Web IDE](https://webidecp-di26c7ouv0.dispatcher.hana.ondemand.com/). You will be prompted to login, provide your credentials (Email and Password) provided by the instructors of SAP TechEd 2018 session CNA375. In the screenshot below, the email: `cna375-395@teched.cloud.sap`, is used.
+1. Launch [SAP Web IDE](https://webidecp-di26c7ouv0.dispatcher.hana.ondemand.com/). You will be prompted to login, provide your credentials (Email and Password) provided by the instructors of SAP TechEd 2018 session CNA375. Here the example email is `cna375-XXX@teched.cloud.sap` - replace XXX with the number provided for you.
 
 ![Log on](./images/logon.png)
 
@@ -26,7 +26,7 @@ In this part, we will import the locally developed code of exercise 1 to 3 into 
 
 3. If you completed part B of exercise 3, enter the repository URL that you noted down in exercise 3 part B's step 7.
 
-For example, your URL could look like: `https://git.hana.ondemand.com/di26c7ouv0/cna395`
+Your URL should look like: `https://git.hana.ondemand.com/di26c7ouv0/cnaXXX`, where XXX is your personal number provided by the session instructors.
 
 If you skipped part B of exercise 3, then provide this URL, `https://git.hana.ondemand.com/di26c7ouv0/cna375ex3`, and click `clone`.
 
