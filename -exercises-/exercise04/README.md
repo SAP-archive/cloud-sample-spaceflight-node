@@ -156,7 +156,7 @@ Change the $metadata part of the URL to something meaningful from our exposed se
 
 ![New Destination](./images/new_destination.png)
 
-Provide the `Name` as `cna375-xxx`, where xxx is from your email. As we use the email `cna375-395@teched.cloud.sap` in the exercise description, the screenshot shows the name as `cna375-395`. Provide `URL` as the one noted from the last step along with the path /booking as shown in the screenshot. Click on `New Property` button twice to include the two properties `WebIDEEnabled` and `WebIDEUsage` with values `true` and `odata_gen` respectively. 
+Provide the `Name` as `cna375-xxx`, where xxx is the number provided for you by the session instructors. Provide `URL` as the one noted from the last step along with the path /booking as shown in the screenshot. Click on `New Property` button twice to include the two properties `WebIDEEnabled` and `WebIDEUsage` with values `true` and `odata_gen` respectively. 
 
 Leave the rest of the populated fields as it is and click `Save`.
 
