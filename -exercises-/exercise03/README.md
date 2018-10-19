@@ -172,7 +172,7 @@ Congratulations, we successfully included custom logic to our code and exposed t
 
 9. Execute the command `git init` in your terminal. Make sure this command is executed at the root folder of the project.
 
-10. Execute the command `git config user.email <EMAIL>` in your terminal. `<EMAIL>` is the email address provided for your user Ex: `cna375-395@teched.cloud.sap`
+10. Execute the command `git config user.email <EMAIL>` in your terminal. `<EMAIL>` is the email address provided for your user which is of the format `cna375-XXX@teched.cloud.sap`. Replace XXX with the user ID provided by the session instructors.
 
 11. Execute the command `git remote add origin <URL>` in your terminal. `<URL>` is the link that was noted in step 7. Switch to the browser, copy the URL and provide it as a parameter to this command.
 
