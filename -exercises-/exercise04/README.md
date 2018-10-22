@@ -142,7 +142,7 @@ The running Node.js application can be seen here. Note down this URL to be used 
 
 On clicking the URL above we can see the service information.
 
-![Running Service](./images/srv_url.png) 
+![Running Service](./images/srv_url1.png) 
 
 Click on the `/booking` service to access the XML metadata information of the oData service exposed. In addition the URL now is changed to http://<service_URL>/booking/$metadata
 
