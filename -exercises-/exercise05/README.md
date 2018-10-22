@@ -42,11 +42,7 @@ Now click on `dest_cloud-sample-spaceflight-node` and delete it using the delete
 
 ![Destination delete](./images/destination.png?raw=true)
 
-4. Goto the `Resources` tab of the same file in the top. Choose `uaa_cloud-sample-spaceflight-node`. Change the service-plan from `default` to `application` as shown:
-
-![default2app](./images/default2app.png?raw=true)
-
-Choose `cloud-sample-spaceflight-node-uaa` and click on delete button as shown. 
+4. Goto the `Resources` tab of the same file in the top. Choose `cloud-sample-spaceflight-node-uaa` and click on delete button as shown. 
 
 ![Delete UAA](./images/delete_uaa.png?raw=true)
 
