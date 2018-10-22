@@ -111,7 +111,7 @@ module.exports = () => {
 }
 ```
 
-9. Now execute `cds deploy` command. This command creates all entities as tables in SQLite local database. It also executes the code from `db/init.js` to initialize the tables with data from the provided CSV files. Note that cds deploy command executes code from `db/init.js`, so ensure that the file is rightly named under the right folder.
+9. Goto file `srv/my-service.cds` under the srv folder, remove all contents of this file and save it. In the next exercise we will define how to expose the service. Now execute `cds deploy` command. This command creates all entities as tables in SQLite local database. It also executes the code from `db/init.js` to initialize the tables with data from the provided CSV files. Note that cds deploy command executes code from `db/init.js`, so ensure that the file is rightly named under the right folder.
 ```
 cds deploy
 ```
