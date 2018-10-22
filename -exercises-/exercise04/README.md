@@ -190,7 +190,9 @@ Congratulations, we successfully imported and built our data model and node serv
 
 ![Manifest Data Source](./images/manifest_ds.png)
 
-7. Choose `Service URL` from the tabs on the left. In the dropdown menu, select the destination that you created in the last step of part A of this exercise. Note that destinations created by all participants appear in the dropdown menu. Under relative path enter `/` and click on `Test`. Once the test is successful the button gets disabled. The service is now selected and click on `Next`.
+7. Choose `Service URL` from the tabs on the left. In the dropdown menu, select the destination that you created in the last step of part A of this exercise. Note that destinations created by all participants appear in the dropdown menu. In case your destination does not appear here, you may have to refresh the SAP Web IDE.
+
+Under relative path enter `/` and click on `Test`. Once the test is successful the button gets disabled. The service is now selected and click on `Next`.
 
 ![Service URL](./images/service_url.png) 
 
