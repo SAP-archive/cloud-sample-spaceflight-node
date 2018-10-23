@@ -12,7 +12,7 @@ In this exercise we will learn to set up our local development environment and c
 
 1. Open the command line terminal and install cds command line tool.
 ```
-npm i -g @sap/cds
+npm i -g @sap/cds@2.9
 ```
 Now, the following command should print the version information
 ```
@@ -20,7 +20,7 @@ cds --version
 ```
 2. Install cds generator command line tool. The generator creates the basic project structure through an interactive wizard.
 ```
-npm i -g @sap/generator-cds
+npm i -g @sap/generator-cds@1.0.8
 ```
 This helps us to use the command, `cds new`, in the next step to create a new project.
 
