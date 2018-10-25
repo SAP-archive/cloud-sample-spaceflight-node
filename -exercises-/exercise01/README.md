@@ -10,20 +10,23 @@ In this exercise we will learn to set up our local development environment and c
 
 ## Exercise description
 
+## Already done for the TechEd session. Proceed to Step 4 of this exercise.
 1. Open the command line terminal and install cds command line tool.
 ```
-npm i -g @sap/cds@2.9
+npm i -g @sap/cds
 ```
 Now, the following command should print the version information
 ```
 cds --version
 ```
+## Already done for the TechEd session. Proceed to Step 4 of this exercise.
 2. Install cds generator command line tool. The generator creates the basic project structure through an interactive wizard.
 ```
-npm i -g @sap/generator-cds@1.0.8
+npm i -g @sap/generator-cds
 ```
 This helps us to use the command, `cds new`, in the next step to create a new project.
 
+## Already done for the TechEd session. Proceed to Step 4 of this exercise.
 3. Execute `cds new` command to create a new project by providing the project name as a parameter. Here, let us use `cloud-sample-spaceflight-node` as the project name.
 ```
 cds new cloud-sample-spaceflight-node
@@ -56,7 +59,7 @@ Choose the file with an extension of .vsix that was downloaded in the previous s
 
 ![Alt text](./images/reload.png?raw=true "Reload VS Code")
 
-7. Goto the `Explorer` tab (first tab that is highlighted in the screenshot) of VS Code editor. Choose `File` menu and then click on `Open Folder`. Navigate to the path where the project was created from the command line tool in Step 3. This will open the project in VS Code as shown. 
+7. Goto the `Explorer` tab (first tab that is highlighted in the screenshot) of VS Code editor. Choose `File` menu and then click on `Open Folder`. Navigate to the path `D:\Files\Session\CNA375\cloud-sample-spaceflight-node\`. This will open the project in VS Code as shown. 
 
 ![Alt text](./images/proj_vscode.png?raw=true)
 
