@@ -10,7 +10,7 @@ In this exercise we will learn to set up our local development environment and c
 
 ## Exercise description
 
-## Already done for the TechEd session. Proceed to Step 4 of this exercise.
+### Already done for the TechEd session. Proceed to Step 4 of this exercise.
 1. Open the command line terminal and install cds command line tool.
 ```
 npm i -g @sap/cds
@@ -19,14 +19,14 @@ Now, the following command should print the version information
 ```
 cds --version
 ```
-## Already done for the TechEd session. Proceed to Step 4 of this exercise.
+### Already done for the TechEd session. Proceed to Step 4 of this exercise.
 2. Install cds generator command line tool. The generator creates the basic project structure through an interactive wizard.
 ```
 npm i -g @sap/generator-cds
 ```
 This helps us to use the command, `cds new`, in the next step to create a new project.
 
-## Already done for the TechEd session. Proceed to Step 4 of this exercise.
+### Already done for the TechEd session. Proceed to Step 4 of this exercise.
 3. Execute `cds new` command to create a new project by providing the project name as a parameter. Here, let us use `cloud-sample-spaceflight-node` as the project name.
 ```
 cds new cloud-sample-spaceflight-node
