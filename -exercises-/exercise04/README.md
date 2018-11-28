@@ -60,7 +60,9 @@ The organization and space will be automatically be populated as shown. Click on
 
 ![Package.json](./images/package_remove_lines.png)
 
-10. Now right click on the `db` folder of the project and click on `Build` as shown. This takes roughly about a minute.
+10. Open the file `db/src/.hdiconfig` and change the first property plugin_version from 2.0.30.0 to 2.0.2.0
+
+Now right click on the `db` folder of the project and click on `Build` as shown. This takes roughly about a minute.
 
 ![Build CDS](./images/build_db.png)
 
