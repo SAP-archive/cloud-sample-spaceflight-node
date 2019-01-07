@@ -27,9 +27,9 @@ npm i -g @sap/generator-cds
 This helps us to use the command, `cds new`, in the next step to create a new project.
 
 ### Already done for the TechEd session. Proceed to Step 4 of this exercise.
-3. Execute `cds new` command to create a new project by providing the project name as a parameter. Here, let us use `cloud-sample-spaceflight-node` as the project name.
+3. Execute `cds init` command to create a new project by providing the project name as a parameter. Here, let us use `cloud-sample-spaceflight-node` as the project name.
 ```
-cds new cloud-sample-spaceflight-node
+cds init cloud-sample-spaceflight-node
 ```
 We will be prompted to select the modules that the project will require. Select the following modules: database and service modules by clicking arrow keys and space bar as shown below.
 
