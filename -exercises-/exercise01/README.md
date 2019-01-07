@@ -24,21 +24,13 @@ cds --version
 ```
 npm i -g @sap/generator-cds
 ```
-This helps us to use the command, `cds new`, in the next step to create a new project.
+This helps us to use the command, `cds init`, in the next step to create a new project.
 
 ### Already done for the TechEd session. Proceed to Step 4 of this exercise.
 3. Execute `cds init` command to create a new project by providing the project name as a parameter. Here, let us use `cloud-sample-spaceflight-node` as the project name.
 ```
-cds init cloud-sample-spaceflight-node
+cds init cloud-sample-spaceflight-node --modules srv,db --srv-technology nodejs
 ```
-We will be prompted to select the modules that the project will require. Select the following modules: database and service modules by clicking arrow keys and space bar as shown below.
-
-![Alt text](./images/db_srv.png?raw=true)
-
-Then choose Node.js under the category "Select the technology of the srv module".
-
-![Alt text](./images/nodejs.png?raw=true)
-
 The project files being created can be seen.
 
 ![Alt text](./images/project.png?raw=true)
