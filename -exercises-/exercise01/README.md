@@ -25,7 +25,7 @@ cds --version
 cds init cloud-sample-spaceflight-node --modules srv,db --mta
 ```
 
-After the successful execution of the command, a message `Project creation was successful.` is prompted. A new directory `cloud-sample-spaceflight-node` is created together with a project structure and content within.
+After the successful execution of the command a new directory `cloud-sample-spaceflight-node` is created together with a project structure and content within.
 
 3. Goto [SAP Development tools page](https://tools.hana.ondemand.com/#cloud) and scroll down to the end to download the CDS extension as shown. Click on the .vsix file and the file download will begin. This may trigger the license agreement popup if you are accessing the page for the first time. Click the `I Have Read And Agree` button and proceed. In case the downloaded file is a zip archive, extract it.
 
