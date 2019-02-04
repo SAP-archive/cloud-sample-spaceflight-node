@@ -24,7 +24,7 @@ Now, the following command should print the version information
 ```
 cds --version
 ```
-2. With the `cds init` command a new project is created. Here, let us use `cloud-sample-spaceflight-node` as the project name. In addition, the option `--modules srv,db` stating that we want to have service and db modules and the options `--mta` for the creation of a mta.yaml.
+3. With the `cds init` command a new project is created. Here, let us use `cloud-sample-spaceflight-node` as the project name. In addition, the option `--modules srv,db` stating that we want to have service and db modules and the options `--mta` for the creation of a mta.yaml.
 
 ```
 cds init cloud-sample-spaceflight-node --modules srv,db --mta
@@ -32,7 +32,7 @@ cds init cloud-sample-spaceflight-node --modules srv,db --mta
 
 After the successful execution of the command a new directory `cloud-sample-spaceflight-node` is created together with a project structure and content within.
 
-3. Goto [SAP Development tools page](https://tools.hana.ondemand.com/#cloud) and scroll down to the end to download the CDS extension as shown. Click on the .vsix file and the file download will begin. This may trigger the license agreement popup if you are accessing the page for the first time. Click the `I Have Read And Agree` button and proceed. In case the downloaded file is a zip archive, extract it.
+4. Goto [SAP Development tools page](https://tools.hana.ondemand.com/#cloud) and scroll down to the end to download the CDS extension as shown. Click on the .vsix file and the file download will begin. This may trigger the license agreement popup if you are accessing the page for the first time. Click the `I Have Read And Agree` button and proceed. In case the downloaded file is a zip archive, extract it.
 
 ![Alt text](./images/cds_plugin.png?raw=true "CDS plugin for VS Code")
 

@@ -12,19 +12,10 @@ In this exercise, we will understand and extend the data model of the [space-fli
 
 1. Open the package.json file in the root folder of your project and include the following dependencies under dependencies section.
 ```json
-    "express"           : "^4.16.3",
     "csvtojson"         : "2.0.8",
     "sqlite3"           : "^4.0.2",
     "spaceflight-model" : "git://github.com/SAP/cloud-sample-spaceflight"
 ```
-
-Next, add the following 2 lines to include the SQLite driver and URL under cds.data.model of the same file and save the file:
-```json
-      "driver"          : "sqlite",            
-      "url"             : "cloud-sample-spaceflight-node.db"
-```
-
-These 2 lines will deploy the data model locally into a SQLite database.
 
 The package.json file looks as shown below. The added lines are highlighted.
 ![Alt text](./images/package.png?raw=true)
@@ -111,9 +102,9 @@ module.exports = () => {
 }
 ```
 
-9. Goto file `srv/my-service.cds` under the srv folder, remove all contents of this file and save it. In the next exercise we will define how to expose the service. Now execute `cds deploy` command. This command creates all entities as tables in SQLite local database. It also executes the code from `db/init.js` to initialize the tables with data from the provided CSV files. Note that cds deploy command executes code from `db/init.js`, so ensure that the file is rightly named under the right folder.
+9. Goto file `srv/my-service.cds` under the srv folder, remove all contents of this file and save it. In the next exercise we will define how to expose the service. Now execute `cds deploy db --to sqlite:cloud-sample-spaceflight-node.db` command. This command creates all entities as tables in SQLite local database and adds configurations to the `package.json`. It also executes the code from `db/init.js` to initialize the tables with data from the provided CSV files. Note that cds deploy command executes code from `db/init.js`, so ensure that the file is rightly named under the right folder.
 ```
-cds deploy
+cds deploy db --to sqlite:cloud-sample-spaceflight-node.db
 ```
 ![Initializing](./images/table_initialize.png?raw=true)
 
