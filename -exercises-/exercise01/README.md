@@ -19,31 +19,15 @@ Now, the following command should print the version information
 ```
 cds --version
 ```
-### Already done for the TechEd session. Proceed to Step 4 of this exercise.
-2. Install cds generator command line tool. The generator creates the basic project structure through an interactive wizard.
+2. With the `cds init` command a new project is created. Here, let us use `cloud-sample-spaceflight-node` as the project name. In addition, the option `--modules srv,db` stating that we want to have service and db modules and the options `--mta` for the creation of a mta.yaml.
+
 ```
-npm i -g @sap/generator-cds
+cds init cloud-sample-spaceflight-node --modules srv,db --mta
 ```
-This helps us to use the command, `cds new`, in the next step to create a new project.
 
-### Already done for the TechEd session. Proceed to Step 4 of this exercise.
-3. Execute `cds new` command to create a new project by providing the project name as a parameter. Here, let us use `cloud-sample-spaceflight-node` as the project name.
-```
-cds new cloud-sample-spaceflight-node
-```
-We will be prompted to select the modules that the project will require. Select the following modules: database and service modules by clicking arrow keys and space bar as shown below.
+After the successful execution of the command, a message `Project creation was successful.` is prompted. A new directory `cloud-sample-spaceflight-node` is created together with a project structure and content within.
 
-![Alt text](./images/db_srv.png?raw=true)
-
-Then choose Node.js under the category "Select the technology of the srv module".
-
-![Alt text](./images/nodejs.png?raw=true)
-
-The project files being created can be seen.
-
-![Alt text](./images/project.png?raw=true)
-
-4. Goto [SAP Development tools page](https://tools.hana.ondemand.com/#cloud) and scroll down to the end to download the CDS extension as shown. Click on the .vsix file and the file download will begin. This may trigger the license agreement popup if you are accessing the page for the first time. Click the `I Have Read And Agree` button and proceed. In case the downloaded file is a zip archive, extract it.
+3. Goto [SAP Development tools page](https://tools.hana.ondemand.com/#cloud) and scroll down to the end to download the CDS extension as shown. Click on the .vsix file and the file download will begin. This may trigger the license agreement popup if you are accessing the page for the first time. Click the `I Have Read And Agree` button and proceed. In case the downloaded file is a zip archive, extract it.
 
 ![Alt text](./images/cds_plugin.png?raw=true "CDS plugin for VS Code")
 
