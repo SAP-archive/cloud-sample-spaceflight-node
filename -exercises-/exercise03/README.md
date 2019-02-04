@@ -39,7 +39,11 @@ service BookingService {
 }
 ```
 
-2. Let us include some custom logic to ensure that not more than 5 passengers are flying in the same spacecraft, as we assume that the spacecraft capacity is 5. For simplicity sake, we assume there is one spacecraft flying every day for each itinerary in a specific space route. Create a file called `booking-service.js` in the same folder `/cloud-sample-spaceflight-node/srv/` and add the following code. Note that this file name is same as that of the of the service created in step 1, `booking-service.cds`, except for the extension. In case the naming is different, add the annotation `@(impl:service.js)` to the `booking-service.cds` file.
+2. As now we have a service defines we need to update the database schema to correspond to our new service implementation. Go to the `package.json` and change the value of the property `"cds.requires.db.model"` from __"db"__ to __"srv"__. And execute in the terminal the command `cds deploy`.
+
+![Alt text](./images/cds_update_db.png?raw=true)
+
+3. Let us include some custom logic to ensure that not more than 5 passengers are flying in the same spacecraft, as we assume that the spacecraft capacity is 5. For simplicity sake, we assume there is one spacecraft flying every day for each itinerary in a specific space route. Create a file called `booking-service.js` in the same folder `/cloud-sample-spaceflight-node/srv/` and add the following code. Note that this file name is same as that of the of the service created in step 1, `booking-service.cds`, except for the extension. In case the naming is different, add the annotation `@(impl:service.js)` to the `booking-service.cds` file.
 ```javascript
 /**
  * Custom logic for booking-service defined in ./booking-service.cds
@@ -70,7 +74,7 @@ module.exports = function ({ teched_flight_trip_Bookings }) {
 }
 ```
 
-3. Run the following command in the terminal to serve the Booking Service:
+4. Run the following command in the terminal to serve the Booking Service:
 ```
 cds serve all
 ```
@@ -78,19 +82,19 @@ Now we see the information that our service is served at the URL: http://localho
 
 ![Alt text](./images/cds_serve_all.png?raw=true)
 
-4. Open [this URL](http://localhost:4004/) in the browser and click on the /booking service as shown:
+5. Open [this URL](http://localhost:4004/) in the browser and click on the /booking service as shown:
 
 ![Alt text](./images/oData_services.png?raw=true)
 
-5. The XML metadata information of the exposed oData service  is seen. In addition the URL now is changed to http://localhost:4004/booking/$metadata
+6. The XML metadata information of the exposed oData service  is seen. In addition the URL now is changed to http://localhost:4004/booking/$metadata
 
 ![Alt text](./images/xml.png?raw=true)
 
-6. Replace the $metadata part of the URL with `Planets` to see the actual contents present in the Astronomical Bodies entity. Hence, on changing the URL to http://localhost:4004/booking/Planets, the contents can be seen as shown below:
+7. Replace the $metadata part of the URL with `Planets` to see the actual contents present in the Astronomical Bodies entity. Hence, on changing the URL to http://localhost:4004/booking/Planets, the contents can be seen as shown below:
 
 ![Alt text](./images/planets.png?raw=true)
 
-7.  Launch Postman app in your system. Now that we have our Booking Service running, let us create a booking by sending an HTTP POST request using Postman App. Create a POST request with this URL: http://localhost:4004/booking/Bookings The header and body of the request should be as follows:
+8.  Launch Postman app in your system. Now that we have our Booking Service running, let us create a booking by sending an HTTP POST request using Postman App. Create a POST request with this URL: http://localhost:4004/booking/Bookings The header and body of the request should be as follows:
 
 Header:
 ```
@@ -117,7 +121,7 @@ Now click on Send and we can see that our booking is created successfully with a
 
 ![Alt text](./images/post_success.png?raw=true)
 
-8. Based on our logic, we should be able to create only upto 5 passengers on the same date and same itinerary (Assumption: 1 spacecraft per itinerary; Spacecraft capactiy: 5). Now let us try to create another booking with Number of Passengers as 5 (or more) for the same date and itinerary. Replace the body of the request with the below JSON contents.
+9. Based on our logic, we should be able to create only upto 5 passengers on the same date and same itinerary (Assumption: 1 spacecraft per itinerary; Spacecraft capactiy: 5). Now let us try to create another booking with Number of Passengers as 5 (or more) for the same date and itinerary. Replace the body of the request with the below JSON contents.
 ```json
 {
       "BookingNo"               : "20180726GA1A1",
