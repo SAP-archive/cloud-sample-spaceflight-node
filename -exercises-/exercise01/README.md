@@ -10,8 +10,13 @@ In this exercise we will learn to set up our local development environment and c
 
 ## Exercise description
 
-### Already done for the TechEd session. Proceed to Step 4 of this exercise.
-1. Open the command line terminal and install cds command line tool.
+1. Setup npm registry
+
+```
+npm set @sap:registry=https://npm.sap.com
+```
+
+2. Install cds command line tool.
 ```
 npm i -g @sap/cds
 ```
