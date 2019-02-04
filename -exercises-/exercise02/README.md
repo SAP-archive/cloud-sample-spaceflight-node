@@ -10,21 +10,21 @@ In this exercise, we will understand and extend the data model of the [space-fli
 
 ## Exercise description
 
-1. Open the package.json file in the root folder of your project and include the following dependencies under dependencies section.
+1. Open the package.json file in the root folder of your project and include the following dependency under the dependencies section.
 ```json
-    "csvtojson"         : "2.0.8",
-    "sqlite3"           : "^4.0.2",
     "spaceflight-model" : "git://github.com/SAP/cloud-sample-spaceflight"
 ```
-
-The package.json file looks as shown below. The added lines are highlighted.
+The package.json file looks as shown below.
 ![Alt text](./images/package.png?raw=true)
+
+With this dependency, we refer to the base model. Further on the exercise we will download, use it and extend it.
 
 2. Go to `View` menu and choose `Terminal`. This invokes the Terminal within the VS Code editor.
 
 ![Alt text](./images/invoke_terminal.png?raw=true) 
 
-3. Make sure the `package.json` file is saved and execute the command `npm install` from the Terminal of VS Code. Ensure that this command is executed from the root folder of the project in the terminal `<your-project-path>/cloud-sample-spaceflight-node/`.
+3. Make sure the `package.json` file is saved and execute the command `npm install` from the Terminal of VS Code. Ensure that this command is executed from the root folder of the project in the terminal `<your-project-path>/cloud-sample-spaceflight-node/`. This will download the base model under `node_modules` from where we can reference it in our data model.
+
 ```
 npm install
 ```
@@ -59,56 +59,22 @@ And our `data-model.cds` file looks as shown:
 
 5. Click [here](https://github.com/SAP/cloud-sample-spaceflight-node/raw/master/-exercises-/docs/csv.zip) to download the CSV files zip folder. 
 
-6. Unzip the file in your System File Explorer. Copy and paste the folder named csv into the following folder `<your-project-path>/cloud-sample-spaceflight-node/db/src/`. Ensure that the CSV files are under the right path: `/db/src/csv`.
+6. Unzip the file in your System File Explorer. Copy and paste the folder named csv into the following folder `<your-project-path>/cloud-sample-spaceflight-node/db/`. Ensure that the CSV files are under the right path: `/db/csv`.
 
-7. Inside the db folder create a file named `init.js` by clicking the Create file button and giving it the name as shown. Make sure the init.js file is under the path `<your-project-path>/cloud-sample-spaceflight-node/db/init.js`
+7. Add SQLite as a development dependency.
 
-![Initializing from CSV](./images/init.png?raw=true)
-
-8. Include the following code snippet into `init.js` and save the file. This will initialize our tables with corresponding data from the path `/db/src/csv`
-```javascript
-const cds = require('@sap/cds')
-const csv2json = require('csvtojson')
-
-const csv = {
-  teched_flight_trip_AircraftCodes: 'aircraftcodes',
-  teched_flight_trip_Airlines: 'airlines',
-  teched_flight_trip_Airports: 'airports',
-  teched_flight_trip_EarthRoutes: 'earthroutes',
-  teched_flight_trip_Itineraries: 'itineraries',
-  teched_space_trip_AstronomicalBodies: 'astrobodies',
-  teched_space_trip_SpaceFlightCompanies: 'spaceflightcompanies',
-  teched_space_trip_SpaceRoutes: 'spaceroutes',
-  teched_space_trip_SpacePorts: 'spaceports'
-}
-
-module.exports = () => {
-  let chain = Promise.resolve()
-
-  for (const tableName in csv) {
-    chain = chain
-      .then(() => {
-        return csv2json().fromFile(`./db/src/csv/${csv[tableName]}.csv`)
-      })
-      .then((values) => {
-        return cds.run(INSERT.into(tableName).rows(values))
-      })
-      .then((rowCount) => {
-        console.log(`Inserted successfully ${rowCount} rows in table ${tableName}`)
-      })
-  }
-
-  return chain
-}
+```
+npm install sqlite3 -D
 ```
 
-9. Goto file `srv/my-service.cds` under the srv folder, remove all contents of this file and save it. In the next exercise we will define how to expose the service. Now execute `cds deploy db --to sqlite:cloud-sample-spaceflight-node.db` command. This command creates all entities as tables in SQLite local database and adds configurations to the `package.json`. It also executes the code from `db/init.js` to initialize the tables with data from the provided CSV files. Note that cds deploy command executes code from `db/init.js`, so ensure that the file is rightly named under the right folder.
+8. Goto file `srv/my-service.cds` under the srv folder, remove all contents of this file and save it. In the next exercise we will define how to expose the service. Now execute `cds deploy db --to sqlite:cloud-sample-spaceflight-node.db` command. This command creates all entities as tables in SQLite local database and adds configurations to the `package.json`. It also inserts the content from the CSV files into the newly created database.
+
 ```
 cds deploy db --to sqlite:cloud-sample-spaceflight-node.db
 ```
 ![Initializing](./images/table_initialize.png?raw=true)
 
-10. Let us verify if the tables were created in the local SQLite database. To do this goto `View` menu and choose `Command Palette...`.
+9. Let us verify if the tables were created in the local SQLite database. To do this goto `View` menu and choose `Command Palette...`([SQLite plugin](https://marketplace.visualstudio.com/items?itemName=alexcvzz.vscode-sqlite) for VSCode is needed).
 
 ![Command Palette](./images/command_palette.png?raw=true)
 
@@ -118,7 +84,7 @@ Type SQLite and choose SQlite: Open Database in Explorer
 Choose `cloud-sample-spaceflight-node.db` as the database and press enter. 
 ![Alt text](./images/open_db.png?raw=true)
 
-This opens the `SQLITE EXPLORER` at the bottom left. Click on it and expand the database, `cloud-sample-spaceflight-node.db`, where we can see the list of tables created. `cloud-sample-spaceflight-node.db` is the name of the local SQLite database that was provided in `package.json` as URL for database in step 1.
+This opens the `SQLITE EXPLORER` at the bottom left. Click on it and expand the database, `cloud-sample-spaceflight-node.db`, where we can see the list of tables created. `cloud-sample-spaceflight-node.db` is the name of the local SQLite database that was provided with the `cds deploy` command in step 7.
 
 All tables are created. Note that the `PaymentInfo` table that was defined by us in our data-model.cds file is also created.
 
