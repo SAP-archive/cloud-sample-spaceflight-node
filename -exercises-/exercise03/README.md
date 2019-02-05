@@ -10,7 +10,7 @@ In this exercise, we will learn to expose our data model entities as OData servi
 
 This exercise is structured into two parts. The second part is optional: <br /><br />
 ## [A.) Add custom logic and expose data model entities as OData services](./README.md#part-a-add-custom-logic-and-expose-data-model-entities-as-odata-services)<br />
-## [B.) Push the code to git service of SAP Cloud Platform (optional)](./README.md#part-b-push-the-code-to-git-service-of-sap-cloud-platform-optional)<br />
+## [B.) Push the code to git service of SAP Cloud Platform](./README.md#part-b-push-the-code-to-git-service-of-sap-cloud-platform-optional)<br />
 
 # Part A: Add custom logic and expose data model entities as OData services
 
