@@ -140,7 +140,7 @@ The request should fail with an HTTP 409 status code as shown:
 
 Congratulations, we successfully included custom logic to our code and exposed the data model entities as oData services. In part B of this exercise, we will create a repository and push the code to git service of SAP Cloud Platform. Part B is optional. In case you directly want to move to the next exercise, click [here](../exercise04/README.md).
 
-# Part B: Push the code to git service of SAP Cloud Platform (optional)
+# Push the code to git service of SAP Cloud Platform
 
 1. Launch [SAP Cloud Platform cockpit](https://account.hana.ondemand.com/) on your browser. Click log on and provide your credentials (Email and Password) provided by the instructors of the SAP TechEd 2018 session CNA375. Here the example email is `cna375-XXX@teched.cloud.sap` - replace XXX with the number provided for you.
 
