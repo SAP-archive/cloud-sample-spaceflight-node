@@ -9,15 +9,16 @@
     "spaceflight-model": "git://github.com/SAP/cloud-sample-spaceflight.git"
   },
   "scripts": {
+    "start": "cds run",
     "build": "cds build/all --clean",
     "watch": "nodemon -w . -i node_modules/**,.git/** -e cds -x npm run build"
   },
   "cds": {
-    "data": {
-      "model": "db/"
-    },
-    "service": {
-      "model": "srv/"
+    "requires": {
+      "db": {
+        "kind": "hana",
+        "model": "db"
+      }
     }
   },
   "private": true
