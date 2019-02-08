@@ -1,0 +1,10 @@
+{
+  "build": {
+      "target": ".",
+      "tasks": [
+        {"src":"db","for":"hana","options":{"model":["db","srv"]}},
+        {"src":"srv","for":"node-cf","options":{"model":["db","srv"]}},
+        {"src":"ui","for":"fiori","options":{"model":["db","srv","ui"]}}
+      ]
+    }
+}

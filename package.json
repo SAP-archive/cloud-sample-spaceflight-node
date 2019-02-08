@@ -3,21 +3,22 @@
   "description": "Reference application built according to the CAP model",
   "version": "1.0.0",
   "dependencies": {
-    "@sap/cds": ">=2.8",
+    "@sap/cds": "^3.5.0",
     "csvtojson": "2.0.8",
     "express": "^4.16.3",
     "spaceflight-model": "git://github.com/SAP/cloud-sample-spaceflight.git"
   },
   "scripts": {
+    "start": "cds run",
     "build": "cds build/all --clean",
     "watch": "nodemon -w . -i node_modules/**,.git/** -e cds -x npm run build"
   },
   "cds": {
-    "data": {
-      "model": "db/"
-    },
-    "service": {
-      "model": "srv/"
+    "requires": {
+      "db": {
+        "kind": "hana",
+        "model": "db"
+      }
     }
   },
   "private": true
