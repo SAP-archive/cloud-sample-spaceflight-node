@@ -59,7 +59,7 @@ And our `data-model.cds` file looks as shown:
 
 5. Click [here](https://github.com/SAP/cloud-sample-spaceflight-node/raw/master/-exercises-/docs/csv.zip) to download the CSV files zip folder. 
 
-6. Unzip the file in your System File Explorer. Copy and paste the folder named csv into the following folder `<your-project-path>/cloud-sample-spaceflight-node/db/`. Ensure that the CSV files are under the right path: `/db/csv`.
+6. Unzip the file in your System File Explorer. Copy and paste the folder named csv into the following folder `<your-project-path>/cloud-sample-spaceflight-node/db/src`. Ensure that the CSV files are under the right path: `/db/src/csv`.
 
 7. Add SQLite as a development dependency.
 
