@@ -10,14 +10,14 @@
 		"block-spacing": 0,
 		"brace-style": [0, "1tbs"],
 		"callback-return": 0,
-		"camelcase": 1,
+		"camelcase": 0,
 		"class-methods-use-this": 0,
 		"comma-dangle": [2, "never"],
 		"comma-spacing": 0,
 		"comma-style": 0,
 		"complexity": [0, 11],
 		"computed-property-spacing": [0, "never"],
-		"consistent-return": 1,
+		"consistent-return": 0,
 		"consistent-this": [0, "that"],
 		"constructor-super": 0,
 		"curly": [2, "all"],
@@ -162,7 +162,7 @@
 		"no-sequences": 1,
 		"no-shadow": 1,
 		"no-shadow-restricted-names": 1,
-		"no-spaced-func": 1,
+		"no-spaced-func": 0,
 		"no-sparse-arrays": 2,
 		"no-sync": 0,
 		"no-tabs": 0,
@@ -220,12 +220,12 @@
 		"prefer-spread": 0,
 		"prefer-template": 0,
 		"quote-props": 0,
-		"quotes": [1, "double"],
+		"quotes": 0,
 		"radix": 0,
 		"require-jsdoc": 0,
 		"require-yield": 0,
 		"rest-spread-spacing": 0,
-		"semi": 2,
+		"semi": 0,
 		"semi-spacing": [0, {
 			"after": true,
 			"before": false
@@ -461,13 +461,20 @@
 		"Q": false,
 		"d3": false,
 		"sinon": false,
-		"sap": false
+		"sap": false,
+		"SELECT":false,
+		"INSERT":false,
+		"UPDATE":false,
+		"DELETE":false,
+		"cds":false
 	},
 	"env": {
 		"browser": true,
 		"node": true,
 		"amd": true,
 		"mocha": true,
-		"jquery": true
-	}
+		"jquery": true,
+		"es6": true
+	},
+	"parserOptions": { "ecmaVersion": 2017 }
 }
