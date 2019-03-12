@@ -24,6 +24,8 @@ Now, the following command should print the version information
 ```
 cds --version
 ```
+> At the time of updating this exercise the newest version is 3.5.2
+
 3. With the `cds init` command a new project is created. Here, let us use `cloud-sample-spaceflight-node` as the project name. In addition, the option `--modules srv,db` stating that we want to have service and db modules and the options `--mta` for the creation of a mta.yaml.
 
 ```

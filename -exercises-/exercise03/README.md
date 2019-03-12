@@ -39,7 +39,7 @@ service BookingService {
 }
 ```
 
-2. As now we have a service definition we need to update the database schema to correspond to our new service implementation. Go to the `package.json` and change the value of the property `"cds.requires.db.model"` from __"db"__ to __"srv"__. And execute in the terminal the command `cds deploy`.
+2. As now we have a service definition we need to update the database schema to correspond to our new service implementation. Go to the `package.json` and change the value of the property `"cds.requires.db.model"` from __"db"__ to __[ "db", "srv" ]__. And execute in the terminal the command `cds deploy`.
 
 ![Alt text](./images/cds_update_db.png?raw=true)
 
