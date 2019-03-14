@@ -16,7 +16,7 @@ This exercise is structured into two parts: <br />
 
 In this part, we will import the locally developed code of exercise 1 to 3 into SAP Web IDE. The database and service components will be deployed to Cloud Foundry.
 
-1. Launch [SAP Web IDE](https://webidecp-di26c7ouv0.dispatcher.hana.ondemand.com/). You will be prompted to login, provide your credentials (Email and Password) provided by the instructors of SAP TechEd 2018 session CNA375. Here the example email is `cna375-XXX@teched.cloud.sap` - replace XXX with the number provided for you.
+1. Launch the SAP Web IDE from the [Cloud cockpit](https://account.hana.ondemand.com/cockpit). You will be prompted to login, provide your credentials (Email and Password).
 
 ![Log on](./images/logon.png)
 
@@ -24,15 +24,13 @@ In this part, we will import the locally developed code of exercise 1 to 3 into 
 
 ![clone](./images/clone1.png)
 
-3. If you completed part B of exercise 3, enter the repository URL that you noted down in exercise 3 part B's step 7.
+3. Enter the repository URL that you noted down in exercise 3 part B's step 7.
 
-Your URL should look like: `https://git.hana.ondemand.com/di26c7ouv0/cnaXXX`, where XXX is your personal number provided by the session instructors.
-
-If you skipped part B of exercise 3, then provide this URL, `https://git.hana.ondemand.com/di26c7ouv0/cna375ex3`, and click `clone`.
+Your URL should look like: `https://git.hanatrial.ondemand.com/XXXtrial/spaceflight`, where XXX is your trial user number.
 
 ![clone](./images/clone.png) 
 
-4. You will be asked to enter the credentials once again. Enter the credentials (email and password) provided by the CNA375 session owners. The authentication in step 1 is for the SAP WebIDE access, and here in this step it authorizes access to the git repository.
+4. You will be asked to enter the credentials once again. Enter the credentials (email and password). The authentication in step 1 is for the SAP WebIDE access, and here in this step it authorizes access to the git repository.
 
 ![clone_auth](./images/clone_auth.png) 
 
@@ -56,11 +54,13 @@ The organization and space will be automatically be populated as shown. Click on
 
 ![Cloud Foundry Org Space](./images/cf_org_space.png)
 
-9. Open package.json file from the root folder, `<git_repo_name>/package.json`, and remove the highlighted lines shown below. These are lines specific to SQLite database that was used locally. As we deploy the database artifacts into SAP HANA, these lines must be removed.
+> If the Builder is not installed in your cf space, please install it by clicking on the button `Install Builder`
+
+9. Open package.json file from the root folder, `<git_repo_name>/package.json`, and remove the highlighted lines shown below. These are lines specific to SQLite database that was used locally. As we deploy the database artifacts into SAP HANA, these lines must be removed. Also, change the value of the property __cds.requires.db.kind__ from __sqlite__ to __hana__, as shown.
 
 ![Package.json](./images/package_remove_lines.png)
 
-10. Open the file `db/src/.hdiconfig` and change the first property plugin_version from 2.0.30.0 to 2.0.2.0
+10. Open the file `db/src/.hdiconfig` and change the first property plugin_version from 2.0.30.0 to 2.0.2.0. Move the folder containing the csv files from __db/csv__ to __db/src/csv__ by Cut and Paste option from the Edit context menu.
 
 Now right click on the `db` folder of the project and click on `Build` as shown. This takes roughly about a minute.
 

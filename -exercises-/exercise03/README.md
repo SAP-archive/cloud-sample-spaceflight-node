@@ -162,28 +162,22 @@ Congratulations, we successfully included custom logic to our code and exposed t
 
 ![Alt text](./images/gotogit.png?raw=true)
 
-6. Create a repository here by clicking on New repository and enter the name as `cnaXXX`, where `XXX` is the personal number provided for you by the session instructors. __Uncheck the `Create empty Commit` and click `OK`.__ The reason for creating the repository with this name is that all participants of this session will create repositores and this will help you to uniquely identify your repository. 
+6. Create a repository here by clicking on New repository and enter the name `spaceflight`. __Uncheck the `Create empty Commit` and click `OK`.__
 
 ![Alt text](./images/git_repo_create.png?raw=true)
 
-7. Now click on your repository and note down the Repository URL. This will be used in step 11 and in the next exercise.
+7. Now click on your repository and note down the Repository URL. This will be used in step 10 and in the next exercise.
 
 ![Alt text](./images/git_repo.png?raw=true)
 
-8. Switch back to Visual studio code and open the `.gitignore` file present in the root folder of your project and append this line `*.db` to the end, so that we do not push the locally created SQLite database. 
+8. Execute the command `git init` in your terminal. Make sure this command is executed at the root folder of the project.
 
-![Alt text](./images/gitignore.png?raw=true)
+9. Execute the command `git remote add origin <URL>` in your terminal. `<URL>` is the link that was noted in step 7. Switch to the browser, copy the URL and provide it as a parameter to this command.
 
-9. Execute the command `git init` in your terminal. Make sure this command is executed at the root folder of the project.
-
-10. Execute the command `git config user.email <EMAIL>` in your terminal. `<EMAIL>` is the email address provided for your user which is of the format `cna375-XXX@teched.cloud.sap`. Replace XXX with the user ID provided by the session instructors.
-
-11. Execute the command `git remote add origin <URL>` in your terminal. `<URL>` is the link that was noted in step 7. Switch to the browser, copy the URL and provide it as a parameter to this command.
-
-The last 3 steps can be seen in the below screenshot:
+The last 2 steps can be seen in the below screenshot:
 ![Alt text](./images/git_init.png?raw=true)
 
-12. Click on the `Source Control` tab of VS Code editor on the left(highlighted in the screenshot) and type a message `Source code of Space travel node app` and click on the Commit button (Tick button) as shown:
+10. Click on the `Source Control` tab of VS Code editor on the left(highlighted in the screenshot) and type a message `Source code of Space travel node app` and click on the Commit button (Tick button) as shown:
 
 ![Alt text](./images/git_commit.png?raw=true)
 
@@ -191,14 +185,14 @@ Click on `Yes` in the popup that says "There are no staged changes to commit. Wo
 
 ![Alt text](./images/stage.png?raw=true)
 
-13. Click on the 3 dots and choose `Push to...`
+11. Click on the 3 dots and choose `Push to...`
 
 ![Alt text](./images/git_push1.png?raw=true)
 
 Choose the URL as shown 
 ![Alt text](./images/git_push2.png?raw=true)
 
-Enter your credentials (email and password) here:
+Enter your credentials (email and password) if requested like in this example:
 ![Alt text](./images/repo_username.png?raw=true)
 
 ![Alt text](./images/repo_password.png?raw=true)

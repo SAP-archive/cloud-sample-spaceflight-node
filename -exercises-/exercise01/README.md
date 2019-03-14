@@ -24,12 +24,12 @@ Now, the following command should print the version information
 ```
 cds --version
 ```
-> At the time of updating this exercise the newest version is 3.5.2
+> At the time of writing this exercise the newest version is 3.5.2
 
-3. With the `cds init` command a new project is created. Here, let us use `cloud-sample-spaceflight-node` as the project name. In addition, the option `--modules srv,db` stating that we want to have service and db modules and the options `--mta` for the creation of a mta.yaml.
+3. With the `cds init` command a new project is created. Here, let us use `cloud-sample-spaceflight-node` as the project name. In addition, the option `--modules srv,db` stating that we want to have service and db modules.The options `--mta` and `--db-technology hana` are for the creation of a mta.yml file with description needed once we move to the WebIDE environment.
 
 ```
-cds init cloud-sample-spaceflight-node --modules srv,db --mta
+cds init cloud-sample-spaceflight-node --modules srv,db --mta --db-technology hana
 ```
 
 After the successful execution of the command a new directory `cloud-sample-spaceflight-node` is created together with a project structure and content within.
@@ -50,7 +50,7 @@ Choose the file with an extension of .vsix that was downloaded in the previous s
 
 ![Alt text](./images/reload.png?raw=true "Reload VS Code")
 
-7. Goto the `Explorer` tab (first tab that is highlighted in the screenshot) of VS Code editor. Choose `File` menu and then click on `Open Folder`. Navigate to the path `D:\Files\Session\CNA375\cloud-sample-spaceflight-node\`. This will open the project in VS Code as shown. 
+7. Goto the `Explorer` tab (first tab that is highlighted in the screenshot) of VS Code editor. Choose `File` menu and then click on `Open Folder`. Navigate to your working directory where the `cds init` command was executed in step number 3 and select the `cloud-sample-spaceflight-node` folder. This will open the project in VS Code as shown. 
 
 ![Alt text](./images/proj_vscode.png?raw=true)
 
