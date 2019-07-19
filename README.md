@@ -1,4 +1,7 @@
-# Scenario:
+# Description
+Learn how to build node applications with the application programming model on SAP Cloud Platform.
+
+##Scenario:
 
 SPICY (Space Itinerary Company) is the most popular travel technology company in our milky way. Owing to the increasing demand in space travel, SPICY is now building a website where it offers users from all planets to login and book their next space flight. You, as a part of the software engineering team of SPICY, have chosen SAP Cloud Platform to build this website. 
 
@@ -54,5 +57,4 @@ This project is provided "as-is": there is no guarantee that raised issues will 
 
 ## License
 
-Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
-This project is licensed under the SAP Sample Code License except as noted otherwise in the [LICENSE](LICENSE) file.
+Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved. This project is licensed under the SAP Sample Code License except as noted otherwise in the [LICENSE](LICENSE) file.
